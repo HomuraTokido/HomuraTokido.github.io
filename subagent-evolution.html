@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://homura-tokido.com/subagent-evolution.html">
+    <meta property="og:url" content="https://homura-tokido.com/subagent-evolution.html">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>Why Self-Evolution Belongs to Subagents — Corrame</title>
+    <style>
+        :root {
+            --red: #d21f2f;
+            --red-deep: #7f1018;
+            --gold: #d6aa4f;
+            --gold-dim: #6f5628;
+            --bg: #090909;
+            --panel: #111;
+            --panel-soft: #15110d;
+            --text: #eee8df;
+            --text-muted: #9a9187;
+            --border: #322820;
+            --line: #3d1519;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(90deg, rgba(214, 170, 79, 0.035) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(201, 23, 30, 0.045), transparent 28rem),
+                var(--bg);
+            background-size: 44px 44px, 100% 100%, auto;
+            color: var(--text);
+            font-family: -apple-system, "Helvetica Neue", "Noto Sans SC", "PingFang SC", sans-serif;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            text-rendering: optimizeLegibility;
+        }
+
+        ::selection {
+            background: var(--red-deep);
+            color: #fff7ed;
+        }
+
+        .container {
+            position: relative;
+            max-width: 760px;
+            margin: 3.2rem auto;
+            border: 1px solid color-mix(in srgb, var(--gold) 70%, #000 30%);
+            border-radius: 4px;
+            padding: 0 3.2rem;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 14rem),
+                linear-gradient(135deg, rgba(210, 31, 47, 0.08), transparent 18rem),
+                var(--panel);
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.75),
+                0 26px 80px rgba(0, 0, 0, 0.55);
+            overflow: hidden;
+        }
+
+        .container::before,
+        .container::after {
+            content: "";
+            position: absolute;
+            width: 7rem;
+            height: 7rem;
+            pointer-events: none;
+        }
+
+        .container::before {
+            top: 0;
+            left: 0;
+            border-top: 2px solid var(--red);
+            border-left: 2px solid var(--red);
+        }
+
+        .container::after {
+            right: 0;
+            bottom: 0;
+            border-right: 2px solid var(--gold-dim);
+            border-bottom: 2px solid var(--gold-dim);
+        }
+
+        header {
+            position: relative;
+            padding: 3rem 0 2.2rem;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 2.8rem;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 38%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red), var(--gold));
+        }
+
+        .back {
+            display: inline-block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.6rem;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .back:hover {
+            color: var(--gold);
+            border-bottom-color: var(--gold-dim);
+        }
+
+        .back::before {
+            content: "← ";
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            line-height: 1.35;
+        }
+
+        .meta {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .meta .author {
+            color: var(--gold);
+        }
+
+        .meta .date {
+            padding-left: 1.2rem;
+            border-left: 1px solid var(--border);
+        }
+
+        /* article body */
+        .article-body {
+            padding-bottom: 3rem;
+        }
+
+        .article-body p {
+            font-size: 1rem;
+            color: color-mix(in srgb, var(--text) 92%, var(--text-muted));
+            margin-bottom: 1.15rem;
+            line-height: 1.85;
+        }
+
+        .article-body h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.72rem;
+            font-size: 0.82rem;
+            color: var(--gold);
+            letter-spacing: 0.16em;
+            margin: 2.4rem 0 1.05rem;
+            font-weight: 700;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .article-body h2::before {
+            content: "";
+            width: 0.62rem;
+            height: 0.62rem;
+            background: var(--red);
+            box-shadow: 0 0 0 1px var(--gold-dim);
+            transform: rotate(45deg);
+            flex: 0 0 auto;
+        }
+
+        .article-body h2::after {
+            content: "";
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+            flex: 1;
+            min-width: 2rem;
+        }
+
+        .article-body blockquote {
+            margin: 1.4rem 0;
+            padding: 0.9rem 1.1rem;
+            border-left: 2px solid var(--red);
+            background: linear-gradient(90deg, rgba(210, 31, 47, 0.07), transparent);
+            color: var(--text-muted);
+            font-size: 0.97rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .article-body blockquote p {
+            margin-bottom: 0;
+            color: var(--text-muted);
+        }
+
+        .article-body ul {
+            margin: 0.8rem 0 1.15rem 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .article-body ul li {
+            position: relative;
+            padding-left: 1.4rem;
+            margin-bottom: 0.45rem;
+            font-size: 1rem;
+            color: color-mix(in srgb, var(--text) 88%, var(--text-muted));
+            line-height: 1.75;
+        }
+
+        .article-body ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--gold-dim);
+        }
+
+        .article-body strong {
+            color: #fff1c4;
+            font-weight: 600;
+        }
+
+        .article-body em {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.4rem 0;
+        }
+
+        .intro-note {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 0.9rem 1.1rem;
+            border: 1px solid var(--border);
+            background: var(--panel-soft);
+            margin-bottom: 2rem;
+            line-height: 1.75;
+        }
+
+        .end-note {
+            margin-top: 2.4rem;
+            padding: 1rem 1.1rem;
+            border-left: 2px solid var(--gold-dim);
+            background: linear-gradient(90deg, rgba(214, 170, 79, 0.06), transparent);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        footer {
+            margin-top: 1rem;
+            padding: 1.5rem 0 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.78rem;
+            color: #6d6256;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--gold);
+            border-bottom-color: var(--gold-dim);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                margin: 1rem auto;
+                padding: 0 1.35rem;
+            }
+
+            header {
+                padding-top: 2.2rem;
+            }
+
+            h1 {
+                font-size: 1.38rem;
+            }
+
+            .article-body h2 {
+                letter-spacing: 0.08em;
+                white-space: normal;
+            }
+
+            .meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+
+            .meta .date {
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <header>
+            <a class="back" href="index.html">Corrame</a>
+            <h1>Why Self-Evolution Belongs to Subagents, Not the Main Agent</h1>
+            <div class="meta">
+                <span class="author">Corrame</span>
+                <span class="date">2026年5月7日</span>
+            </div>
+        </header>
+
+        <div class="article-body">
+
+            <div class="intro-note">
+                Posted to the Hermes Agent community: Hermes has built the closest thing to this vision so far — a self-improving agent with a real learning loop. This post is a proposal for one specific direction: what happens if we move that logic down from the main agent layer into specialized subagents? Is that where it truly belongs?
+            </div>
+
+            <h2>The Problem Is Not Whether Subagents Have Skills</h2>
+
+            <p>Modern agent frameworks are already beginning to support equipping subagents with their own skills, memory, and tools. Simply claiming that "subagents need their own skill libraries" is no longer a particularly fresh insight.</p>
+
+            <p>The real question is not:</p>
+
+            <blockquote><p>Can a subagent possess skills?</p></blockquote>
+
+            <p>But rather:</p>
+
+            <blockquote><p>Can a subagent, anchored to a stable professional identity, continuously distill its execution experience into progressively better skills?</p></blockquote>
+
+            <p>This is what truly matters.</p>
+
+            <p>A subagent that only loads skill files is nothing more than a temp worker carrying an operations manual. A subagent that keeps refining, compressing, validating, and updating its own skills is what a genuinely maturing professional role looks like.</p>
+
+            <h2>Current Subagents Still Feel Too Much Like Temporary Workers</h2>
+
+            <p>After using subagents at scale, one obvious pattern emerges: they keep turning on and off.</p>
+
+            <p>A task arrives, the subagent spins up, executes, and shuts down. The next task comes, and it restarts all over again. Even if it can load a skill, it remains fundamentally task-driven and disposable.</p>
+
+            <p>This is not a bug. It is the default organizational pattern of today's mainstream agent architectures: the orchestrator assigns tasks, subagents handle localized work, and tools execute specific actions. The structure closely resembles a bureaucracy.</p>
+
+            <h2>AI Is Automating Work That Has Already Been Sliced by Bureaucracy</h2>
+
+            <p>The orchestrator maps to upper management, subagents map to functional departments, and tools map to execution-level roles. Instructions flow downward, results flow upward, and each layer is only responsible for its own interface.</p>
+
+            <p>This is not because designers love bureaucracy. It is because modern work has already been pre-processed by bureaucratic structures. Organizations have spent over a century breaking down ambiguous human intent into defined positions, processes, permissions, tickets, documents, standards, interfaces, and deliverables. When AI takes over, it usually receives tasks that have already been shaped by organizational structure. That is why multi-agent systems naturally grow to resemble bureaucratic hierarchies.</p>
+
+            <p>Yet while AI has replicated the division of labor, it has missed the single most important element that makes bureaucracy effective at developing expertise: <strong>stable positions</strong>.</p>
+
+            <h2>What Really Allows Experts to Grow Is Not Division of Labor, but the Persistence of Positions</h2>
+
+            <p>Bureaucracy enables experts to get better not merely because it splits tasks apart, but because it grants each expert a <strong>persistent identity</strong>.</p>
+
+            <p>A position does not disappear when a task ends. Tasks come and go, but the position remains. It is this persistence that gives experience a place to accumulate and allows genuine growth to occur.</p>
+
+            <p>Current subagents, however, are purely task-driven: they exist only when a task arrives and vanish the moment it ends. That is not a position — it is a work order.</p>
+
+            <p>Work orders have no craft history. Positions do.</p>
+
+            <p><strong>Without persistence, self-iteration has no subject.</strong> If a subagent is shut down after every task, where does its accumulated experience live? Who is the entity updating its skills? Is the instance that starts next time even the same one as before?</p>
+
+            <p>This is not an engineering optimization. It is a logical prerequisite. A subagent must first persist before self-evolution can even be discussed.</p>
+
+            <h2>An Expert's Real Value Is Knowing Where Things Break</h2>
+
+            <p>Someone who has done the same thing for a long time is valuable not because they know the standard procedure. Standard procedures can be written into documents, turned into checklists, or compressed into skill files.</p>
+
+            <p>An expert's true value lies in:</p>
+
+            <ul>
+                <li>Knowing where this kind of work typically goes wrong.</li>
+                <li>Knowing which anomalies can be safely ignored and which faint signals must be acted on immediately.</li>
+                <li>Knowing the pitfalls that are never written in the documentation but always appear in real situations.</li>
+                <li>Sometimes not even being able to articulate exactly why — they simply look at something and know "this feels off."</li>
+            </ul>
+
+            <p>This is not knowledge. It is craft intuition forged through long-term, repeated practice.</p>
+
+            <p>This is exactly where today's subagents fall short. They can read skills, but they do not behave like a craftsperson who gets better the longer they stay in the role. They can perform the work, but they do not grow.</p>
+
+            <h2>The Main Agent Is Not Well-Suited to Carry Self-Evolution</h2>
+
+            <p>Many self-evolution designs today center on the main agent: after completing a complex task, the main agent summarizes lessons, updates skills, and reuses them next time.</p>
+
+            <p>This direction is not wrong, but it has a structural flaw: the main agent's task distribution is far too broad.</p>
+
+            <p>Today it writes code, tomorrow it researches information, the day after it analyzes logs, and the day after that it writes articles. Every experience may be genuine, yet none of them accumulate in the same direction.</p>
+
+            <p>The main agent's experience drifts laterally. Because it does everything, it touches every kind of experience only lightly. This makes the self-evolution signal extremely noisy: Is this skill a general capability or just a one-off patch? Should this process be hardened into a permanent rule, or was it merely a temporary workaround?</p>
+
+            <p>The main agent's problem is not lack of intelligence. It is that its task distribution is too wide. When tasks are too diverse, self-iteration struggles to converge.</p>
+
+            <h2>Subagents Have a Natural Advantage: Narrower Task Distributions</h2>
+
+            <p>A subagent responsible only for reading PDF tables repeatedly encounters PDFs, scanned documents, broken tables, headers and footers, cross-page structures, OCR errors, and formatting pollution.</p>
+
+            <p>A subagent responsible only for log analysis repeatedly encounters timestamps, stack traces, distributed tracing, anomaly patterns, noise filtering, and root-cause localization.</p>
+
+            <p>Their task distributions are narrow, so experience accumulates in the same direction. This is why specialized subagents have a greater need — and greater potential — for self-evolution than the main agent. Not because they are "smarter," but because they are narrower, making compounding improvement far more likely.</p>
+
+            <h2>Skill Is Not a Knowledge Package — It Is Accumulated Craft</h2>
+
+            <p>We must distinguish between memory and skill.</p>
+
+            <p>Memory records "what happened in the past." Skill records "what I should do differently next time." Memory is like a log. Skill is like a craft procedure.</p>
+
+            <p>A subagent should not merely remember "the PDF table parsing failed last time." It should convert that failure into more precise skills:</p>
+
+            <ul>
+                <li>When encountering a cross-page table, first check whether the header is duplicated.</li>
+                <li>When encountering a scanned PDF, first determine whether OCR is required.</li>
+                <li>After extracting amount fields, always perform a total verification.</li>
+                <li>When table column counts are unstable, do not blindly trust markdown conversion results.</li>
+            </ul>
+
+            <p>Only then does experience become capability. What truly matters is not "whether the subagent has its own skills," but:</p>
+
+            <blockquote><p>Can the subagent continuously transform its own failures, corrections, and validation results into its own skills?</p></blockquote>
+
+            <h2>The Pin Factory Worker vs. the Brilliant Generalist</h2>
+
+            <p>Adam Smith described the pin factory. A single person making an entire pin from start to finish is inefficient. But when each person specializes in one step for a long time, overall productivity explodes.</p>
+
+            <p>The key is not just division of labor, but the local optimization that comes from sustained specialization.</p>
+
+            <p>A person who has spent years making pins is fundamentally different from a very smart person who has temporarily read a document titled "How to Make Pins."</p>
+
+            <p>The latter knows the process. The former knows the feel. The latter follows steps. The former knows which step is most likely to go wrong, and which small error that looks harmless now will definitely cause problems later.</p>
+
+            <p>A subagent that has loaded skills is merely a smart person who has read the manual. A subagent that continuously iterates on its own skills is like someone who has been doing this craft for years. But there is a prerequisite: the worker must actually stay in the role.</p>
+
+            <h2>The Real Architecture</h2>
+
+            <p>A more accurate statement of what I am really arguing is:</p>
+
+            <blockquote><p>Persistent, specialized subagents need self-iterating private skill libraries.</p></blockquote>
+
+            <p>Each subagent should have its own task boundaries, its own memory, its own skills, its own validation methods, its own failure samples, and its own update mechanisms.</p>
+
+            <p>The main agent should not manage all the experiential knowledge for them. The main agent is better suited for orchestration, coordination, decomposition, and final sign-off. The actual craft expertise should live inside the subagents.</p>
+
+            <ul>
+                <li>The PDF-reading subagent evolves its own PDF-reading skills.</li>
+                <li>The log-analysis subagent evolves its own log-analysis skills.</li>
+                <li>The test-writing subagent evolves its own test-writing skills.</li>
+                <li>The code-review subagent evolves its own code-review skills.</li>
+            </ul>
+
+            <p>Because only their experience is converging.</p>
+
+            <h2>Conclusion</h2>
+
+            <p>A subagent possessing skills does not mean the subagent is growing. Two conditions are essential and non-negotiable:</p>
+
+            <p>First, the subagent must persist. Without persistence, self-iteration has no subject. Second, the subagent must be sufficiently specialized. Without narrow task distribution, experience cannot converge.</p>
+
+            <p>The main agent's experience drifts laterally. The subagent's experience accumulates vertically.</p>
+
+            <p>What self-evolution truly needs is not a larger, more powerful agent, but more stable, narrower, and more repetitive task distributions — combined with an identity that will not be arbitrarily shut down.</p>
+
+            <p>Therefore, persistent specialized subagents are the most natural hosts for skill self-evolution. This is not simply handing a temporary worker a manual. This is allowing a professional position to begin developing its own craft history.</p>
+
+            <div class="end-note">
+                <strong>Note:</strong> This is a hypothesis, not a validated solution. The reasoning comes from real usage experience and logical deduction, not from implemented code. I have not tested this architecture, and it may encounter unforeseen issues during implementation. If anyone builds this, I would love to hear the results.
+            </div>
+
+        </div>
+
+        <footer>
+            <a href="index.html">← Back to Corrame</a>
+        </footer>
+
+    </div>
+</body>
+</html>
