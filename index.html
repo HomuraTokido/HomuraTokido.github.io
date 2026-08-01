@@ -424,6 +424,19 @@
             outline-offset: 4px;
         }
 
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            border: 0;
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
         .final-question {
             min-height: 82vh;
             border-bottom: 0;
@@ -657,7 +670,8 @@
                                 href="mqqapi://card/show_pslcard?src_type=internal&amp;source=sharecard&amp;version=1&amp;uin=2609629019"
                                 aria-label="在 QQ 中打开 2609629019 的个人名片并添加好友"
                             >2609629019 · 一键添加</a>
-                            <button class="copy-qq" id="copy-qq" type="button" aria-live="polite">复制号码</button>
+                            <button class="copy-qq" id="copy-qq" type="button">复制号码</button>
+                            <span id="copy-status" class="visually-hidden" role="status"></span>
                         </li>
                         <li>B 站：<a href="https://space.bilibili.com/794282" target="_blank" rel="noopener noreferrer">朱鹭户焰png</a></li>
                         <li>GitHub：<a href="https://github.com/HomuraTokido" target="_blank" rel="noopener noreferrer">朱鷺戸ほむら</a></li>
@@ -688,6 +702,7 @@
             const qqNumber = "2609629019";
             const qqLink = document.getElementById("qq-friend-link");
             const copyButton = document.getElementById("copy-qq");
+            const copyStatus = document.getElementById("copy-status");
             const isMobile = /Android|iPhone|iPad|iPod|HarmonyOS/i.test(navigator.userAgent)
                 || (navigator.maxTouchPoints > 1 && window.innerWidth < 900);
 
@@ -717,11 +732,14 @@
                     }
 
                     copyButton.textContent = "已复制";
+                    copyStatus.textContent = "已复制";
                     window.setTimeout(() => {
                         copyButton.textContent = "复制号码";
+                        copyStatus.textContent = "";
                     }, 1800);
                 } catch {
                     copyButton.textContent = qqNumber;
+                    copyStatus.textContent = "复制失败";
                 }
             });
         })();
