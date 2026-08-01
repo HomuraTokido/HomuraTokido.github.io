@@ -8,6 +8,14 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <title>朱鹭户焰主义宣言</title>
+    <meta name="description" content="一份关于发展、欲望、技术、身体与未来的自我协议。">
+    <meta property="og:title" content="朱鹭户焰主义宣言">
+    <meta property="og:description" content="一份关于发展、欲望、技术、身体与未来的自我协议。">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://homura-tokido.com/img/manifest-banner.png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1536">
+    <meta property="og:image:alt" content="朱鹭户焰主义宣言配图">
     <style>
         :root {
             --red: #d21f2f;
@@ -52,6 +60,7 @@
             position: relative;
             max-width: 920px;
             margin: 3.2rem auto;
+            border: 1px solid #967737;
             border: 1px solid color-mix(in srgb, var(--gold) 70%, #000 30%);
             border-radius: 4px;
             padding: 0 3.2rem;
@@ -156,6 +165,7 @@
         p {
             margin-bottom: 0.8rem;
             font-size: 0.95rem;
+            color: #e7e2d8;
             color: color-mix(in srgb, var(--text) 92%, var(--text-muted));
         }
 
@@ -201,6 +211,10 @@
             background: #0b0b0b;
         }
 
+        .banner picture {
+            display: block;
+        }
+
         .nav-back {
             display: inline-block;
             margin-top: 0.8rem;
@@ -221,7 +235,7 @@
             padding: 1.5rem 0 2rem;
             border-top: 1px solid var(--border);
             font-size: 0.78rem;
-            color: #6d6256;
+            color: #8b8177;
             text-align: center;
         }
 
@@ -250,7 +264,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
+        <article>
 
         <header>
             <h1>朱鹭户焰主义宣言</h1>
@@ -259,10 +274,13 @@
         </header>
 
         <figure class="banner">
-            <img src="img/manifest-banner.png" alt="朱鹭户焰主义宣言配图">
+            <picture>
+                <source type="image/webp" srcset="img/manifest-banner-640.webp 640w, img/manifest-banner-1024.webp 1024w" sizes="(max-width: 720px) calc(100vw - 2.5rem), 880px">
+                <img src="img/manifest-banner.png" width="1024" height="1536" fetchpriority="high" alt="朱鹭户焰主义宣言配图">
+            </picture>
         </figure>
 
-        <section>
+        <section aria-label="序言">
             <p>一个无法被旧分类系统命名的幽灵，正在旧世界的上空徘徊。</p>
 
             <p>它不是左派，不是右派；不是自由主义，不是威权主义；不是民主主义，不是无政府主义；不是男，不是女；不是保守，也不是传统意义上的激进。</p>
@@ -690,6 +708,7 @@
             <a href="index.html" class="nav-back">← 返回首页</a>
         </footer>
 
-    </div>
+        </article>
+    </main>
 </body>
 </html>
