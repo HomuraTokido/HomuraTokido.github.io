@@ -3,5 +3,9 @@
 .AppleDouble
 .LSOverride
 
+# Windows
+Thumbs.db
+desktop.ini
+
 # Jekyll build output (not used; site is plain static)
 _site

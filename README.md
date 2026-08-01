@@ -4,7 +4,7 @@
 
 访问地址：[homura-tokido.com](https://homura-tokido.com/)
 
-纯静态网站，直接部署于 GitHub Pages，无需构建步骤。首页位于 `index.html`，其他 HTML 文件为独立文章页面，图片资源存放于 `img/`。
+纯静态网站，直接部署于 GitHub Pages，无需构建步骤。首页位于 `index.html`，其他 HTML 文件为文章页面（共享 `css/article.css` 基础样式，页面特有样式保留在各自的 `<style>` 中），图片资源存放于 `img/`。
 
 ## 本地预览
 

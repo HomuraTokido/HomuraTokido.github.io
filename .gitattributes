@@ -1,1 +1,6 @@
 * text=auto eol=lf
+
+# Never line-ending-convert image assets
+*.png binary
+*.webp binary
+*.ico binary

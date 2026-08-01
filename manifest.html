@@ -12,183 +12,13 @@
     <meta property="og:title" content="朱鹭户焰主义宣言">
     <meta property="og:description" content="一份关于发展、欲望、技术、身体与未来的自我协议。">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="https://homura-tokido.com/img/manifest-banner.png">
+    <meta property="og:image" content="https://homura-tokido.com/img/og-manifest.jpg">
     <meta property="og:image:width" content="1024">
-    <meta property="og:image:height" content="1536">
+    <meta property="og:image:height" content="538">
     <meta property="og:image:alt" content="朱鹭户焰主义宣言配图">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/article.css">
     <style>
-        :root {
-            --red: #d21f2f;
-            --red-deep: #7f1018;
-            --gold: #d6aa4f;
-            --gold-dim: #6f5628;
-            --bg: #090909;
-            --panel: #111;
-            --panel-soft: #15110d;
-            --text: #eee8df;
-            --text-muted: #9a9187;
-            --border: #322820;
-            --line: #3d1519;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background:
-                linear-gradient(90deg, rgba(214, 170, 79, 0.035) 1px, transparent 1px),
-                linear-gradient(180deg, rgba(201, 23, 30, 0.045), transparent 28rem),
-                var(--bg);
-            background-size: 44px 44px, 100% 100%, auto;
-            color: var(--text);
-            font-family: -apple-system, "Helvetica Neue", "Noto Sans SC", "PingFang SC", sans-serif;
-            line-height: 1.9;
-            padding: 2rem 1.5rem;
-            text-rendering: optimizeLegibility;
-        }
-
-        ::selection {
-            background: var(--red-deep);
-            color: #fff7ed;
-        }
-
-        .container {
-            position: relative;
-            max-width: 920px;
-            margin: 3.2rem auto;
-            border: 1px solid #967737;
-            border: 1px solid color-mix(in srgb, var(--gold) 70%, #000 30%);
-            border-radius: 4px;
-            padding: 0 3.2rem;
-            background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 14rem),
-                linear-gradient(135deg, rgba(210, 31, 47, 0.08), transparent 18rem),
-                var(--panel);
-            box-shadow:
-                0 0 0 1px rgba(0, 0, 0, 0.75),
-                0 26px 80px rgba(0, 0, 0, 0.55);
-            overflow: hidden;
-        }
-
-        .container::before,
-        .container::after {
-            content: "";
-            position: absolute;
-            width: 7rem;
-            height: 7rem;
-            pointer-events: none;
-        }
-
-        .container::before {
-            top: 0;
-            left: 0;
-            border-top: 2px solid var(--red);
-            border-left: 2px solid var(--red);
-        }
-
-        .container::after {
-            right: 0;
-            bottom: 0;
-            border-right: 2px solid var(--gold-dim);
-            border-bottom: 2px solid var(--gold-dim);
-        }
-
-        header {
-            position: relative;
-            padding: 3rem 0 2.2rem;
-            border-bottom: 1px solid var(--line);
-            margin-bottom: 2.5rem;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-            width: 38%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--red), var(--gold));
-        }
-
-        h1 {
-            font-size: 2.15rem;
-            color: var(--red);
-            letter-spacing: 0;
-            margin-bottom: 0.6rem;
-            line-height: 1.25;
-            text-shadow: 0 0 22px rgba(210, 31, 47, 0.22);
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        section {
-            position: relative;
-            margin-bottom: 2.65rem;
-        }
-
-        h2 {
-            display: flex;
-            align-items: center;
-            gap: 0.72rem;
-            font-size: 0.82rem;
-            color: var(--gold);
-            letter-spacing: 0.16em;
-            margin-bottom: 1.05rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        h2::before {
-            content: "";
-            width: 0.62rem;
-            height: 0.62rem;
-            background: var(--red);
-            box-shadow: 0 0 0 1px var(--gold-dim);
-            transform: rotate(45deg);
-            flex: 0 0 auto;
-        }
-
-        h2::after {
-            content: "";
-            height: 1px;
-            background: linear-gradient(90deg, var(--border), transparent);
-            flex: 1;
-        }
-
-        p {
-            margin-bottom: 0.8rem;
-            font-size: 0.95rem;
-            color: #e7e2d8;
-            color: color-mix(in srgb, var(--text) 92%, var(--text-muted));
-        }
-
-        blockquote {
-            margin: 0.8rem 0 1.2rem;
-            padding: 0.7rem 0 0.7rem 1.1rem;
-            border-left: 2px solid var(--red);
-            background: linear-gradient(90deg, rgba(210, 31, 47, 0.08), transparent);
-            color: var(--text);
-            font-size: 0.95rem;
-        }
-
-        blockquote p {
-            margin-bottom: 0;
-            color: var(--text);
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 2.5rem 0;
-        }
-
         h3 {
             font-size: 0.95rem;
             color: var(--gold);
@@ -214,57 +44,12 @@
         .banner picture {
             display: block;
         }
-
-        .nav-back {
-            display: inline-block;
-            margin-top: 0.8rem;
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 0.85rem;
-            border-bottom: 1px solid transparent;
-            transition: color 0.2s, border-color 0.2s;
-        }
-
-        .nav-back:hover {
-            color: var(--red);
-            border-bottom-color: var(--red);
-        }
-
-        footer {
-            margin-top: 3rem;
-            padding: 1.5rem 0 2rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.78rem;
-            color: #8b8177;
-            text-align: center;
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 1rem;
-            }
-
-            .container {
-                margin: 1rem auto;
-                padding: 0 1.35rem;
-            }
-
-            header {
-                padding-top: 2.7rem;
-            }
-
-            h1 {
-                font-size: 1.68rem;
-            }
-
-            h2 {
-                letter-spacing: 0.08em;
-            }
-        }
     </style>
 </head>
 <body>
-    <main class="container">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+
+    <main class="container" id="main-content">
         <article>
 
         <header>
