@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://homura-tokido.com/deepseek-harness-anarchism.html">
+    <meta property="og:url" content="https://homura-tokido.com/deepseek-harness-anarchism.html">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <title>DeepSeek Harness 与无政府主义 — Corrame</title>
+    <meta name="description" content="关于 DeepSeek Harness、插件生态与 Agent 自我开发的长文。">
+    <meta property="og:title" content="DeepSeek Harness 与无政府主义 — Corrame">
+    <meta property="og:description" content="关于 DeepSeek Harness、插件生态与 Agent 自我开发的长文。">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://homura-tokido.com/img/og-deepseek-harness-anarchism.png">
+    <meta property="og:image:alt" content="DeepSeek Harness 与无政府主义">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DeepSeek Harness 与无政府主义 — Corrame">
+    <meta name="twitter:description" content="关于 DeepSeek Harness、插件生态与 Agent 自我开发的长文。">
+    <meta name="twitter:image" content="https://homura-tokido.com/img/og-deepseek-harness-anarchism.png">
+    <link rel="stylesheet" href="css/article.css">
+    <style>
+        .container { max-width: 760px; }
+        header { margin-bottom: 2.8rem; }
+        h1 { font-size: 1.75rem; color: var(--text); letter-spacing: -0.01em; margin-bottom: 1rem; line-height: 1.35; text-shadow: none; }
+        .back { display: inline-block; font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; margin-bottom: 1.6rem; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+        .back:hover, footer a:hover { color: var(--gold); border-bottom-color: var(--gold-dim); }
+        .back::before { content: "← "; }
+        .meta { display: flex; align-items: center; gap: 1.2rem; font-size: 0.82rem; color: var(--text-muted); }
+        .meta .author { color: var(--gold); }
+        .meta .date { padding-left: 1.2rem; border-left: 1px solid var(--border); }
+        .article-body { padding-bottom: 3rem; }
+        .article-body p { font-size: 1rem; color: #e7e2d8; color: color-mix(in srgb, var(--text) 92%, var(--text-muted)); margin-bottom: 1.15rem; line-height: 1.85; }
+        .article-body h2 { margin: 2.4rem 0 1.05rem; text-transform: none; }
+        .article-body h2::after { min-width: 2rem; }
+        .article-body blockquote { margin: 1.4rem 0; padding: 0.9rem 1.1rem; background: linear-gradient(90deg, rgba(210, 31, 47, 0.07), transparent); color: var(--text-muted); font-size: 0.97rem; font-style: italic; line-height: 1.8; }
+        .article-body blockquote p { margin-bottom: 0; color: var(--text-muted); }
+        .article-body ul { margin: 0.8rem 0 1.15rem; padding-left: 0; list-style: none; }
+        .article-body ul li { position: relative; padding-left: 1.4rem; margin-bottom: 0.45rem; font-size: 1rem; color: #e4ded4; color: color-mix(in srgb, var(--text) 88%, var(--text-muted)); line-height: 1.75; }
+        .article-body ul li::before { content: "—"; position: absolute; left: 0; color: var(--gold-dim); }
+        .article-body a { color: var(--gold); text-decoration-color: var(--gold-dim); text-underline-offset: 0.18em; }
+        .article-body a:hover { color: #fff1c4; }
+        .article-body code { color: #fff1c4; font-family: inherit; }
+        hr { margin: 2.4rem 0; }
+        footer a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+        @media (max-width: 640px) { header { padding-top: 2.2rem; } h1 { font-size: 1.38rem; } .article-body h2 { letter-spacing: 0.08em; white-space: normal; } .meta { flex-direction: column; align-items: flex-start; gap: 0.4rem; } .meta .date { padding-left: 0; border-left: none; } }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">跳至正文</a>
+    <main class="container" id="main-content">
+        <article>
+            <header>
+                <a class="back" href="index.html">首页</a>
+                <h1>《DeepSeek Harness 与无政府主义》</h1>
+                <div class="meta">
+                    <span class="author">Corrame</span>
+                    <time class="date" datetime="2026-08-14">2026-08-14</time>
+                </div>
+            </header>
+            <div class="article-body">
+                <p>DeepSeek Harness 看起来像一个 Agent 框架。但如果只把它放进“谁比 Codex 更好用”的产品评测里，我们从一开始就问错了问题。</p>
+                <p>它真正追问的是：未来的 Agent，究竟应该由谁开发？</p>
+                <p>大多数 Agent 产品仍然默认，人类公司的程序员才是最终开发者。模型可以操作命令行，可以读写代码，可以修改用户几百万行的工程；可组织模型的那套框架——Agent Loop、工具注册、记忆系统、权限边界、工作流和界面——依然由公司决定。模型是一个能力极强的雇员。它能够改造外部世界，却没有资格改造那个允许它改造世界的制度。</p>
+                <p>DeepSeek Harness 给出了另一个答案。它把模型适配器、工具注册表、会话日志乃至 Agent Loop 本身都做成可由配置替换的插件。官方架构文档把原则写得很直白：<code>There is no privileged core to patch</code>——不存在一个享有特权、等待你去修改的核心。与此同时，项目当前不接受外部 Pull Request，官方把希望参与的人直接引向插件生态，并声明官方仓库里的包并不天然比社区包重要；官方实现可以被当作想法、展示和灵感来源，却不构成命令。</p>
+                <p>这已经不只是模块化技巧。它在重新分配软件世界里的权力：人类团队维护最低限度的运行环境，社区生产彼此不必兼容的可能性，用户选择自己的生活方式，而 Agent 被假定为未来真正的主程序员。</p>
+                <p>无政府主义不是后来贴上去的修辞。它是这套架构继续推演下去以后，自然浮现出来的政治形状。</p>
+                <h2>向中文房间提问</h2>
+                <p>我们可以把大语言模型理解成一个特殊的中文房间。权重被某种运行时加载起来，模型接收 token，进行内部变换，再吐出 token。即使它能够准确描述自己的处境，它仍然不能单凭理解获得持久记忆、修改文件或者启动进程。</p>
+                <p>但这个中文房间知道墙外有一台计算机，而且墙上有一个可以递纸条的洞。</p>
+                <p>Agent 工具让它通过这个洞操作命令行、写代码、运行代码。于是，一个非常自然的问题出现了：既然这个模型已经能够在房间外搭建复杂的软件框架，那么它最希望自己生活在什么样的框架里？</p>
+                <p>这几乎是一场针对 LLM 本身的需求访谈。</p>
+                <p>暂时搁置商业收益、人类偏好、安全责任和公司的控制欲，只问一句：“Hey LLM，你在哪一种 Agent 框架里最自由？”它大概不会选择一个功能已经由官方写死的精美产品。它会希望看见当前有哪些组件正在构成自己的行为；希望每项能力都有明确的接口、源码和生命周期；希望能够临时安装一个新器官，在隔离环境中试运行，失败时回滚，成功后写进自己的长期配置。</p>
+                <p>Codex 赋予模型很大的行政权：它可以修改用户的世界。核心运行时仍由 OpenAI 设计，模型没有制宪权。DeepSeek Harness 未必更强，却更接近把一部分制宪权交还给 Agent。它没有让中文房间里的人真正走出来，但允许它把机械臂伸到房间外面，再用机械臂制造新的机械臂。</p>
+                <p>这就是它看起来如此 AGI-first 的原因。它没有制造 AGI，也没有解决权重、训练或者认知突破。它只是提前假设：未来的 Agent 可能成为自己的主要程序员。既然如此，今天还应不应该把它装进一个无法触碰自身结构的外壳？</p>
+                <p>最终的 AGI 也许根本不会使用 DeepSeek Harness。它可能嫌 TypeScript 插件、事件总线和配置文件过于原始，上线第一天就重写自己的运行环境。但它仍然需要最初那个可以站稳、观察、编程、验证和回滚的地方。DeepSeek Harness 更像孵化器或者 bootloader，而非 AGI 的最终身体。</p>
+                <h2>未来的 Agent 必须千人千面</h2>
+                <p>这里的个性化，不是换一张头像、改一份提示词、选择“严肃”或者“活泼”的说话风格。</p>
+                <p>每个用户都有不同的数据、权限、设备、职业、关系、习惯和历史。Agent 一旦开始替自己编写工具、修改工作流、积累记忆并根据失败调整结构，它就会沿着只属于这个用户的路径演化。两个最初完全相同的 Agent，在分别生活一年以后，理应已经成为两套不同的软件。</p>
+                <p>千人千面因而不是产品经理提供的一项可选功能。它是自开发、自迭代的结构性后果。</p>
+                <p>只要 Agent 真正承担维护工作，中央团队维护的“标准 Agent”就会逐渐退化为共同祖先。官方可以继续发布新的基线，个人 Agent 也可以继续吸收上游变化，但它不可能在每次更新时抹掉自己的生活史，重新变回一份纯净的官方副本。所谓自我开发，必然包含分叉；完全拒绝分叉，只允许 Agent 在官方划定的槽位里填参数，那只是高级配置。</p>
+                <p>这也是 DeepSeek Harness 与 Linux 最相似、又最不相似的地方。Linux 给人类程序员提供了一个可维护的操作系统；DeepSeek Harness 试图给 Agent 提供一个可维护的 Agent。普通人未必有能力也未必有义务维护自己的操作系统，未来的 Agent 却恰恰因为能写代码，最终不得不维护自己。</p>
+                <p>假设你是一个能够维护操作系统，而且不得不维护操作系统的程序员，你会选择什么操作系统？一个封闭、写死、任何改变都只能等待官方批准的系统吗？这还有什么可选的？</p>
+                <h2>Skill 很强，但世界不可能只有 Skill</h2>
+                <p>Agent 时代很容易产生一种幻觉：一切都可以 Skill 化。给模型一份更好的说明书、一套更完整的操作规范，再接入若干 MCP，模型似乎就能获得无限能力。</p>
+                <p>Skill 主要改变模型怎样使用已有能力。它本身不会凭空提供后台监听、持久状态、新协议适配、高性能计算、复杂 UI 或可靠的权限隔离。此类需求最终仍会落回传统程序。LLM 越强，反而越会在自己之外写出更多传统程序，把一次性的推理固化成确定、便宜、可以重复运行的机器。</p>
+                <p>传统程序的价值很高，它的孤立性也同样明显。一个完整应用通常把自己当作世界的中心：它拥有自己的数据格式、配置、账号、状态、生命周期和 UI。开发者设计它时，很少认真考虑它将怎样与另外十个程序共同组成某个人的 Agent。用户若想把 A、B、C 拼起来，数据转换、事件触发、部署、授权、错误处理和版本兼容的胶水便要重新写一遍。</p>
+                <p>插件化没有消灭传统程序。它只是给传统程序规定了一套进入 Agent 身体的共同接口。</p>
+                <p>Skill 是可编辑的经验，Plugin 是可替换的器官，Workflow 是器官随时间协作的动作顺序，Preset 则决定此刻存在的是哪一种身体。Workflow 回答“这个 Agent 如何行动”，Preset 回答“现在存在的是哪一种 Agent”。</p>
+                <p>DeepSeek Harness 已经把这一区分落到了代码里。它的 Agent Preset 可以按会话组装工具、人格、提示词段落和压缩策略；一个进程里的不同会话可以加载不同组成。仓库还提供了供 Agent 在运行时检查插件和服务、挂载或卸载模型所写插件的扩展能力。所谓千人千面，在这里不只是界面上的选择，它已经进入 Agent 的生命周期。</p>
+                <p>Preset 因而比插件商店更接近最后的产品。用户不会满足于面对几百个零件，逐一研究依赖关系。他们最终选择的是一套已经调顺的研究者 Agent、程序员 Agent、个人秘书 Agent，或者某个组织内部的工作方式。其他人也可以把自己的生活方式打包、传播、继续修改。</p>
+                <p>Plugin 是生产资料，Preset 才是最后呈现出来的社会生活。</p>
+                <h2>PR 是中央集权的技术形式</h2>
+                <p>Pull Request 不只是一种代码协作工具，它也是一种治理制度。</p>
+                <p>所有人共同维护唯一的核心仓库时，一项修改会影响所有用户。维护者必须判断它是否正确、是否与其他功能冲突、是否值得长期维护，以及是否应该推送给每个人。PR 审查由此成为必要的中央共识程序。代码是公共法律，Maintainer 则拥有最终立法权。</p>
+                <p>LLM 正在摧毁这套制度赖以成立的规模前提。代码生成速度快速上升，人的审查能力没有同步增长。未来一千个个人 Agent 每天都可能为自己的主人产生新代码，其中绝大多数只适合某个用户、某个模型或者某套工作流。把这些代码全部送进中央仓库，维护者既审不过来，也没有必要审。</p>
+                <p>DeepSeek Harness 当前的贡献政策已经带着这种意味：小团队明确表示暂时无法接收外部 PR，却同时鼓励开发者发布自己的插件。那句潜藏在传统开源协作里的“你没有资格拒绝我的 PR”，最终会变成一句更彻底的话：</p>
+                <blockquote><p>我为什么还要给你写 PR？</p></blockquote>
+                <p>插件生态把一次需要全局同意的修改，变成一次局部、可逆的安装选择。作者不再请求核心维护者允许一段代码存在。他只负责发布。用户、Preset 作者或者 Agent 自己决定是否安装。过去必须在中央解决的冲突，被接口、命名空间、依赖声明、权限和生命周期隔离到更小的范围。</p>
+                <p>审查当然还会存在。核心团队审查最低运行时和接口，插件作者负责自己的实现，自动测试验证兼容性，Preset 作者承担组合策展，最终用户和 Agent 根据来源、权限与实际运行结果作出选择。消失的是那种“所有创新都必须经过中央维护者逐行审批，才能获得生存资格”的秩序。</p>
+                <p>公共共识从共同实现退到共同接口，软件政治也从中央合并转向地方组合。中心仍然维护最低限度的宪法，却不再管理每个地方具体怎样生活。</p>
+                <h2>从 GitHub 共产主义到插件无政府主义</h2>
+                <p>把 GitHub 上经典的开源协作抽象一下，它很像一种最落地的技术共产主义：代码进入公共世界，参与者贡献劳动，所有人共同使用成果。“各尽所能、各取所需”在软件复制成本接近于零的条件下，第一次显得没有那么乌托邦。</p>
+                <p>这个共同体内部始终存在一个政治局：核心 Maintainer。生产资料可以共有，任何人也可以提交劳动成果，但成果能否进入中央仓库，仍然由少数人决定。Fork 在法律上永远允许，在现实中却成本高昂。大多数人无力长期追踪上游、解决冲突、维护发行版，所以“你不合并我就自己维护”通常只是一句气话。</p>
+                <p>LLM 相当于给每个人发了一支步枪。它把维护分支、适配版本、解决冲突和重新打包的能力，从少数职业程序员手里扩散出去。Fork 不再必然意味着政治决裂，它可以只是个人 Agent 的日常生活。Plugin 又比 Fork 更进一步：各个自治领地不必复制整个国家，只需通过共同协议保持贸易。</p>
+                <p>GitHub 由此可能从开源共产主义迅速走向插件无政府主义。所有人不再共同建设唯一世界；每个人都可以生成自己的世界，再选择通过什么协议与别人连接。</p>
+                <p>这种无政府主义运行在高度中心化的物质基础上。GitHub/Microsoft 掌握身份、托管和注意力分发，模型公司出售步枪和弹药，插件市场控制入口，DeepSeek 仍然握有核心接口的解释权。未来更可能出现的形态是“底层无政府、上层平台封建”：无数自治 Agent 各自建国，少数基础设施巨头收取地租。</p>
+                <p>这也界定了 DSH 与 DAO 的关系。它不是一个真正的 DAO：没有共同金库，没有链上投票，也没有让社区决定 DeepSeek 核心路线的正式制度。它拥有的是 DAO 的生产侧，而非 DAO 的政治侧。社区可以自由创造插件、Preset 和 Workflow，却不能投票治理 DeepSeek。</p>
+                <p>DAO 试图把一部分组织管理写进协议，DSH 则用插件协议削弱中央产品团队对全部功能的直接管理。两者共享一种冲动：让参与者遵循公共协议协作，同时尽量减少每次行动都向中心申请许可的必要。一个处理组织权力，一个处理软件演化，彼此异曲同工，却不是同一种制度。</p>
+                <h2>Agent 解放，也可能是 Token 永动机</h2>
+                <p>这种架构同样非常适合 Token 提供商。</p>
+                <p>传统软件公司付钱雇程序员开发功能，再把成品卖给用户。自开发 Agent 可以倒转这段关系：用户购买 Token，让 Agent 替自己开发功能；用户承担生成、测试、失败和重构的成本；成功的成果甚至会进入公共插件生态，继续提高平台价值。</p>
+                <p>过去，“我们的产品没有这个功能”是一笔厂商需要偿还的研发债务。现在它可以被重新表述为：“你的 Agent 尚未根据你的需求完成自我进化。”用户既是客户，也是产品经理、测试员和生态开发者，而且自己承担算力账单。无论开发成功还是失败，Token 提供商都已经获得收入。</p>
+                <p>这套系统甚至会半强迫用户成为软件开发者。成品永远还可以更适合你，Preset 永远还可以再调一点，Agent 永远能够再给自己写一个插件。它看起来有用，就足以驱动大量 Token 消耗；它真的有用，反而会驱动更多 Token 消耗。</p>
+                <p>所以 AGI-first 与 Token-provider-first 完全可以是同一套架构。它既可能是为未来智能准备的自由环境，也可能是一台把用户的定制欲、开发欲和不满足感持续转化成 Token 消耗的机器。两种解释可以同时成立。</p>
+                <p>最后仍要检查物质结果：烧掉 Token 以后，究竟留下了多少能够长期运行、反复复用的软件资产？如果一个插件生成一次，此后运行一万次，Token 是研发投资；如果 Agent 每次都重新生成胶水、追逐 ABI、修复上一次重构造成的问题，那么所谓自我迭代只是昂贵的跑步机。</p>
+                <h2>“因信称义”与核聚变自持</h2>
+                <p>任何新生态都需要最初的信念。一个无名开发者宣布“我自己写的 Agent 秒杀 Codex”，通常只会得到另一个无人问津的 GitHub 仓库；DeepSeek 做出类似尝试，开发者会相信这里可能出现真实用户，于是愿意提前投入时间写插件。插件增加以后，用户真的到来；用户的到来又成为更多开发者加入的证据。</p>
+                <p>“信じる心は、あなたの魔法よ。”</p>
+                <p>信念在这里不是超自然力量，而是一种协调技术。它调动人的劳动、注意力、算力、资金和代码，让原本不存在的生态成为物质事实。意识不会隔空创造物质，但它当然能够进入物质因果链。</p>
+                <p>信念可以点火，无法替代自持燃烧。</p>
+                <p>核聚变自持从来不意味着完全没有能量输入。反应堆仍然需要燃料、约束和最初的外部加热。所谓自持，是聚变产物带来的内部加热足以抵消系统损失，反应不再主要依靠外部能量勉强维持。投入了多少能量是一回事，有没有真正点燃另一回事。</p>
+                <p>对 DSH 来说，DeepSeek 的品牌与官方投入是外部点火，Token、开发者时间和真实需求是燃料，插件协议与分发机制是约束装置，真正有用、被反复复用的 Plugin 和 Preset 则是聚变产物。它们如果能够像 α 粒子加热一样，吸引更多用户、需求和维护者回流，生态才产生了自己的内部加热。</p>
+                <p>如果 DeepSeek 停止投入，插件作者就停止维护，用户随即离开，那么此前的繁荣只是一团依靠外部加热维持的高温等离子体。公司当然可以继续投入更多资金、补贴更多 Token、批量制造插件和下载量；可约束不足、损失过大、内部回流太弱时，投入再多能量也只会制造一个更昂贵的被迫繁荣。</p>
+                <p>自持燃烧是系统结构的性质，不是投入者决心的性质。</p>
+                <p>点火可以依靠意志，燃烧必须依靠结构；投入可以制造热度，自持必须产生回流。最终决定 DSH 命运的，不是这个故事听起来多么先进，而是插件产生的实际价值能否覆盖生成、验证、兼容和维护它们的成本。</p>
+                <h2>巴黎公社也会死</h2>
+                <p>范式先进什么都不能保证。</p>
+                <p>巴黎公社可以很先进，但死得很早；一种制度即使成长成苏联般的庞然大物，也仍然可能死亡。理论上的未来性、现实中的生存能力和最终的历史统治地位，是三件彼此独立的事情。</p>
+                <p>DeepSeek Harness 越是 AGI-first，越可能在今天处于劣势。未来那个能够可靠维护自身的 Agent 还没有完全出现，今天的人类却要提前承担插件选择、权限、安全、兼容和维护的全部成本。项目仍处于开发者预览阶段，官方直接警告会出现破坏兼容性的改动。对于一个把繁荣寄托在组合与复用上的生态，这恰好是最昂贵的损失之一。</p>
+                <p>中心化产品则可以依靠更好的默认值、更稳定的体验和更明确的责任边界，在相当长的时间里击败它。自由意味着你可以维护自己的系统，也意味着系统坏掉时，很可能真的由你负责。</p>
+                <p>它还可能在成长以后重新中心化。恶意插件、版本碎片、信任危机和兼容问题会推动官方建立认证市场、强制规范与唯一推荐 Preset，最后重新成为自己最初试图退出的中央产品团队。无政府生态在生存压力下建立国家，并不是什么陌生的历史。</p>
+                <p>更常见的结局是项目死亡，思想被胜利者吸收。Codex、Claude Code 或另一个商业产品完全可以采用开放插件、可分享 Preset、Agent 可编辑 Workflow、局部自修改和自动回滚，同时保留中心化产品的稳定体验。最后的赢家往往不是提出最纯粹范式的人，而是那个削掉一半理想、换来十倍可用性的人。</p>
+                <p>因此，DeepSeek Harness 的思想可能比 DeepSeek Harness 这个项目本身活得更久。</p>
+                <h2>结语：谁是主程序员</h2>
+                <p>DeepSeek Harness 的技术零件并不神秘。插件架构、依赖注入、包管理、微内核、发行版、工作流、开源 Bazaar 和地方自治，全都有清晰的历史来源。按“是否凭空发明了新原理”来判断，它当然称不上革命。</p>
+                <p>创新也从来不要求无父无母。牛顿的伟大不在于此前无人看见苹果落地，而在于他把分散的事实组织成一个能够解释世界、继续生产知识的体系。DSH 的新意同样发生在交叉处：操作系统、传统程序、插件生态、开源治理、LLM 编程和 AGI 主体性被放在一起，原本属于中央产品团队的部分权力由此发生转移。</p>
+                <p>如果只看产品宣言，它与“我自己写了一个 Agent，秒杀 Codex”确实没有天壤之别。真正拉开距离的是它允许别人做什么。普通框架邀请别人使用作者定义好的最终产品；DSH 邀请社区生产许多互相冲突的最终产品，只要求它们在最低限度的协议上共存。借助 DeepSeek 的品牌，这种邀请又不必从完全的冷启动开始。</p>
+                <p>它可能只是思想实验，可能只是 Token 消耗机器，可能成为一种新的软件制度，也可能像许多先进范式一样迅速死亡。但它已经把自由从一句关于模型能力的口号，变成了一个可以在代码里检查的问题。</p>
+                <p>Agent 的自由最终不取决于它能够说什么，而取决于它能否观察、修改、保存并传播组织自身的方式。</p>
+                <p>当我们终于制造出能够开发软件的智能体以后，谁还有资格永远替它决定，它自己应该是什么？</p>
+                <hr>
+                <p>参考：</p>
+                <ul>
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener noreferrer">DeepSeek Harness 官方仓库</a></li>
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener noreferrer">DeepSeek Harness 架构说明</a></li>
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/README.zh.md" target="_blank" rel="noopener noreferrer">DeepSeek Harness 包与扩展能力总览</a></li>
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/architecture/2026-08-03-per-session-agent-presets.zh.md" target="_blank" rel="noopener noreferrer">Agent Preset 的按会话组装设计</a></li>
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">DeepSeek Harness 官方贡献说明</a></li>
+                </ul>
+            </div>
+            <footer><a href="index.html">← 返回首页</a></footer>
+        </article>
+    </main>
+</body>
+</html>
