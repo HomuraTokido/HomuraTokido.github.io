@@ -8,15 +8,15 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <title>DeepSeek Harness 与无政府主义 — Corrame</title>
-    <meta name="description" content="关于 DeepSeek Harness、插件生态与 Agent 自我开发的长文。">
+    <meta name="description" content="DeepSeek Harness 是否正在把 Agent 的“制宪权”从特权核心交还给插件生态？一篇关于 Agent 自我开发、开源治理与 Token 经济的长文。">
     <meta property="og:title" content="DeepSeek Harness 与无政府主义 — Corrame">
-    <meta property="og:description" content="关于 DeepSeek Harness、插件生态与 Agent 自我开发的长文。">
+    <meta property="og:description" content="DeepSeek Harness 是否正在把 Agent 的“制宪权”从特权核心交还给插件生态？一篇关于 Agent 自我开发、开源治理与 Token 经济的长文。">
     <meta property="og:type" content="article">
     <meta property="og:image" content="https://homura-tokido.com/img/og-deepseek-harness-anarchism.png">
     <meta property="og:image:alt" content="DeepSeek Harness 与无政府主义">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DeepSeek Harness 与无政府主义 — Corrame">
-    <meta name="twitter:description" content="关于 DeepSeek Harness、插件生态与 Agent 自我开发的长文。">
+    <meta name="twitter:description" content="DeepSeek Harness 是否正在把 Agent 的“制宪权”从特权核心交还给插件生态？一篇关于 Agent 自我开发、开源治理与 Token 经济的长文。">
     <meta name="twitter:image" content="https://homura-tokido.com/img/og-deepseek-harness-anarchism.png">
     <link rel="stylesheet" href="css/article.css">
     <style>
@@ -29,6 +29,8 @@
         .meta { display: flex; align-items: center; gap: 1.2rem; font-size: 0.82rem; color: var(--text-muted); }
         .meta .author { color: var(--gold); }
         .meta .date { padding-left: 1.2rem; border-left: 1px solid var(--border); }
+        .position-note { margin: 0 0 2.2rem; padding: 1rem 1.1rem; border-left: 2px solid var(--gold-dim); background: linear-gradient(90deg, rgba(214, 170, 79, 0.07), transparent); color: var(--text-muted); font-size: 0.88rem; line-height: 1.8; }
+        .position-note strong { color: #fff1c4; font-weight: 600; }
         .article-body { padding-bottom: 3rem; }
         .article-body p { font-size: 1rem; color: #e7e2d8; color: color-mix(in srgb, var(--text) 92%, var(--text-muted)); margin-bottom: 1.15rem; line-height: 1.85; }
         .article-body h2 { margin: 2.4rem 0 1.05rem; text-transform: none; }
@@ -58,6 +60,9 @@
                     <time class="date" datetime="2026-08-14">2026-08-14</time>
                 </div>
             </header>
+            <aside class="position-note" aria-label="说明">
+                <strong>说明：</strong>本文并非把一个外来的政治标签强加给普通的插件系统。我认为，DeepSeek Harness 对“特权核心”、官方实现地位和中央合并模式的明确拒绝，本身已经表达了一种自觉的去中心化治理思想。“无政府主义”是我对这套设计思想政治形状的命名，而不是对项目成员私人政治身份的判断。文中关于项目状态与技术实现的描述截至 2026 年 8 月 14 日；关于其长期政治与经济后果的部分属于作者推演。
+            </aside>
             <div class="article-body">
                 <p>DeepSeek Harness 看起来像一个 Agent 框架。但如果只把它放进“谁比 Codex 更好用”的产品评测里，我们从一开始就问错了问题。</p>
                 <p>它真正追问的是：未来的 Agent，究竟应该由谁开发？</p>
