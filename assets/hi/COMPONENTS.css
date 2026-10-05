@@ -1,0 +1,1048 @@
+/*
+  Homura Interface portable components
+
+  Every selector is namespaced with .hi-. This file deliberately does not
+  reset body, headings, buttons, inputs, links, or any other host element.
+  Include TOKENS.css before this file. Theme variables inherit from html or
+  from a local element carrying data-theme="white-default|red-black".
+*/
+
+.hi-page {
+  box-sizing: border-box;
+  color: var(--page-text);
+  background: var(--page-bg);
+  font-family: var(--components-page-font-family), var(--font-fallback);
+  font-size: var(--components-page-font-size);
+  font-weight: var(--components-page-font-weight);
+  line-height: var(--components-page-line-height);
+  transition: color var(--motion-theme-duration) ease,
+    background-color var(--motion-theme-duration) ease;
+}
+
+.hi-page--full {
+  min-height: 100vh;
+}
+
+.hi-page *,
+.hi-page *::before,
+.hi-page *::after {
+  box-sizing: border-box;
+}
+
+.hi-display,
+.hi-headline-lg,
+.hi-headline-md {
+  color: var(--color-primary);
+  font-family: var(--font-headline-lg);
+}
+
+.hi-display {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--typography-headline-display-font-size);
+  font-weight: var(--typography-headline-display-font-weight);
+  line-height: var(--typography-headline-display-line-height);
+}
+
+.hi-headline-lg {
+  margin: 0;
+  font-size: var(--typography-headline-lg-font-size);
+  font-weight: var(--typography-headline-lg-font-weight);
+  line-height: var(--typography-headline-lg-line-height);
+}
+
+.hi-headline-md {
+  margin: 0;
+  font-family: var(--font-headline-md);
+  font-size: var(--typography-headline-md-font-size);
+  font-weight: var(--typography-headline-md-font-weight);
+  line-height: var(--typography-headline-md-line-height);
+}
+
+.hi-body {
+  max-width: var(--layout-reading-width);
+  color: var(--color-secondary);
+  font-family: var(--font-body);
+  font-size: var(--typography-body-md-font-size);
+  font-weight: var(--typography-body-md-font-weight);
+  line-height: var(--typography-body-md-line-height);
+}
+
+.hi-body-sm {
+  color: var(--color-secondary);
+  font-family: var(--font-body-sm);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+.hi-surface {
+  color: var(--surface-text);
+  background: var(--surface-bg);
+  border-radius: var(--components-surface-rounded);
+  padding: var(--components-surface-padding);
+  transition: color var(--motion-theme-duration) ease,
+    background-color var(--motion-theme-duration) ease;
+}
+
+.hi-divider {
+  display: block;
+  width: 100%;
+  height: var(--components-divider-height);
+  margin: var(--spacing-md) 0;
+  border: 0;
+  background: var(--divider-bg);
+}
+
+/* 引文：左侧一根发丝线，与 .hi-divider 同厚同色；字号跟随组合的排版类 */
+.hi-quote {
+  margin: 0;
+  padding-left: var(--spacing-md);
+  color: var(--color-primary);
+  border-left: var(--components-divider-height) solid var(--divider-bg);
+}
+
+/* 正文链接：可点靠下划线表达，不靠颜色，不用红 */
+.hi-link {
+  color: var(--color-primary);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-outline-control);
+  text-decoration-thickness: var(--components-divider-height);
+  text-underline-offset: var(--typography-link-underline-offset);
+  transition: text-decoration-color var(--motion-selection-duration) ease;
+}
+
+.hi-link:hover {
+  text-decoration-color: currentColor;
+}
+
+/* 行内代码：只换等宽字体 */
+.hi-code {
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+}
+
+.hi-glass-regular,
+.hi-glass-clear,
+.hi-popover,
+.hi-toolbar,
+.hi-button--glass,
+.hi-button--prominent {
+  position: relative;
+  /* 用 z-index 形成层叠上下文，不用 isolation: isolate：后者会成为 backdrop root，
+     把光学层 ::before 能读到的背景切断，玻璃就整块消失（2026-09-15 在真实页面上撞到） */
+  z-index: 0;
+  /* 边框只占位；边缘带由文件末尾的 ::after 渐变环画，光学层开启时由滤镜画 */
+  border: var(--material-edge-width) solid transparent;
+  box-shadow: var(--material-glass-regular-shadow);
+  transition: color var(--motion-theme-duration) ease,
+    background-color var(--motion-theme-duration) ease,
+    border-color var(--motion-theme-duration) ease,
+    box-shadow var(--motion-selection-duration) ease,
+    transform var(--motion-press-duration) ease,
+    opacity var(--motion-expand-duration) var(--motion-expand-easing);
+}
+
+/* 材料公式的 CSS 基础层：涂色。own 取 --hi-fill 的颜色，厚度取层级的透过率，不取填充自己的 alpha。
+   CSS 做不到滤色，染色玻璃在这一层是"透射近似"；光学层开启时由滤镜按完整公式算。 */
+.hi-glass-regular,
+.hi-toolbar,
+.hi-button--glass,
+.hi-button--prominent { --hi-glass-t: var(--material-glass-t-control); }
+.hi-popover { --hi-glass-t: var(--material-glass-t-focus); }
+.hi-glass-clear { --hi-glass-t: var(--material-glass-t-clear); }
+.hi-glass-regular,
+.hi-glass-clear,
+.hi-popover,
+.hi-toolbar,
+.hi-button--glass,
+.hi-button--prominent {
+  --hi-paint: color-mix(in srgb, rgb(from var(--hi-fill) r g b) calc((1 - var(--hi-paint-t, var(--hi-glass-t))) * 100%), transparent);
+}
+/* 染色玻璃在涂色层单独取更低的透过率（DESIGN.md「网页渲染器 · CSS 基础层」）；光学层不看这个变量 */
+.hi-button--prominent,
+[data-hi-tinted],
+[data-theme="red-black"]:not([data-red="off"]) .hi-toolbar:not([data-hi-backdrop]) { --hi-paint-t: var(--material-glass-t-tint-paint); }
+@supports not (color: rgb(from red r g b)) {
+  .hi-glass-regular, .hi-glass-clear, .hi-popover, .hi-toolbar, .hi-button--glass, .hi-button--prominent { --hi-paint: var(--hi-fill); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .hi-glass-regular, .hi-glass-clear, .hi-popover, .hi-toolbar, .hi-button--glass, .hi-button--prominent { --hi-glass-t: 0; }
+}
+
+.hi-range:active::-webkit-slider-thumb {
+  position: relative;
+  isolation: isolate;
+  border: var(--material-edge-width) solid var(--hi-edge-light, var(--material-edge-light));
+  box-shadow: inset 0 var(--material-edge-width) 0 var(--hi-edge-light, var(--material-edge-light)),
+    inset 0 calc(var(--material-edge-width) * -1) 0 var(--hi-edge-dark, var(--material-edge-dark)),
+    var(--material-glass-regular-shadow);
+}
+
+.hi-range:active::-moz-range-thumb {
+  position: relative;
+  isolation: isolate;
+  border: var(--material-edge-width) solid var(--hi-edge-light, var(--material-edge-light));
+  box-shadow: inset 0 var(--material-edge-width) 0 var(--hi-edge-light, var(--material-edge-light)),
+    inset 0 calc(var(--material-edge-width) * -1) 0 var(--hi-edge-dark, var(--material-edge-dark)),
+    var(--material-glass-regular-shadow);
+}
+
+.hi-glass-regular > *,
+.hi-glass-clear > *,
+.hi-popover > *,
+.hi-toolbar > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hi-glass-regular {
+  --hi-fill: var(--hi-glass-bg, var(--glass-regular-bg));
+  color: var(--hi-glass-text, var(--color-primary));
+  background: var(--hi-paint);
+  border-radius: var(--components-glass-regular-rounded);
+  padding: var(--components-glass-regular-padding);
+  -webkit-backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+  backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+}
+
+.hi-glass-clear {
+  color: var(--hi-glass-text, var(--color-primary));
+  font-weight: var(--typography-label-md-font-weight);
+  --hi-fill: var(--hi-glass-bg, var(--glass-clear-bg));
+  background: var(--hi-paint);
+  border-radius: var(--components-glass-clear-rounded);
+  padding: var(--components-glass-clear-padding);
+  -webkit-backdrop-filter: blur(var(--material-glass-clear-blur)) saturate(var(--material-glass-clear-saturation));
+  backdrop-filter: blur(var(--material-glass-clear-blur)) saturate(var(--material-glass-clear-saturation));
+  box-shadow: var(--material-glass-clear-shadow);
+}
+
+/* Backdrop response is explicit and local. The library does not sample
+   arbitrary pixels or infer whether a background is readable. Regular glass
+   reads a background only by swapping its own fill/text (DESIGN.md: "先保留
+   背景的影响，再调整填充明暗、不透明度与表面文字"); it gets no separate dim
+   layer. Clear glass on a light backdrop is the one case DESIGN.md calls for
+   a dim layer ("背后内容亮时，在玻璃后面加暗色调光层"). */
+.hi-glass-clear[data-hi-backdrop="light"]::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  content: "";
+  background: var(--material-glass-clear-dim);
+}
+
+.hi-glass-regular[data-hi-backdrop="dark"],
+.hi-glass-clear[data-hi-backdrop="dark"] {
+  --hi-glass-text: var(--components-toolbar-dark-text-color); /* 暗背景上的字：取库里红栏的白字，同一个值 */
+  --hi-edge-light: var(--material-edge-light-dark);
+}
+
+.hi-glass-regular[data-hi-backdrop="light"] {
+  --hi-glass-text: var(--colors-primary);
+  --hi-edge-light: var(--material-edge-light);
+}
+
+.hi-glass-clear[data-hi-backdrop="light"] {
+  --hi-glass-text: var(--components-toolbar-dark-text-color); /* 暗背景上的字：取库里红栏的白字，同一个值 */
+  --hi-edge-light: var(--material-edge-light);
+}
+
+.hi-glass-regular[data-hi-backdrop="dark"] {
+  --hi-glass-bg: var(--components-glass-regular-dark-background-color);
+}
+
+.hi-glass-regular[data-hi-backdrop="light"] {
+  --hi-glass-bg: var(--components-glass-regular-background-color);
+}
+
+.hi-glass-clear[data-hi-backdrop="dark"] {
+  --hi-glass-bg: var(--components-glass-clear-dark-background-color);
+}
+
+.hi-glass-clear[data-hi-backdrop="light"] {
+  --hi-glass-bg: var(--components-glass-clear-background-color);
+}
+
+.hi-toolbar {
+  --hi-optics-blur: var(--toolbar-optics-blur);
+  --hi-optics-saturation: var(--toolbar-optics-saturation);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* DESIGN.md Layout：控制条永远一行；标签之间的留白放在命中区里面，随窗宽连续收放，所以栏上的条目之间不再留空隙 */
+  --hi-bar-item-inset: clamp(var(--control-bar-item-inset-min), var(--control-bar-item-inset-fluid), var(--control-bar-item-inset-max));
+  flex-wrap: nowrap;
+  gap: 0;
+  /* DESIGN.md 浮动栏：四周一圈内壁，高度是命中区加上下各一个内壁；按钮与当前项因此和栏同心 */
+  /* 栏有一圈 --material-edge-width 的透明边框给边缘带占位，内边距扣掉它，命中区到栏外缘正好一个内壁 */
+  min-height: calc(var(--layout-touch-target) + 2 * var(--control-bar-wall));
+  padding: calc(var(--control-bar-wall) - var(--material-edge-width));
+  box-sizing: border-box;
+  color: var(--hi-toolbar-text, var(--toolbar-text, var(--color-primary)));
+  --hi-fill: var(--hi-toolbar-bg, var(--toolbar-bg));
+  background: var(--hi-paint);
+  border-color: transparent;
+  border-radius: var(--components-toolbar-rounded);
+  -webkit-backdrop-filter: var(--toolbar-backdrop-filter);
+  backdrop-filter: var(--toolbar-backdrop-filter);
+}
+
+/* 内容里另起一行的文字按钮：文字与正文左缘对齐，命中区和悬停底色向外伸出（扣掉留白和占位边框） */
+.hi-button--flush {
+  align-self: flex-start; /* 在 .hi-stack 这类纵向排列里不被拉满整行，文字才落在行首 */
+  margin-inline-start: calc(-1 * (var(--control-button-inset) + var(--material-edge-width)));
+}
+
+/* 栏上的按钮与不可点的文字标签用同一份留白，文字因此对齐；标签不折行 */
+.hi-toolbar > .hi-button,
+.hi-toolbar > span {
+  padding-inline: var(--hi-bar-item-inset);
+  white-space: nowrap;
+}
+
+.hi-toolbar[data-hi-backdrop="dark"] {
+  --hi-optics-blur: var(--material-glass-regular-blur);
+  --hi-optics-saturation: var(--material-glass-regular-saturation);
+  --hi-toolbar-bg: var(--components-glass-regular-dark-background-color);
+  --hi-toolbar-text: var(--components-toolbar-dark-text-color); /* 暗背景上的字：取库里红栏的白字，同一个值 */
+  --hi-edge-light: var(--material-edge-light-dark);
+}
+
+.hi-toolbar[data-hi-backdrop="light"] {
+  --hi-optics-blur: var(--material-glass-regular-blur);
+  --hi-optics-saturation: var(--material-glass-regular-saturation);
+  --hi-toolbar-bg: var(--components-glass-regular-background-color);
+  --hi-toolbar-text: var(--colors-primary);
+  --hi-edge-light: var(--material-edge-light);
+}
+
+.hi-toolbar__group,
+.hi-cluster {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.hi-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--layout-touch-target);
+  min-height: var(--components-button-height);
+  padding: 0 var(--control-button-inset);
+  color: var(--color-primary);
+  font-family: var(--components-button-font-family), var(--font-fallback);
+  font-size: var(--components-button-font-size);
+  font-weight: var(--components-button-font-weight);
+  line-height: var(--components-button-line-height);
+  text-align: center;
+  text-decoration: none;
+  background: transparent;
+  border: var(--material-edge-width) solid transparent;
+  border-radius: var(--components-button-rounded);
+  cursor: pointer;
+  transition: color var(--motion-theme-duration) ease,
+    background-color var(--motion-theme-duration) ease,
+    border-color var(--motion-theme-duration) ease,
+    transform var(--motion-press-duration) ease;
+}
+
+.hi-button:hover {
+  background: color-mix(in srgb, var(--color-primary) var(--state-hover-tint), transparent);
+}
+
+.hi-button:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+.hi-button--glass {
+  color: var(--hi-glass-button-text, var(--color-primary));
+  --hi-fill: var(--hi-glass-button-bg, var(--glass-regular-bg));
+  background: var(--hi-paint);
+  border-color: transparent;
+  -webkit-backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+  backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+}
+
+.hi-button--glass[data-hi-backdrop="dark"] {
+  --hi-glass-button-bg: var(--components-glass-regular-dark-background-color);
+  --hi-glass-button-text: var(--components-toolbar-dark-text-color); /* 暗背景上的字：取库里红栏的白字，同一个值 */
+  --hi-edge-light: var(--material-edge-light-dark);
+}
+
+.hi-button--glass[data-hi-backdrop="light"] {
+  --hi-glass-button-bg: var(--components-glass-regular-background-color);
+  --hi-glass-button-text: var(--colors-primary);
+  --hi-edge-light: var(--material-edge-light);
+}
+
+.hi-button--prominent {
+  color: var(--button-prominent-text);
+  --hi-fill: var(--button-prominent-bg);
+  background: var(--hi-paint);
+  border-color: transparent;
+  -webkit-backdrop-filter: var(--button-prominent-backdrop-filter);
+  backdrop-filter: var(--button-prominent-backdrop-filter);
+}
+
+/* Toolbar controls share the toolbar material. This prevents a prominent
+   button from adding an independent red slab inside a red toolbar. */
+.hi-toolbar .hi-button,
+.hi-toolbar .hi-button--glass,
+.hi-toolbar .hi-button--prominent {
+  color: currentColor;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Prominent action inside a colorless toolbar gets a thin red fill for
+   emphasis (DESIGN.md: "无色玻璃栏内的主要按钮可以用红色薄填充强调，共享栏
+   的玻璃"). The default red-black toolbar is already a red slab, so its own
+   prominent button stays flush with it instead of adding a second red block
+   (DESIGN.md: "红栏内的按钮...不再铺一块独立红底"); red off removes the fill.
+   --state-toolbar-prominent-fill 的值来自 DESIGN.md Components（红 18%）。
+   pending block at the end of TOKENS.css. */
+.hi-toolbar .hi-button--prominent {
+  background: color-mix(in srgb, var(--color-tertiary) var(--state-toolbar-prominent-fill), transparent);
+}
+
+[data-theme="red-black"] .hi-toolbar:not([data-hi-backdrop]) .hi-button--prominent {
+  background: transparent;
+}
+
+[data-theme="red-black"][data-red="off"] .hi-toolbar .hi-button--prominent {
+  background: transparent;
+}
+
+.hi-button:focus-visible,
+.hi-segmented__item:focus-visible,
+.hi-switch:focus-visible,
+.hi-range:focus-visible,
+.hi-input:focus-visible,
+.hi-popover__item:focus-visible,
+.hi-link:focus-visible {
+  /* DESIGN.md Components 状态：3px 主文字色 50% 的软环，没有硬线，所有控件同一种；不用红 */
+  outline: var(--state-focus-ring-width) solid color-mix(in srgb, var(--color-primary) var(--state-focus-ring-tint), transparent);
+  outline-offset: 0;
+}
+
+.hi-segmented {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--components-segmented-height);
+  max-width: 100%;
+  padding: var(--components-segmented-padding);
+  overflow-x: auto;
+  color: var(--color-primary);
+  font-family: var(--components-segmented-font-family), var(--font-fallback);
+  font-size: var(--components-segmented-font-size);
+  font-weight: var(--components-segmented-font-weight);
+  line-height: var(--components-segmented-line-height);
+  background: var(--segmented-bg);
+  border: var(--material-edge-width) solid var(--hi-edge-light, var(--material-edge-light));
+  border-radius: var(--components-segmented-rounded);
+  -webkit-backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+  backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+}
+
+.hi-segmented__item {
+  flex: 0 0 auto;
+  min-width: var(--layout-touch-target);
+  min-height: var(--layout-touch-target);
+  position: relative;
+  isolation: isolate;
+  padding: 0 var(--spacing-sm);
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+  background: transparent;
+  border: var(--material-edge-width) solid transparent;
+  border-radius: var(--rounded-full);
+  cursor: pointer;
+  transition: color var(--motion-selection-duration) ease,
+    background-color var(--motion-selection-duration) ease,
+    transform var(--motion-press-duration) ease;
+}
+
+.hi-segmented__item[aria-pressed="true"] {
+  color: var(--segmented-selected-text);
+  background: transparent;
+}
+
+.hi-segmented__item[aria-pressed="true"]::before {
+  position: absolute;
+  z-index: -1;
+  inset: var(--spacing-xxs) 0;
+  content: "";
+  background: var(--segmented-selected-bg);
+  border-radius: var(--rounded-full);
+  transition: background-color var(--motion-selection-duration) ease;
+}
+
+.hi-segmented__item:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+.hi-button:disabled,
+.hi-button[aria-disabled="true"],
+.hi-segmented__item:disabled,
+.hi-segmented__item[aria-disabled="true"],
+.hi-switch:disabled,
+.hi-range:disabled,
+.hi-input:disabled {
+  opacity: var(--state-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.hi-toolbar .hi-segmented {
+  color: currentColor;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.hi-switch-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  min-height: var(--layout-touch-target);
+  color: var(--color-primary);
+  font-family: var(--font-label);
+}
+
+.hi-switch {
+  flex: 0 0 auto;
+  width: var(--components-switch-on-width);
+  height: var(--components-switch-on-height);
+  margin: 0;
+  padding: var(--control-switch-padding);
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--switch-off-bg);
+  border: 0;
+  border-radius: var(--rounded-full);
+  cursor: pointer;
+  transition: background-color var(--motion-selection-duration) ease,
+    box-shadow var(--motion-selection-duration) ease;
+}
+
+.hi-switch::after {
+  display: block;
+  width: var(--control-switch-thumb-size);
+  height: var(--control-switch-thumb-size);
+  content: "";
+  background: var(--color-surface);
+  border-radius: var(--rounded-full);
+  box-shadow: var(--control-thumb-shadow);
+  transform: translateX(0);
+  transition: background-color var(--motion-selection-duration) ease,
+    transform var(--motion-selection-duration) var(--motion-expand-easing);
+}
+
+.hi-switch:checked {
+  background: var(--switch-on-bg);
+}
+
+.hi-switch:checked::after {
+  transform: translateX(calc(var(--components-switch-on-width) - (var(--control-switch-padding) * 2) - var(--control-switch-thumb-size)));
+}
+
+.hi-range {
+  display: block;
+  width: 100%;
+  min-width: var(--impl-range-min-width);
+  height: var(--layout-touch-target);
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(90deg, var(--color-tertiary) 0 var(--hi-range-progress, 50%), var(--color-outline-control) var(--hi-range-progress, 50%) 100%) center / 100% var(--control-range-track-height) no-repeat;
+  border: 0;
+  cursor: pointer;
+}
+
+.hi-range::-webkit-slider-runnable-track {
+  height: var(--control-range-track-height);
+  background: transparent;
+  border-radius: var(--rounded-full);
+}
+
+.hi-range::-moz-range-track {
+  height: var(--control-range-track-height);
+  background: transparent;
+  border-radius: var(--rounded-full);
+}
+
+.hi-range::-webkit-slider-thumb {
+  width: var(--components-slider-thumb-size);
+  height: var(--components-slider-thumb-size);
+  margin-top: calc((var(--control-range-track-height) - var(--components-slider-thumb-size)) / 2);
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--slider-thumb-bg);
+  border: var(--material-edge-width) solid var(--color-outline-control);
+  border-radius: var(--components-slider-thumb-rounded);
+  box-shadow: var(--control-thumb-shadow);
+  transition: background-color var(--motion-selection-duration) ease,
+    box-shadow var(--motion-selection-duration) ease,
+    transform var(--motion-press-duration) ease;
+}
+
+.hi-range::-moz-range-thumb {
+  width: var(--components-slider-thumb-size);
+  height: var(--components-slider-thumb-size);
+  background: var(--slider-thumb-bg);
+  border: var(--material-edge-width) solid var(--color-outline-control);
+  border-radius: var(--components-slider-thumb-rounded);
+  box-shadow: var(--control-thumb-shadow);
+  transition: background-color var(--motion-selection-duration) ease,
+    box-shadow var(--motion-selection-duration) ease,
+    transform var(--motion-press-duration) ease;
+}
+
+.hi-range:active::-webkit-slider-thumb {
+  background: var(--glass-regular-bg);
+  box-shadow: inset 0 var(--material-edge-width) 0 var(--hi-edge-light, var(--material-edge-light)),
+    inset 0 calc(var(--material-edge-width) * -1) 0 var(--hi-edge-dark, var(--material-edge-dark)),
+    var(--material-glass-regular-shadow);
+  transform: scale(var(--motion-press-scale));
+}
+
+.hi-range:active::-moz-range-thumb {
+  background: var(--glass-regular-bg);
+  box-shadow: inset 0 var(--material-edge-width) 0 var(--hi-edge-light, var(--material-edge-light)),
+    inset 0 calc(var(--material-edge-width) * -1) 0 var(--hi-edge-dark, var(--material-edge-dark)),
+    var(--material-glass-regular-shadow);
+  transform: scale(var(--motion-press-scale));
+}
+
+.hi-field {
+  display: grid;
+  gap: var(--spacing-xxs);
+  color: var(--color-primary);
+}
+
+.hi-field__label {
+  color: var(--color-primary);
+  font-family: var(--font-label);
+  font-size: var(--typography-label-md-font-size);
+}
+
+.hi-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: var(--components-input-height);
+  padding: var(--components-input-padding);
+  color: var(--input-text);
+  font-family: var(--components-input-font-family), var(--font-fallback);
+  font-size: var(--components-input-font-size);
+  font-weight: var(--components-input-font-weight);
+  line-height: var(--components-input-line-height);
+  background: var(--input-bg);
+  border: var(--material-edge-width) solid var(--color-outline-control);
+  border-radius: var(--components-input-rounded);
+  transition: color var(--motion-theme-duration) ease,
+    background-color var(--motion-theme-duration) ease,
+    border-color var(--motion-selection-duration) ease,
+    box-shadow var(--motion-selection-duration) ease;
+}
+
+.hi-input::placeholder {
+  color: var(--color-secondary); /* 占位文字用次文字色，不再降低不透明度 */
+}
+
+.hi-input:focus-visible {
+  border-color: var(--color-primary); /* 焦点时边框转主文字色，焦点环由上面的统一规则提供 */
+}
+
+.hi-popover-anchor {
+  position: relative;
+  display: inline-block;
+}
+
+.hi-popover {
+  position: absolute;
+  z-index: var(--impl-popover-z-index);
+  top: calc(100% + var(--spacing-xs));
+  left: 0;
+  min-width: var(--impl-popover-min-width);
+  max-width: min(var(--impl-popover-max-width), calc(100vw - var(--impl-popover-viewport-margin)));
+  padding: var(--components-popover-padding);
+  color: var(--color-primary);
+  --hi-fill: var(--popover-bg);
+  background: var(--hi-paint);
+  border-color: transparent;
+  border-radius: var(--components-popover-rounded);
+  -webkit-backdrop-filter: blur(var(--material-glass-popover-blur)) saturate(var(--material-glass-regular-saturation));
+  backdrop-filter: blur(var(--material-glass-popover-blur)) saturate(var(--material-glass-regular-saturation));
+  transform-origin: top left;
+  transition: opacity var(--motion-expand-duration) var(--motion-expand-easing),
+    transform var(--motion-expand-duration) var(--motion-expand-easing);
+  transition-behavior: allow-discrete;
+}
+
+@starting-style {
+  .hi-popover[data-hi-state="open"] {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--motion-expand-offset))) scale(var(--motion-expand-scale));
+  }
+}
+
+.hi-popover[data-hi-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-1 * var(--motion-expand-offset))) scale(var(--motion-expand-scale));
+}
+
+.hi-popover[data-hi-state="open"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.hi-popover__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--layout-touch-target);
+  padding: 0 var(--spacing-sm);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: var(--material-edge-width) solid transparent;
+  border-radius: var(--rounded-input);
+  cursor: pointer;
+}
+
+.hi-popover__item:hover {
+  background: color-mix(in srgb, var(--color-primary) var(--state-hover-tint), transparent);
+}
+
+.hi-highlight {
+  display: inline-block;
+  width: var(--highlight-width);
+  height: var(--components-highlight-height);
+  vertical-align: middle;
+  background: var(--highlight-bg);
+  border-radius: var(--rounded-full);
+}
+
+.hi-highlight--dot {
+  width: var(--components-highlight-height);
+  height: var(--components-highlight-height);
+}
+
+.hi-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.hi-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--impl-grid-card-min-width)), 1fr));
+}
+
+.hi-reading {
+  max-width: var(--layout-reading-width);
+}
+
+.hi-reading > * + * {
+  margin-top: var(--spacing-md);
+}
+
+.hi-settings {
+  display: grid;
+  gap: var(--spacing-lg);
+  max-width: var(--impl-settings-max-width);
+}
+
+/* 栏上的当前项（DESIGN.md Components「当前项」）。给 .hi-toolbar 加 data-hi-current：
+   "lens" 是一颗滤色片，自己的颜色取 --hi-current-color（默认主题红），透过率再乘 --material-glass-t-item；
+   "fill" 是无色状态下的薄填充。滤色片由 COMPONENTS.js 插入并定位；读不到背景时退回涂色。 */
+.hi-toolbar[data-hi-current] {
+  --hi-current-color: var(--color-tertiary);
+}
+
+.hi-toolbar[data-hi-current] .hi-button[aria-current]:not([aria-current="false"]) {
+  background: color-mix(in srgb, currentColor var(--state-current-fill), transparent);
+}
+
+.hi-toolbar[data-hi-current="lens"] .hi-button[aria-current]:not([aria-current="false"]) {
+  background: transparent;
+  color: var(--components-toolbar-dark-text-color);
+}
+
+.hi-toolbar > .hi-toolbar__current {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--hi-current-paint, var(--color-tertiary));
+  box-shadow: inset 0 var(--components-divider-height) 0 var(--material-edge-light-dark),
+    inset var(--components-divider-height) 0 0 var(--material-edge-light-dark),
+    inset 0 calc(var(--components-divider-height) * -1) 0 var(--hi-edge-dark),
+    inset calc(var(--components-divider-height) * -1) 0 0 var(--hi-edge-dark);
+  transition: left var(--motion-selection-duration) var(--motion-expand-easing),
+    top var(--motion-selection-duration) var(--motion-expand-easing),
+    width var(--motion-selection-duration) var(--motion-expand-easing);
+}
+
+.hi-toolbar > .hi-toolbar__current::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--hi-current-sheen), transparent var(--material-current-sheen-end));
+}
+
+.hi-toolbar:not([data-hi-current="lens"]) > .hi-toolbar__current {
+  display: none;
+}
+
+/* 凹槽（DESIGN.md Elevation & Depth「箱庭」）：台面上凹下去的一块。深度 --d 是一级一级的整数；
+   槽底明度、槽沿影子的宽度与软度全部由它推出，不单独调。槽沿阴影落在上沿与左沿，右下内沿一道发丝高光。
+   深色主题里槽底都是近黑、槽沿不画影子，深浅由右下内沿的受光读出（--hi-rim-glow）。
+   结构：.hi-recess > .hi-recess__body（放内容）+ .hi-recess__rim（空元素，放最后）。 */
+.hi-recess {
+  --d: 2;
+  --hi-recess-fill: color-mix(in oklab, var(--hi-recess), var(--hi-recess-deep) calc(var(--d) * var(--space-recess-darken)));
+  position: relative;
+  border-radius: var(--rounded-glass);
+  background: var(--hi-recess-fill);
+  transition: background-color var(--motion-theme-duration) ease;
+}
+
+.hi-recess__body {
+  position: relative;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.hi-recess__rim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  /* 右下内沿的受光随深度变宽变亮：深色主题靠它读深度，白主题亮度是 0 */
+  box-shadow:
+    inset calc(var(--d) * var(--space-rim-glow-reach) * -1) calc(var(--d) * var(--space-rim-glow-reach) * -1) calc(var(--d) * var(--space-rim-glow-blur)) rgb(from var(--space-light) r g b / calc(var(--d) * var(--hi-rim-glow))),
+    inset 0 calc(var(--d) * var(--space-rim-reach)) calc(var(--d) * var(--space-rim-blur)) calc(var(--d) * var(--space-rim-spread)) var(--hi-rim-dark),
+    inset calc(var(--d) * var(--space-rim-reach)) 0 calc(var(--d) * var(--space-rim-blur)) calc(var(--d) * var(--space-rim-spread)) var(--hi-rim-dark),
+    inset 0 calc(var(--components-divider-height) * -1) 0 var(--hi-rim-light),
+    inset calc(var(--components-divider-height) * -1) 0 0 var(--hi-rim-light);
+}
+
+/* 物件（DESIGN.md Elevation & Depth「箱庭」）：有分量的内容，比如唱片封面。所有物件一样平，同一个投影，不画侧面。
+   多碟与套装加 .hi-object--stack：封面后面斜着叠两层同样大小的封面，往右上错开，取封面自己的图，一层比一层暗。
+   结构：button.hi-object（封面图写在 --hi-cover）> .hi-object__face，标题等文字由页面自己排。 */
+.hi-object {
+  position: relative;
+  z-index: 0; /* 叠放的薄边用 z-index -1 压在封面后面，只在物件自己里面 */
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: var(--rounded-input);
+  cursor: pointer;
+  outline: none;
+}
+
+.hi-object__face {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--rounded-input);
+  background-image: var(--hi-cover, none);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--space-cast-x) var(--space-cast-y) var(--space-cast-blur) var(--hi-cast);
+  transition: transform var(--motion-press-duration) ease, box-shadow var(--motion-selection-duration) ease;
+}
+
+.hi-object--stack::before,
+.hi-object--stack::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: var(--space-stack-offset-y);
+  left: var(--space-stack-offset-x);
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--rounded-input);
+  background-image: var(--hi-cover, none);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(var(--space-stack-dim));
+}
+
+.hi-object--stack::after {
+  top: calc(var(--space-stack-offset-y) * 2);
+  left: calc(var(--space-stack-offset-x) * 2);
+  filter: brightness(calc(var(--space-stack-dim) * var(--space-stack-dim)));
+}
+
+.hi-object__face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 var(--components-divider-height) 0 var(--material-edge-light-dark),
+    inset var(--components-divider-height) 0 0 var(--material-edge-light-dark),
+    inset 0 calc(var(--components-divider-height) * -1) 0 var(--hi-edge-dark),
+    inset calc(var(--components-divider-height) * -1) 0 0 var(--hi-edge-dark);
+}
+
+.hi-object:active .hi-object__face {
+  transform: scale(var(--motion-press-scale));
+}
+
+.hi-object:focus-visible .hi-object__face {
+  outline: var(--state-focus-ring-width) solid color-mix(in srgb, var(--color-primary) var(--state-focus-ring-tint), transparent);
+  outline-offset: var(--state-focus-ring-width);
+}
+
+@media (hover: hover) {
+  .hi-object:hover .hi-object__face::after {
+    background: color-mix(in srgb, var(--space-light) var(--state-hover-tint), transparent);
+  }
+}
+
+@media (max-width: 720px) {
+  .hi-display {
+    font-size: var(--typography-headline-display-narrow-font-size);
+  }
+
+  .hi-toolbar__group,
+  .hi-cluster {
+    max-width: 100%;
+  }
+
+  .hi-segmented {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hi-page,
+  .hi-button,
+  .hi-glass-regular,
+  .hi-glass-clear,
+  .hi-popover,
+  .hi-toolbar,
+  .hi-segmented__item,
+  .hi-switch,
+  .hi-switch::after,
+  .hi-input {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+
+  .hi-range::-webkit-slider-thumb {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+
+  .hi-range::-moz-range-thumb {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .hi-glass-regular,
+  .hi-glass-clear,
+  .hi-toolbar,
+  .hi-button--glass,
+  .hi-button--prominent,
+  .hi-segmented,
+  .hi-input {
+    border-color: currentColor;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .hi-glass-regular,
+  .hi-glass-clear,
+  .hi-toolbar,
+  .hi-button--glass,
+  .hi-button--prominent,
+  .hi-popover,
+  .hi-segmented,
+  .hi-optics {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* 边缘带，CSS 基础层：1px 方向性渐变环。左上取亮边色，对侧取暗边色，中段透明。
+   DESIGN.md 玻璃的构成：边缘带不是画出来的线，一圈均匀的描边是错误实现。
+   这里用渐变近似受光，是"透射近似"；光学层开启时由滤镜按法线算，这个环隐藏。 */
+.hi-glass-regular::after,
+.hi-glass-clear::after,
+.hi-popover::after,
+.hi-toolbar::after,
+.hi-button--glass::after,
+.hi-button--prominent::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--material-edge-width));
+  z-index: 2;
+  padding: var(--material-edge-width);
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, var(--hi-edge-light, var(--material-edge-light)) 0%, transparent 38%, transparent 62%, var(--hi-edge-dark, var(--material-edge-dark)) 100%);
+  /* 蒙版里的 #000 只表示"不透明"，不是界面颜色 */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+/* 栏内按钮共享栏的玻璃，没有自己的边缘带 */
+.hi-toolbar .hi-button--glass::after,
+.hi-toolbar .hi-button--prominent::after {
+  content: none;
+}
+
+/* 光学层（OPTICS.js 按元素开启）：.hi-optics 是脚本插入的第一个子元素，比玻璃大一圈，
+   填充、折射、高光都由它的滤镜提供；本体不再自己做填充和 backdrop-filter，渐变环也隐藏。
+   外延区域滤镜输出透明，露出原背景。用真实子元素而不是 ::before：伪元素上的 backdrop-filter
+   在固定定位元素里时有时无。 */
+[data-hi-optics="on"][data-hi-optics] {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+[data-hi-optics="on"] > .hi-optics {
+  position: absolute;
+  inset: calc(-1 * (var(--hi-optics-pad, var(--optics-pad)) + var(--material-edge-width)));
+  z-index: -1;
+  display: block;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+[data-hi-optics="on"]::after {
+  content: none;
+}

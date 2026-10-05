@@ -1,0 +1,18 @@
+Homura Interface 素材库的拷贝（新站自己用；旧长文用的是 /hi/ 下那份现站原样拷贝，两份互不影响）。
+
+源仓库：HomuraTokido/homura-interface（私有仓库；这个文件会随公开版发布，所以不写本机路径）
+源 commit（git -C 源仓库 rev-parse HEAD，2026-10-03 读取）：643638cee3942e85f13eec850b2da006605ba7fc
+
+从源仓库原样复制、未改动的文件：
+  TOKENS.css
+  COMPONENTS.css
+  COMPONENTS.js
+  OPTICS.js
+  assets/fonts/NotoSerifSC-VF.woff2
+  assets/fonts/NotoSansSC-VF.woff2
+
+另外一个文件不是来自源仓库：
+  assets/fonts/OFL.txt  从本仓库 live/hi/assets/fonts/OFL.txt 原样复制（字体的许可证；源仓库的 assets/fonts/ 里没有这个文件）
+
+库内相对路径保持不变：TOKENS.css 里的 url("assets/fonts/...") 解析到本目录的 assets/fonts/。
+同步方法：源仓库提交之后，把上面六个文件原样拷进本目录，改写上面的 commit 号。不在这里手改库文件；要改样式写在 src/styles/site.css。

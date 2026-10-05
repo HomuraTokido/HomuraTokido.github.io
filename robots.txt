@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://homura-tokido.com/sitemap-index.xml

@@ -1,0 +1,103 @@
+/* 长文页的版式。颜色、字体、控件全部来自 hi/ 素材库（homura-interface 的拷贝，不手改）；
+   这里只管位置与间距，只引用库的变量。长文是杂志，不是海报：正文守阅读宽度，不加饰件。 */
+
+html {
+    background: var(--page-bg);
+}
+
+body {
+    margin: 0;
+}
+
+.longread {
+    width: min(100% - 2 * var(--spacing-page-margin), var(--layout-reading-width));
+    margin: 0 auto;
+    padding: var(--spacing-3xl) 0;
+}
+
+.longread :is(article, header, section, figure, h1, h2, h3, p, ul, blockquote) {
+    margin: 0;
+}
+
+/* 流式间距：同组 spacing.md，章节之间 spacing.2xl */
+.longread :is(article, section, .article-body) > * + * {
+    margin-top: var(--spacing-md);
+}
+
+.longread :is(article, .article-body) > :is(section, h2, .hi-divider) {
+    margin-top: var(--spacing-2xl);
+}
+
+.longread :is(section, .article-body) > h3 {
+    margin-top: var(--spacing-xl);
+}
+
+.longread .hi-divider {
+    margin-bottom: 0;
+}
+
+.longread :is(.hi-display, .hi-headline-lg, .hi-headline-md) {
+    text-wrap: balance;
+}
+
+.longread header {
+    display: grid;
+    justify-items: start;
+    gap: var(--spacing-md);
+}
+
+.longread .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.back-arrow::before {
+    content: "←\00a0"; /* 按钮是 flex 容器，普通空格会被吞掉，用不换行空格保住原来的“← ” */
+}
+
+.longread .hi-quote > p + p {
+    margin-top: var(--spacing-xs);
+}
+
+.longread ul {
+    padding-left: var(--spacing-lg);
+    list-style-type: "— ";
+}
+
+.longread li + li {
+    margin-top: var(--spacing-xxs);
+}
+
+.longread strong {
+    color: var(--color-primary);
+}
+
+.longread figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--rounded-surface);
+}
+
+.longread footer {
+    margin-top: var(--spacing-3xl);
+}
+
+.skip-link {
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+    transform: none;
+}
+
+@media (max-width: 720px) {
+    .longread {
+        width: min(100% - 2 * var(--spacing-page-margin-narrow), var(--layout-reading-width));
+        padding: var(--spacing-2xl) 0;
+    }
+}

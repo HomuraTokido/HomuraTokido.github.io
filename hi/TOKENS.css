@@ -1,0 +1,446 @@
+/*
+  Homura Interface tokens
+
+  The @generated block is produced by tools/tokens.js from DESIGN.md front matter; never edit it by hand.
+  The semantic block below it is the small implementation bridge used by the
+  portable components. Put data-theme on html for a full page, or on a local
+  .hi-page/section for an isolated theme scope. Values in this file are the
+  source values; component geometry and behavior live in COMPONENTS.css/js.
+*/
+
+@font-face {
+  font-family: "Source Han Serif";
+  src: url("assets/fonts/NotoSerifSC-VF.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Han Sans";
+  src: url("assets/fonts/NotoSansSC-VF.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* @generated:begin 由 tools/tokens.js 从 DESIGN.md front matter 生成，不要手改；改值改 DESIGN.md 再重新生成 */
+:root {
+  /* colors */
+  --colors-background: #f2f2f7;
+  --colors-surface: #ffffff;
+  --colors-primary: #121212;
+  --colors-secondary: #3f4650;
+  --colors-outline: #cfd4dc;
+  --colors-outline-control: #858b95;
+  --colors-tertiary: #d21e33;
+  --colors-gold: #d8bc6e;
+  --colors-background-dark: #090909;
+  --colors-surface-dark: #141113;
+  --colors-primary-dark: #f3f4f6;
+  --colors-secondary-dark: #b6bdc8;
+  --colors-outline-dark: #303640;
+  --colors-outline-control-dark: #5f6672;
+  --colors-tertiary-dark: #dc2239;
+  --colors-gold-dark: #e3c777;
+
+  /* typography */
+  --typography-headline-display-font-family: "Source Han Serif";
+  --typography-headline-display-font-size: 48px;
+  --typography-headline-display-font-weight: 700;
+  --typography-headline-display-line-height: 1.2;
+  --typography-headline-lg-font-family: "Source Han Serif";
+  --typography-headline-lg-font-size: 28px;
+  --typography-headline-lg-font-weight: 600;
+  --typography-headline-lg-line-height: 1.35;
+  --typography-headline-md-font-family: "Source Han Serif";
+  --typography-headline-md-font-size: 20px;
+  --typography-headline-md-font-weight: 600;
+  --typography-headline-md-line-height: 1.4;
+  --typography-body-md-font-family: "Source Han Serif";
+  --typography-body-md-font-size: 16px;
+  --typography-body-md-font-weight: 400;
+  --typography-body-md-line-height: 1.8;
+  --typography-label-md-font-family: "Source Han Serif";
+  --typography-label-md-font-size: 15px;
+  --typography-label-md-font-weight: 500;
+  --typography-label-md-line-height: 1.4;
+  --typography-body-sm-font-family: "Source Han Serif";
+  --typography-body-sm-font-size: 13px;
+  --typography-body-sm-font-weight: 400;
+  --typography-body-sm-line-height: 1.6;
+
+  /* rounded */
+  --rounded-surface: 16px;
+  --rounded-glass: 24px;
+  --rounded-popover: 20px;
+  --rounded-input: 12px;
+  --rounded-full: 9999px;
+
+  /* spacing */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 72px;
+  --spacing-max-width: 1200px;
+  --spacing-page-margin: 40px;
+  --spacing-page-margin-narrow: 20px;
+
+  /* params · typography */
+  --typography-headline-display-narrow-font-size: 34px;
+  --typography-link-underline-offset: 0.3em; /* 正文链接的下划线离字多远 */
+
+  /* params · font */
+  --font-fallback: "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-sans: "Noto Sans SC", sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+
+  /* params · layout */
+  --layout-reading-width: 38em;
+  --layout-touch-target: 44px;
+  --layout-breakpoint-narrow: 720px; /* 窄屏起点；媒体查询不认变量，样式表里写死的同一个数由 tools/tokens.js --check 盯着 */
+
+  /* params · material */
+  --material-glass-regular-blur: 12px;
+  --material-glass-regular-saturation: 1.25;
+  --material-glass-regular-shadow: 0 8px 24px rgba(20, 30, 50, 0.12);
+  --material-glass-clear-blur: 3px;
+  --material-glass-clear-saturation: 1.15;
+  --material-glass-clear-shadow: var(--material-glass-regular-shadow);
+  --material-glass-clear-dim: rgba(0, 0, 0, 0.35);
+  --material-glass-tint-blur: var(--material-glass-regular-blur);
+  --material-glass-tint-saturation: 0;
+  --material-edge-light: rgba(255, 255, 255, 0.75);
+  --material-edge-dark: rgba(20, 30, 50, 0.12);
+  --material-edge-light-dark: rgba(255, 255, 255, 0.18);
+  --material-edge-dark-dark: rgba(0, 0, 0, 0.5);
+  --material-edge-width: 1px; /* 网页：CSS 基础层方向性渐变环的宽度 */
+  --material-glass-popover-blur: 20px;
+  --material-glass-t-control: 0.3; /* 控制层：浮动栏、玻璃按钮、常规玻璃 */
+  --material-glass-t-focus: 0.22; /* 临时焦点与阅读面：弹出层、菜单、侧栏，比控制层少透一档 */
+  --material-glass-t-clear: 0.88; /* 通透玻璃：只在媒体之上 */
+  --material-glass-t-item: 0.5; /* 玻璃上的当前项：再乘一次，逐级传递 */
+  --material-glass-filter-floor: 0.5; /* 染色玻璃的滤色取它自己的颜色；太暗时按比例提亮到最亮通道这个数 */
+  --material-glass-t-tint-paint: 0.12; /* 网页：只给 CSS 基础层，涂色做不到滤色，染色玻璃取更低的透过率保住色相与白字对比 */
+
+  /* params · optics */
+  --optics-bevel: 10px; /* 倒角宽 */
+  --optics-thickness: 16px; /* 玻璃厚 */
+  --optics-ior: 1.5; /* 折射率 */
+  --optics-chroma: 0.05; /* 三通道偏移差 */
+  --optics-pad: 24px; /* 读取背景的外延 */
+  --optics-edge-blur: 1px; /* 边带内的背景模糊 */
+  --optics-highlight: 0.7; /* 镜面高光强度 */
+  --optics-shade: 0.35; /* 暗边强度 */
+  --optics-lift: 0.1; /* 内侧一圈提亮 */
+  --optics-light-angle: 225deg; /* 光源方向，左上 */
+  --optics-budget: 3; /* 网页：一屏最多开启光学层的块数，性能默认值，场景可改 */
+
+  /* params · motion */
+  --motion-press-duration: 120ms;
+  --motion-press-scale: 0.98;
+  --motion-selection-duration: 180ms;
+  --motion-expand-duration: 260ms;
+  --motion-expand-offset: 8px;
+  --motion-expand-scale: 0.96;
+  --motion-expand-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-theme-duration: 320ms;
+
+  /* params · control */
+  --control-switch-padding: 2px; /* 开关轨道内壁到手柄的间隙 */
+  --control-switch-thumb-size: 27px; /* 开关手柄直径 */
+  --control-range-track-height: 4px; /* 滑块轨道厚度 */
+  --control-thumb-shadow: 0 1px 3px rgba(20, 30, 50, 0.18); /* 开关与滑块手柄静止投影，同一个值 */
+
+  /* params · state */
+  --state-hover-tint: 8%; /* 悬停叠加的主文字色比例 */
+  --state-focus-ring-width: 3px; /* 焦点软环宽度 */
+  --state-focus-ring-tint: 50%; /* 焦点软环里主文字色的比例 */
+  --state-disabled-opacity: 0.44; /* 禁用态整体不透明度 */
+  --state-toolbar-prominent-fill: 18%; /* 无色玻璃栏内主要操作的红色薄填充 */
+
+  /* params · geometry */
+  --geometry-highlight-width: 96px; /* 金线的长度，白主题 */
+  --geometry-highlight-width-dark: 144px; /* 金线的长度，深色主题 */
+
+  /* params · control */
+  --control-bar-wall: 6px; /* 控制条里命中区到栏边的内壁；同一层的控制条高度都是命中区加上下各一个内壁 */
+  --control-button-inset: 20px; /* 按钮文字到它命中区左右边的留白 */
+  --control-bar-item-inset-max: var(--spacing-lg); /* 栏上标签到它命中区左右边的留白，宽窗时的上限 */
+  --control-bar-item-inset-min: var(--spacing-xs); /* 同上，窄窗时的下限 */
+  --control-bar-item-inset-fluid: 2vw; /* 上下限之间随窗宽连续变化的取值 */
+
+  /* params · layout */
+  --layout-pointer-target: 28px; /* 指针形态（Mac、大屏）命中区的下限，视觉图形可以更小 */
+  --layout-far-target: 60px; /* 远距形态（头显）的命中区 */
+
+  /* params · state */
+  --state-current-fill: 16%; /* 无色状态下栏上当前项的薄填充（当前文字色的比例） */
+
+  /* params · material */
+  --material-current-sheen: rgba(255, 255, 255, 0.16); /* 栏上当前项滤色片顶部的一道亮面，白主题 */
+  --material-current-sheen-dark: rgba(255, 70, 96, 0.2); /* 同上，深色主题 */
+  --material-current-sheen-end: 54%; /* 亮面从顶部淡出到这个位置 */
+
+  /* params · space */
+  --space-cast-x: 3px; /* 物件投影向右的偏移；所有物件同一个 */
+  --space-cast-y: 5px; /* 物件投影向下的偏移 */
+  --space-cast-blur: 7px; /* 物件投影的软度 */
+  --space-cast: rgba(20, 30, 50, 0.28); /* 物件投影的颜色，白主题 */
+  --space-cast-dark: rgba(0, 0, 0, 0.7); /* 深色主题 */
+  --space-light: #ffffff; /* 光的颜色：物件悬停时亮起来的那一层、凹槽右下内沿的受光 */
+  --space-stack-offset-x: 4px; /* 多碟与套装的叠放记号：封面后面每层往右错开多少 */
+  --space-stack-offset-y: -4px; /* 每层往上错开多少（负数是往上）；斜向右上，避开落向右下的投影 */
+  --space-stack-dim: 0.62; /* 每往后一层，封面图的亮度乘这个数 */
+  --space-recess-darken: 9%; /* 凹槽每深一级，槽底往深处色混的比例 */
+  --space-recess-deep: #c9ced8; /* 白主题槽底往深处混向的颜色 */
+  --space-recess-deep-dark: #000000; /* 深色主题 */
+  --space-rim-reach: 4px; /* 凹槽每深一级，槽沿的影子伸进去多远 */
+  --space-rim-blur: 6px; /* 凹槽每深一级，槽沿影子的软度 */
+  --space-rim-spread: -3px; /* 凹槽每深一级，槽沿影子的收缩 */
+  --space-rim-dark: rgba(20, 30, 50, 0.22); /* 槽沿的影子，白主题 */
+  --space-rim-dark-dark: rgba(0, 0, 0, 0); /* 深色主题不画槽沿的影子：黑地上看不见，只会压暗槽里的封面 */
+  --space-rim-light: rgba(255, 255, 255, 0.95); /* 凹槽右下内沿的发丝高光，白主题 */
+  --space-rim-light-dark: rgba(255, 255, 255, 0.12); /* 深色主题 */
+  --space-rim-glow: 0; /* 凹槽每深一级，右下内沿受光的亮度（光的不透明度），白主题不用：白主题靠槽底变暗读深度 */
+  --space-rim-glow-dark: 0.035; /* 深色主题靠它读深度（2026-09-23 候选页选定 E） */
+  --space-rim-glow-reach: 1px; /* 凹槽每深一级，右下内沿受光伸进去多远 */
+  --space-rim-glow-blur: 1.5px; /* 凹槽每深一级，右下内沿受光的软度 */
+  --space-deck-dark: #0b0a0b; /* 有凹槽的场景里深色主题的台面（2026-09-19 候选页选定，黑 E2） */
+  --space-recess-dark: #000000; /* 有凹槽的场景里深色主题的槽底（黑 E2） */
+
+  /* components */
+  --components-page-background-color: var(--colors-background);
+  --components-page-text-color: var(--colors-primary);
+  --components-page-font-family: var(--typography-body-md-font-family);
+  --components-page-font-size: var(--typography-body-md-font-size);
+  --components-page-font-weight: var(--typography-body-md-font-weight);
+  --components-page-line-height: var(--typography-body-md-line-height);
+  --components-page-dark-background-color: var(--colors-background-dark);
+  --components-page-dark-text-color: var(--colors-primary-dark);
+  --components-surface-background-color: var(--colors-surface);
+  --components-surface-text-color: var(--colors-secondary);
+  --components-surface-rounded: var(--rounded-surface);
+  --components-surface-padding: var(--spacing-lg);
+  --components-surface-dark-background-color: var(--colors-surface-dark);
+  --components-surface-dark-text-color: var(--colors-secondary-dark);
+  --components-divider-background-color: var(--colors-outline);
+  --components-divider-height: 1px;
+  --components-divider-dark-background-color: var(--colors-outline-dark);
+  --components-glass-regular-background-color: rgba(255, 255, 255, 0.7);
+  --components-glass-regular-rounded: var(--rounded-glass);
+  --components-glass-regular-padding: var(--spacing-sm);
+  --components-glass-regular-dark-background-color: rgba(8, 8, 10, 0.7);
+  --components-glass-clear-background-color: rgba(255, 255, 255, 0.12);
+  --components-glass-clear-rounded: var(--rounded-glass);
+  --components-glass-clear-padding: var(--spacing-sm);
+  --components-glass-clear-dark-background-color: rgba(8, 8, 10, 0.12);
+  --components-toolbar-background-color: rgba(255, 255, 255, 0.7);
+  --components-toolbar-rounded: var(--rounded-full);
+  --components-toolbar-dark-background-color: rgba(112, 8, 26, 0.7);
+  --components-toolbar-dark-text-color: #ffffff;
+  --components-button-font-family: var(--typography-label-md-font-family);
+  --components-button-font-size: var(--typography-label-md-font-size);
+  --components-button-font-weight: var(--typography-label-md-font-weight);
+  --components-button-line-height: var(--typography-label-md-line-height);
+  --components-button-rounded: var(--rounded-full);
+  --components-button-height: 44px;
+  --components-button-prominent-background-color: rgba(190, 22, 42, 0.7);
+  --components-button-prominent-text-color: #ffffff;
+  --components-segmented-font-family: var(--typography-label-md-font-family);
+  --components-segmented-font-size: var(--typography-label-md-font-size);
+  --components-segmented-font-weight: var(--typography-label-md-font-weight);
+  --components-segmented-line-height: var(--typography-label-md-line-height);
+  --components-segmented-rounded: var(--rounded-full);
+  --components-segmented-height: 36px;
+  --components-segmented-padding: 3px;
+  --components-segmented-selected-background-color: rgba(18, 18, 18, 0.08);
+  --components-segmented-selected-text-color: var(--colors-primary);
+  --components-segmented-selected-dark-background-color: rgba(243, 244, 246, 0.12);
+  --components-segmented-selected-dark-text-color: var(--colors-primary-dark);
+  --components-switch-on-background-color: var(--colors-tertiary);
+  --components-switch-on-width: 51px;
+  --components-switch-on-height: 31px;
+  --components-switch-on-dark-background-color: var(--colors-tertiary-dark);
+  --components-switch-off-background-color: var(--colors-outline-control);
+  --components-switch-off-dark-background-color: var(--colors-outline-control-dark);
+  --components-slider-thumb-background-color: var(--colors-surface);
+  --components-slider-thumb-rounded: var(--rounded-full);
+  --components-slider-thumb-size: 24px;
+  --components-slider-thumb-dark-background-color: var(--colors-surface-dark);
+  --components-input-background-color: var(--colors-surface);
+  --components-input-text-color: var(--colors-primary);
+  --components-input-font-family: var(--typography-body-md-font-family);
+  --components-input-font-size: var(--typography-body-md-font-size);
+  --components-input-font-weight: var(--typography-body-md-font-weight);
+  --components-input-line-height: var(--typography-body-md-line-height);
+  --components-input-rounded: var(--rounded-input);
+  --components-input-height: 44px;
+  --components-input-padding: 0 14px;
+  --components-input-dark-background-color: var(--colors-surface-dark);
+  --components-input-dark-text-color: var(--colors-primary-dark);
+  --components-popover-background-color: rgba(255, 255, 255, 0.78);
+  --components-popover-rounded: var(--rounded-popover);
+  --components-popover-padding: var(--spacing-xs);
+  --components-popover-dark-background-color: rgba(12, 12, 14, 0.78);
+  --components-highlight-background-color: var(--colors-gold);
+  --components-highlight-height: 1px;
+  --components-highlight-dark-background-color: var(--colors-gold-dark);
+}
+/* @generated:end */
+
+/* White Default is the fallback when the embedding page has no theme attr. */
+:root,
+[data-theme="white-default"] {
+  --color-background: var(--colors-background);
+  --color-surface: var(--colors-surface);
+  --color-primary: var(--colors-primary);
+  --color-secondary: var(--colors-secondary);
+  --color-outline: var(--colors-outline);
+  --color-outline-control: var(--colors-outline-control);
+  --color-tertiary: var(--colors-tertiary);
+  --color-gold: var(--colors-gold);
+  --hi-edge-light: var(--material-edge-light);
+  --hi-edge-dark: var(--material-edge-dark);
+
+  --page-bg: var(--components-page-background-color);
+  --page-text: var(--components-page-text-color);
+  --surface-bg: var(--components-surface-background-color);
+  --surface-text: var(--components-surface-text-color);
+  --divider-bg: var(--components-divider-background-color);
+  --glass-regular-bg: var(--components-glass-regular-background-color);
+  --glass-clear-bg: var(--components-glass-clear-background-color);
+  --toolbar-bg: var(--components-toolbar-background-color);
+  --toolbar-text: var(--color-primary);
+  --button-prominent-bg: var(--components-button-prominent-background-color);
+  --button-prominent-text: var(--components-button-prominent-text-color);
+  --segmented-bg: var(--glass-regular-bg);
+  --segmented-selected-bg: var(--components-segmented-selected-background-color);
+  --segmented-selected-text: var(--components-segmented-selected-text-color);
+  --switch-on-bg: var(--components-switch-on-background-color);
+  --switch-off-bg: var(--components-switch-off-background-color);
+  --slider-thumb-bg: var(--components-slider-thumb-background-color);
+  --input-bg: var(--components-input-background-color);
+  --input-text: var(--components-input-text-color);
+  --popover-bg: var(--components-popover-background-color);
+  --highlight-bg: var(--components-highlight-background-color);
+  --highlight-width: var(--geometry-highlight-width); /* DESIGN.md Components：金线白主题 96px */
+  --toolbar-backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+  --toolbar-optics-blur: var(--material-glass-regular-blur);
+  --toolbar-optics-saturation: var(--material-glass-regular-saturation);
+  --button-prominent-backdrop-filter: blur(var(--material-glass-tint-blur)) saturate(var(--material-glass-tint-saturation));
+  /* 箱庭（DESIGN.md Elevation & Depth「箱庭」）：台面取内容面，槽底取画布 */
+  --hi-deck: var(--color-surface);
+  --hi-recess: var(--color-background);
+  --hi-recess-deep: var(--space-recess-deep);
+  --hi-rim-dark: var(--space-rim-dark);
+  --hi-rim-light: var(--space-rim-light);
+  --hi-rim-glow: var(--space-rim-glow);
+  --hi-cast: var(--space-cast);
+  --hi-current-sheen: var(--material-current-sheen);
+  color-scheme: light;
+}
+
+[data-theme="red-black"] {
+  --color-background: var(--colors-background-dark);
+  --color-surface: var(--colors-surface-dark);
+  --color-primary: var(--colors-primary-dark);
+  --color-secondary: var(--colors-secondary-dark);
+  --color-outline: var(--colors-outline-dark);
+  --color-outline-control: var(--colors-outline-control-dark);
+  --color-tertiary: var(--colors-tertiary-dark);
+  --color-gold: var(--colors-gold-dark);
+  --hi-edge-light: var(--material-edge-light-dark);
+  --hi-edge-dark: var(--material-edge-dark-dark);
+
+  --page-bg: var(--components-page-dark-background-color);
+  --page-text: var(--components-page-dark-text-color);
+  --surface-bg: var(--components-surface-dark-background-color);
+  --surface-text: var(--components-surface-dark-text-color);
+  --divider-bg: var(--components-divider-dark-background-color);
+  --glass-regular-bg: var(--components-glass-regular-dark-background-color);
+  --glass-clear-bg: var(--components-glass-clear-dark-background-color);
+  --toolbar-bg: var(--components-toolbar-dark-background-color);
+  --toolbar-text: var(--components-toolbar-dark-text-color);
+  --button-prominent-bg: var(--components-button-prominent-background-color);
+  --button-prominent-text: var(--components-button-prominent-text-color);
+  --segmented-bg: var(--glass-regular-bg);
+  --segmented-selected-bg: var(--components-segmented-selected-dark-background-color);
+  --segmented-selected-text: var(--components-segmented-selected-dark-text-color);
+  --switch-on-bg: var(--components-switch-on-dark-background-color);
+  --switch-off-bg: var(--components-switch-off-dark-background-color);
+  --slider-thumb-bg: var(--components-slider-thumb-dark-background-color);
+  --input-bg: var(--components-input-dark-background-color);
+  --input-text: var(--components-input-dark-text-color);
+  --popover-bg: var(--components-popover-dark-background-color);
+  --highlight-bg: var(--components-highlight-dark-background-color);
+  --highlight-width: var(--geometry-highlight-width-dark); /* DESIGN.md Components：金线深色主题 144px */
+  --toolbar-backdrop-filter: blur(var(--material-glass-tint-blur)) saturate(var(--material-glass-tint-saturation));
+  --toolbar-optics-blur: var(--material-glass-tint-blur);
+  --toolbar-optics-saturation: var(--material-glass-tint-saturation);
+  --button-prominent-backdrop-filter: blur(var(--material-glass-tint-blur)) saturate(var(--material-glass-tint-saturation));
+  --hi-deck: var(--space-deck-dark);
+  --hi-recess: var(--space-recess-dark);
+  --hi-recess-deep: var(--space-recess-deep-dark);
+  --hi-rim-dark: var(--space-rim-dark-dark);
+  --hi-rim-light: var(--space-rim-light-dark);
+  --hi-rim-glow: var(--space-rim-glow-dark);
+  --hi-cast: var(--space-cast-dark);
+  --hi-current-sheen: var(--material-current-sheen-dark);
+  color-scheme: dark;
+}
+
+/* Red off is a state of Red-Black. The gold accent remains available. */
+[data-theme="red-black"][data-red="off"] {
+  --toolbar-bg: var(--components-glass-regular-dark-background-color);
+  --toolbar-text: var(--colors-primary-dark);
+  --button-prominent-bg: var(--components-glass-regular-dark-background-color);
+  --button-prominent-text: var(--colors-primary-dark);
+  --switch-on-bg: var(--colors-primary-dark);
+  --toolbar-backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+  --toolbar-optics-blur: var(--material-glass-regular-blur);
+  --toolbar-optics-saturation: var(--material-glass-regular-saturation);
+  --button-prominent-backdrop-filter: blur(var(--material-glass-regular-blur)) saturate(var(--material-glass-regular-saturation));
+}
+
+/* Short font aliases keep copied snippets readable. */
+:root,
+[data-theme="white-default"],
+[data-theme="red-black"] {
+  --font-display: var(--typography-headline-display-font-family), var(--font-fallback);
+  --font-headline-lg: var(--typography-headline-lg-font-family), var(--font-fallback);
+  --font-headline-md: var(--typography-headline-md-font-family), var(--font-fallback);
+  --font-body: var(--typography-body-md-font-family), var(--font-fallback);
+  --font-label: var(--typography-label-md-font-family), var(--font-fallback);
+  --font-body-sm: var(--typography-body-sm-font-family), var(--font-fallback);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root,
+  [data-theme="white-default"] {
+    --glass-regular-bg: var(--colors-surface);
+    --glass-clear-bg: var(--colors-surface);
+    --popover-bg: var(--colors-surface);
+  }
+
+  [data-theme="red-black"] {
+    --glass-regular-bg: var(--colors-surface-dark);
+    --glass-clear-bg: var(--colors-surface-dark);
+    --popover-bg: var(--colors-surface-dark);
+  }
+}
+
+/* 实现常量：DESIGN.md 不规定，是素材库自己的排版与层级选择，改动不需要回来对照文档 */
+:root {
+  --impl-popover-min-width: 176px;
+  --impl-popover-max-width: 320px;
+  --impl-popover-viewport-margin: 40px; /* 弹出层贴边时与视口边缘的最小距离 */
+  --impl-popover-z-index: 20;
+  --impl-range-min-width: 160px;        /* 滑块最小可用宽度 */
+  --impl-settings-max-width: 560px;     /* .hi-settings 表单容器宽度 */
+  --impl-grid-card-min-width: 280px;    /* .hi-grid 卡片自适应换行的最小宽度 */
+}

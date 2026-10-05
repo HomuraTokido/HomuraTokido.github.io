@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="red-black"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#090909"><title>装备 · 朱鹭户焰</title><meta name="description" content="你好，我是朱鹭户焰.png。一个无法被现代分类器分类、正在互联网中游荡的人。"><link rel="canonical" href="https://homura-tokido.com/uses/"><meta property="og:site_name" content="朱鹭户焰 / HOMURA TOKIDO"><meta property="og:title" content="装备 · 朱鹭户焰"><meta property="og:description" content="一个无法被现代分类器分类的幽灵，正在互联网中游荡。"><meta property="og:type" content="website"><meta property="og:url" content="https://homura-tokido.com/uses/"><meta property="og:image" content="https://homura-tokido.com/img/og-share.jpg"><meta property="og:image:width" content="941"><meta property="og:image:height" content="494"><meta property="og:image:alt" content="朱鹭户焰的角色形象"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/x-icon" href="/img/favicon.ico"><link rel="icon" type="image/svg+xml" href="/img/favicon.svg"><link rel="alternate" type="application/rss+xml" title="朱鹭户焰 / HOMURA TOKIDO" href="/rss.xml"><link rel="sitemap" href="/sitemap-index.xml"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://homura-tokido.com/#person","name":"朱鹭户焰","alternateName":["HOMURA TOKIDO","朱鹭户焰png","朱鷺戸ほむら","HomuraTokido"],"url":"https://homura-tokido.com/","sameAs":["https://space.bilibili.com/794282","https://github.com/HomuraTokido"],"mainEntityOfPage":{"@id":"https://homura-tokido.com/#webpage"}},{"@type":"WebSite","@id":"https://homura-tokido.com/#website","url":"https://homura-tokido.com/","name":"朱鹭户焰 / HOMURA TOKIDO","publisher":{"@id":"https://homura-tokido.com/#person"}},{"@type":"WebPage","@id":"https://homura-tokido.com/uses/#webpage","url":"https://homura-tokido.com/uses/","name":"装备 · 朱鹭户焰","description":"你好，我是朱鹭户焰.png。一个无法被现代分类器分类、正在互联网中游荡的人。","inLanguage":"zh-CN","isPartOf":{"@id":"https://homura-tokido.com/#website"},"publisher":{"@id":"https://homura-tokido.com/#person"}}]}</script><link rel="stylesheet" href="/assets/hi/TOKENS.css"><link rel="stylesheet" href="/assets/hi/COMPONENTS.css"><link rel="stylesheet" href="/_astro/site.27P_tDud.css"><script>document.documentElement.classList.add('js');
+addEventListener('pagehide', function () {
+  try { history.scrollRestoration = 'auto'; } catch (e) {}
+});
+addEventListener('pageshow', function (e) {
+  if (e.persisted) { try { history.scrollRestoration = 'manual'; } catch (err) {} }
+});
+(function () {
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    var st = history.state;
+    if (!nav || (nav.type !== 'reload' && nav.type !== 'back_forward') || !st || !(st.scrollY > 0 || st.scrollX > 0)) return;
+    var root = document.documentElement;
+    root.classList.add('restoring-scroll');
+    var done = function () { root.classList.remove('restoring-scroll'); };
+    document.addEventListener('DOMContentLoaded', function () { requestAnimationFrame(done); });
+    setTimeout(done, 1500);
+  } catch (e) {}
+})();
+(function () {
+  var FULL_LOAD = {"pages":[],"prefixes":["/interface/","/pagefind/"]};
+  function fullLoad(url) {
+    var p = url.pathname;
+    if (FULL_LOAD.prefixes.some(function (pre) { return p === pre.slice(0, -1) || p.indexOf(pre) === 0; })) return true;
+    var ext = /\.([a-z0-9]+)$/i.exec(p);
+    if (!ext) return false;
+    if (/^html?$/i.test(ext[1])) return FULL_LOAD.pages.indexOf(p) >= 0;
+    return true;
+  }
+  function relativeImages(doc, base) {
+    var rel = function (u) { return !!u && !/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(u); };
+    var abs = function (u) {
+      var x = new URL(u, base);
+      return x.origin === location.origin ? x.pathname + x.search + x.hash : x.href;
+    };
+    doc.querySelectorAll('img[src], img[srcset], source[srcset]').forEach(function (el) {
+      var src = el.getAttribute('src');
+      if (rel(src)) el.setAttribute('src', abs(src));
+      var set = el.getAttribute('srcset');
+      if (!set || set.indexOf('data:') >= 0) return;
+      var changed = false;
+      var out = set.split(',').map(function (c) {
+        var t = c.trim().split(/\s+/);
+        if (rel(t[0])) { t[0] = abs(t[0]); changed = true; }
+        return t.join(' ');
+      });
+      if (changed) el.setAttribute('srcset', out.join(', '));
+    });
+  }
+  window.__htFullLoad = fullLoad; // 里站的 ?ai=1 / ?src=1 脚本用它判断哪些地址不改写
+  // 取消这次页面切换，路由改为整页跳到同一地址（不先抓取）。
+  document.addEventListener('astro:before-preparation', function (e) {
+    if (fullLoad(e.to)) e.preventDefault();
+  });
+  document.addEventListener('astro:before-swap', function (e) {
+    var hi = window.HomuraInterface;
+    if (hi) document.querySelectorAll('[data-hi-popover-trigger][aria-expanded="true"]').forEach(function (t) { hi.closePopover(t); });
+    var carry = [];
+    for (var i = 0; i < document.body.children.length; i++) {
+      var el = document.body.children[i];
+      var defs = el.localName === 'svg' && el.querySelector('defs');
+      var probe = el.localName === 'span' && !el.className && !el.childNodes.length && el.style.display === 'none';
+      if (defs || probe) carry.push(el);
+    }
+    carry.forEach(function (el) { e.newDocument.body.appendChild(el); });
+    e.newDocument.documentElement.classList.add('js');
+    relativeImages(e.newDocument, e.to.href);
+  });
+  document.addEventListener('astro:after-swap', function () {
+    if (window.HomuraInterface) window.HomuraInterface.init(document);
+  });
+})();</script><script src="/assets/hi/COMPONENTS.js" defer></script><script src="/assets/hi/OPTICS.js" defer></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="swap"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CYDbzu1r.js"></script><link rel="stylesheet" href="/_astro/Base.E65VzyY6.css"></head><body class="hi-page hi-page--full"><a class="hi-button skip-link" href="#main" data-pagefind-ignore="all">跳到正文</a><header class="site-header hi-body-sm" id="top" data-pagefind-ignore="all"><div class="site-wrap site-header__inner"><a class="site-brand" href="/" data-id="site-name" data-by="her">朱鹭户焰 / HOMURA TOKIDO</a><div class="site-header__links"><a class="site-header__link hit" href="/writing/">文章</a><a class="site-header__link hit" href="/interface/" data-astro-reload="true">设计语言</a><span class="site-header__out site-header__out--first" data-id="contact-bilibili" data-by="her"><a class="site-header__link hit is-external" href="https://space.bilibili.com/794282" target="_blank" rel="noopener noreferrer" data-external>B 站<span class="link-external" aria-hidden="true">↗</span><span class="visually-hidden">（外部链接，在新标签页打开）</span></a></span><span class="site-header__out" data-id="contact-github" data-by="her"><a class="site-header__link hit is-external" href="https://github.com/HomuraTokido" target="_blank" rel="noopener noreferrer" data-external>GitHub<span class="link-external" aria-hidden="true">↗</span><span class="visually-hidden">（外部链接，在新标签页打开）</span></a></span></div></div></header><div data-astro-transition-persist="site-dock" class="site-dock" data-pagefind-ignore="all"><nav class="hi-toolbar site-dock__bar" data-hi-current="lens" aria-label="站点导航"><a class="hi-button site-dock__link" href="/" data-dock-key="home">朱鹭户焰</a><button class="hi-button site-dock__more" type="button" data-dock-key="more" aria-expanded="false" aria-controls="site-deck" aria-current="true">更多</button><a class="hi-button site-dock__more-link" href="#site-more" data-dock-key="more-link" aria-current="true">更多</a></nav><div class="hi-popover site-deck" id="site-deck" data-state="closed" data-hi-optics="off" role="region" aria-label="更多" inert style="--deck-cols: 3"><span class="site-deck__skin" aria-hidden="true"></span><div class="site-deck__scroll"><ul class="site-deck__grid" role="list"><li class="site-deck__item"><a class="site-deck__link" href="/character/" data-dock-key="character"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-character.BRSavR79_Z1OhPlD.avif 160w, /_astro/window-character.BRSavR79_ZpeSs0.avif 240w, /_astro/window-character.BRSavR79_YN3qD.avif 320w, /_astro/window-character.BRSavR79_1MGiS0.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-character.BRSavR79_2si00N.webp" srcset="/_astro/window-character.BRSavR79_ZFGmGG.webp 160w, /_astro/window-character.BRSavR79_IlzbW.webp 240w, /_astro/window-character.BRSavR79_28ow5A.webp 320w, /_astro/window-character.BRSavR79_Z28TmgY.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">角色</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/favorites/" data-dock-key="favorites"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-favorites.Bk7qEdI6_ZGPUbc.avif 160w, /_astro/window-favorites.Bk7qEdI6_Hc1Hr.avif 240w, /_astro/window-favorites.Bk7qEdI6_27eXB5.avif 320w, /_astro/window-favorites.Bk7qEdI6_Z2a3TKu.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-favorites.Bk7qEdI6_1DzwzY.webp" srcset="/_astro/window-favorites.Bk7qEdI6_qJxsK.webp 160w, /_astro/window-favorites.Bk7qEdI6_1PMumo.webp 240w, /_astro/window-favorites.Bk7qEdI6_Z1OlGxT.webp 320w, /_astro/window-favorites.Bk7qEdI6_Z11sr6x.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">喜好</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/timeline/" data-dock-key="timeline"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-timeline.CdcoTEHB_1A2gr9.avif 160w, /_astro/window-timeline.CdcoTEHB_Z2fSCs.avif 240w, /_astro/window-timeline.CdcoTEHB_Z1Ey3H4.avif 320w, /_astro/window-timeline.CdcoTEHB_ZLGAlD.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-timeline.CdcoTEHB_T3umj.webp" srcset="/_astro/window-timeline.CdcoTEHB_Z1DPBvk.webp 160w, /_astro/window-timeline.CdcoTEHB_1N3me0.webp 240w, /_astro/window-timeline.CdcoTEHB_aKc9o.webp 320w, /_astro/window-timeline.CdcoTEHB_13BEuO.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">时间线</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/now/" data-dock-key="now"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-now.DASJUbnq_ZXLkiK.avif 160w, /_astro/window-now.DASJUbnq_QN5ac.avif 240w, /_astro/window-now.DASJUbnq_Z2mNDaM.avif 320w, /_astro/window-now.DASJUbnq_Z2mnMXG.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-now.DASJUbnq_1s3j45.webp" srcset="/_astro/window-now.DASJUbnq_ZAYTV4.webp 160w, /_astro/window-now.DASJUbnq_1ezuwS.webp 240w, /_astro/window-now.DASJUbnq_Z202dN6.webp 320w, /_astro/window-now.DASJUbnq_Z1YBnB0.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">近况</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/projects/" data-dock-key="projects"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-projects.D_WAFdx4_Z2pTHnn.avif 160w, /_astro/window-projects.D_WAFdx4_11YglW.avif 240w, /_astro/window-projects.D_WAFdx4_ZAiSHE.avif 320w, /_astro/window-projects.D_WAFdx4_hxyCL.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-projects.D_WAFdx4_Z1wCqEw.webp" srcset="/_astro/window-projects.D_WAFdx4_ZzArvU.webp 160w, /_astro/window-projects.D_WAFdx4_Z2cSBAw.webp 240w, /_astro/window-projects.D_WAFdx4_1f0m8N.webp 320w, /_astro/window-projects.D_WAFdx4_27QOue.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">项目</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/writing/" data-dock-key="writing"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-writing.DO-wUyA5_Z1u5Q72.avif 160w, /_astro/window-writing.DO-wUyA5_ZAgsle.avif 240w, /_astro/window-writing.DO-wUyA5_ixUpz.avif 320w, /_astro/window-writing.DO-wUyA5_2uCiA5.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-writing.DO-wUyA5_5mN7o.webp" srcset="/_astro/window-writing.DO-wUyA5_cA4mz.webp 160w, /_astro/window-writing.DO-wUyA5_16ps8n.webp 240w, /_astro/window-writing.DO-wUyA5_20ePTb.webp 320w, /_astro/window-writing.DO-wUyA5_ZRRTJf.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">文章</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/interface/" data-dock-key="design"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-design.B6ldoKCf_Z2qxpXG.avif 160w, /_astro/window-design.B6ldoKCf_Z8GCc7.avif 240w, /_astro/window-design.B6ldoKCf_299azs.avif 320w, /_astro/window-design.B6ldoKCf_Z1lpjEh.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-design.B6ldoKCf_Z1V9WLR.webp" srcset="/_astro/window-design.B6ldoKCf_4Stiy.webp 160w, /_astro/window-design.B6ldoKCf_2mJh58.webp 240w, /_astro/window-design.B6ldoKCf_ZpB3We.webp 320w, /_astro/window-design.B6ldoKCf_1a1zBX.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">设计语言</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/uses/" data-dock-key="uses" aria-current="page"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-uses.CCp6AO2U_ZHd8LW.avif 160w, /_astro/window-uses.CCp6AO2U_1zROXl.avif 240w, /_astro/window-uses.CCp6AO2U_Z1cdk5i.avif 320w, /_astro/window-uses.CCp6AO2U_Z27QJhq.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-uses.CCp6AO2U_2vhbu2.webp" srcset="/_astro/window-uses.CCp6AO2U_Gts6w.webp 160w, /_astro/window-uses.CCp6AO2U_Z25BGW7.webp 240w, /_astro/window-uses.CCp6AO2U_ctgNb.webp 320w, /_astro/window-uses.CCp6AO2U_ZIa8nW.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">装备</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/contact/" data-dock-key="contact"><span class="site-deck__win site-deck__win--open" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-contact.BuY4pugC_2sJYbH.avif 160w, /_astro/window-contact.BuY4pugC_Z1HBKQq.avif 240w, /_astro/window-contact.BuY4pugC_ZNMn5C.avif 320w, /_astro/window-contact.BuY4pugC_1nh04S.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-contact.BuY4pugC_VVoYP.webp" srcset="/_astro/window-contact.BuY4pugC_ZTKe8C.webp 160w, /_astro/window-contact.BuY4pugC_ZUPmO.webp 240w, /_astro/window-contact.BuY4pugC_RSxnY.webp 320w, /_astro/window-contact.BuY4pugC_Z20edfr.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">联系</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/search/" data-dock-key="search"><span class="site-deck__win site-deck__win--dim" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-search.wgMrYNGG_Z198hjq.avif 160w, /_astro/window-search.wgMrYNGG_18Hvs9.avif 240w, /_astro/window-search.wgMrYNGG_Z1DCOzd.avif 320w, /_astro/window-search.wgMrYNGG_Z40b01.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-search.wgMrYNGG_2jdpVI.webp" srcset="/_astro/window-search.wgMrYNGG_1miBWO.webp 160w, /_astro/window-search.wgMrYNGG_Z1q2I4x.webp 240w, /_astro/window-search.wgMrYNGG_QN4H2.webp 320w, /_astro/window-search.wgMrYNGG_2rqIhe.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">搜索</span></a></li></ul></div><div class="site-deck__foot"><button class="hi-button hi-button--glass site-deck__close" type="button">关闭</button></div></div></div><script>(function () {
+  if (window.HTDock) return;
+  var ITEM = ':scope > [data-dock-key]';
+  function parts() {
+    var dock = document.querySelector('.site-dock');
+    var bar = dock && dock.querySelector('.site-dock__bar');
+    var more = dock && dock.querySelector('.site-dock__more');
+    var deck = dock && dock.querySelector('.site-deck');
+    return bar && more && deck ? { dock: dock, bar: bar, more: more, deck: deck } : null;
+  }
+  function isOpen(p) {
+    return !!p && p.more.getAttribute('aria-expanded') === 'true';
+  }
+  // 整根栏变形成面板、原路变回（dock.css 第 2 节）：量栏相对面板内边距盒的位置，写成 --from-*，皮的四边从这里插值到盖满面板；
+  // 量「更多」相对底栏的位置和大小，写成 --close-*，「关闭」放在同一个地方。开合前都量一次（窗口变过宽窄，栏和面板都会挪）
+  function aim(p) {
+    var d = p.deck, b = p.bar.getBoundingClientRect(), r = d.getBoundingClientRect();
+    var x0 = r.left + d.clientLeft, y0 = r.top + d.clientTop;
+    var s = d.style;
+    s.setProperty('--from-t', (b.top - y0) + 'px');
+    s.setProperty('--from-l', (b.left - x0) + 'px');
+    s.setProperty('--from-r', (x0 + d.clientWidth - b.right) + 'px');
+    s.setProperty('--from-b', (y0 + d.clientHeight - b.bottom) + 'px');
+    s.setProperty('--from-rad', (b.height / 2) + 'px');
+    var foot = d.querySelector('.site-deck__foot');
+    if (!foot) return;
+    var m = p.more.getBoundingClientRect(), f = foot.getBoundingClientRect();
+    s.setProperty('--close-t', (m.top - f.top) + 'px');
+    s.setProperty('--close-l', (m.left - f.left) + 'px');
+    s.setProperty('--close-w', m.width + 'px');
+    s.setProperty('--close-h', m.height + 'px');
+  }
+  // 开着时栏看不见，也不让点、不让聚焦（inert）；面板里的「关闭」把它变回来
+  function open(p) {
+    // 先让内容排出来（data-warm），面板有了真实高度再量
+    p.deck.setAttribute('data-warm', '');
+    aim(p);
+    p.dock.setAttribute('data-deck', 'open');
+    p.bar.inert = true;
+    p.deck.inert = false;
+    p.deck.setAttribute('data-state', 'open');
+    p.more.setAttribute('aria-expanded', 'true');
+    var first = p.deck.querySelector('a[href]');
+    if (first) first.focus({ preventScroll: true });
+  }
+  function close(p, toMore) {
+    if (!isOpen(p)) return;
+    var inside = p.deck.contains(document.activeElement);
+    aim(p);
+    p.dock.removeAttribute('data-deck');
+    p.deck.setAttribute('data-state', 'closed');
+    p.deck.inert = true;
+    p.bar.inert = false;
+    p.more.setAttribute('aria-expanded', 'false');
+    if (toMore || inside) p.more.focus({ preventScroll: true });
+  }
+  function copyAttrs(el, from, names) {
+    names.forEach(function (name) {
+      var v = from.getAttribute(name);
+      if (v === null) el.removeAttribute(name);
+      else if (el.getAttribute(name) !== v) el.setAttribute(name, v);
+    });
+  }
+  function refreshChip(bar) {
+    if (window.HomuraInterface && window.HomuraInterface.refreshCurrent) window.HomuraInterface.refreshCurrent(bar);
+  }
+  // 栏上的项照新页面增删：按 data-dock-key 对，留得下的元素原地不动
+  function syncBar(bar, nextBar) {
+    var key = function (el) { return el.getAttribute('data-dock-key'); };
+    var want = Array.prototype.slice.call(nextBar.querySelectorAll(ITEM));
+    var wanted = want.map(key);
+    var have = {};
+    var changed = false;
+    bar.querySelectorAll(ITEM).forEach(function (el) {
+      if (wanted.indexOf(key(el)) < 0) { el.remove(); changed = true; }
+      else have[key(el)] = el;
+    });
+    want.forEach(function (w, i) {
+      var at = bar.querySelectorAll(ITEM)[i] || null;
+      var el = have[key(w)];
+      if (el) {
+        copyAttrs(el, w, ['href', 'aria-current']);
+        if (el.localName === 'a' && el.textContent !== w.textContent) el.textContent = w.textContent;
+        if (el !== at) { bar.insertBefore(el, at); changed = true; }
+      } else {
+        bar.insertBefore(document.importNode(w, true), at);
+        changed = true;
+      }
+    });
+    if (changed) refreshChip(bar);
+  }
+  // 当前项直接取页面内容（她 2026-10-04 定的「特事特办」，样式见 dock.css 末节）：栏的玻璃画在栏里的子层 .hi-optics 上，
+  // 当前项是它的兄弟层，背景滤镜本来只取得到栏。这里把当前项「要去的位置」（库写在它行内样式里的 left/top/width/height）
+  // 换算到玻璃层的坐标，写成 --hole-* 四个变量，dock.css 用它们在玻璃层上挖一个胶囊形的洞。
+  // 变量注册成长度、和当前项同一条过渡，浏览器同一帧驱动两者，洞不会追不上当前项。没有当前项时洞收成 0。
+  function syncHole() {
+    var bar = document.querySelector('.site-dock__bar');
+    var layer = bar && bar.querySelector(':scope > .hi-optics');
+    var chip = bar && bar.querySelector(':scope > .hi-toolbar__current');
+    if (!layer || !chip) return;
+    var px = function (v) { return parseFloat(v) || 0; };
+    var w = px(chip.style.width), h = px(chip.style.height);
+    if (!w || !h) {
+      layer.style.setProperty('--hole-w', '0px');
+      layer.style.setProperty('--hole-r', '0px');
+      return;
+    }
+    var br = bar.getBoundingClientRect(), lr = layer.getBoundingClientRect();
+    layer.style.setProperty('--hole-x', (px(chip.style.left) + br.left + bar.clientLeft - lr.left) + 'px');
+    layer.style.setProperty('--hole-y', (px(chip.style.top) + br.top + bar.clientTop - lr.top) + 'px');
+    layer.style.setProperty('--hole-w', w + 'px');
+    layer.style.setProperty('--hole-h', h + 'px');
+    layer.style.setProperty('--hole-r', (h / 2) + 'px');
+  }
+  // 库插入玻璃层、插入当前项、改当前项位置（换项、换页、窗口变宽窄）都会动栏里的节点或行内样式：盯住整根栏，
+  // 只跳过玻璃层自己的样式变化（那是这里写的变量，不跳过就会自己触发自己）。栏是 transition:persist 的同一个元素，盯一次就够。
+  function watchHole() {
+    var bar = document.querySelector('.site-dock__bar');
+    if (!bar || bar.__htHole) return;
+    bar.__htHole = new MutationObserver(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        var t = list[i].target;
+        if (list[i].type === 'attributes' && t.classList && t.classList.contains('hi-optics')) continue;
+        syncHole();
+        return;
+      }
+    });
+    bar.__htHole.observe(bar, { subtree: true, childList: true, attributes: true, attributeFilter: ['style'] });
+    syncHole();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchHole);
+  else watchHole();
+  document.addEventListener('astro:page-load', watchHole);
+  window.HTDock = {
+    setCurrent: function (k) {
+      var bar = document.querySelector('.site-dock__bar');
+      if (!bar) return;
+      bar.querySelectorAll(ITEM).forEach(function (el) {
+        if (el.getAttribute('data-dock-key') === k) el.setAttribute('aria-current', el.hasAttribute('data-dock-anchor') ? 'location' : 'page');
+        else el.removeAttribute('aria-current');
+      });
+    },
+  };
+  // 预热：鼠标移到「更多」上、键盘聚焦到它时，面板里的缩略图先下载、解码（data-warm 让滚动层先排出来但仍看不见，见 dock.css），
+  // 点开那一刻不再临时解码；只做一次
+  function warm(e) {
+    var p = parts();
+    if (!p || !(e.target instanceof Element) || !p.more.contains(e.target) || p.deck.hasAttribute('data-warm')) return;
+    p.deck.setAttribute('data-warm', '');
+  }
+  document.addEventListener('pointerover', warm);
+  document.addEventListener('focusin', warm);
+  var tapOutside = false;
+  window.addEventListener('pointerdown', function (e) {
+    var p = parts();
+    tapOutside = isOpen(p) && !p.dock.contains(e.target);
+  }, true);
+  ['pointercancel', 'keydown'].forEach(function (type) {
+    window.addEventListener(type, function () { tapOutside = false; }, true);
+  });
+  window.addEventListener('click', function (e) {
+    if (!e.isTrusted || !tapOutside) return;
+    tapOutside = false;
+    e.preventDefault();
+  }, true);
+  document.addEventListener('click', function (e) {
+    var p = parts();
+    if (!p) return;
+    var t = e.target instanceof Element ? e.target : null;
+    if (t && p.more.contains(t)) {
+      if (isOpen(p)) close(p, true);
+      else open(p);
+      return;
+    }
+    if (t && t.closest('.site-deck__close')) {
+      close(p, true);
+      return;
+    }
+    if (isOpen(p) && !(t && p.dock.contains(t))) close(p, false);
+  });
+  // 开着时窗口变宽窄：栏和面板都挪了，重量一次，「关闭」跟着「更多」原来的位置走
+  window.addEventListener('resize', function () {
+    var p = parts();
+    if (isOpen(p)) aim(p);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var p = parts();
+    if (!isOpen(p)) return;
+    e.preventDefault();
+    close(p, true);
+  });
+  document.addEventListener('focusout', function (e) {
+    var p = parts();
+    if (!isOpen(p) || !(e.target instanceof Node) || !p.deck.contains(e.target)) return;
+    var to = e.relatedTarget;
+    if (!to || p.deck.contains(to) || to === p.more) return;
+    close(p, false);
+  });
+  document.addEventListener('astro:before-preparation', function (e) {
+    if (e.defaultPrevented) return;
+    var p = parts();
+    if (p) close(p, false);
+  });
+  document.addEventListener('astro:before-swap', function (e) {
+    var dock = document.querySelector('.site-dock');
+    var next = e.newDocument.querySelector('.site-dock');
+    if (!dock || !next) return;
+    var p = parts();
+    if (p) close(p, false);
+    copyAttrs(dock, next, ['lang']);
+    var bar = dock.querySelector('.site-dock__bar');
+    var nextBar = next.querySelector('.site-dock__bar');
+    if (bar && nextBar) syncBar(bar, nextBar);
+    dock.querySelectorAll('.site-deck [data-dock-key]').forEach(function (el) {
+      var twin = next.querySelector('.site-deck [data-dock-key="' + el.getAttribute('data-dock-key') + '"]');
+      if (twin) copyAttrs(el, twin, ['href', 'aria-current', 'data-current']);
+    });
+  });
+})();</script><main id="main" class="site-wrap site-main"><div class="section-page section-page--uses" data-section="uses"><div class="uses-head"><header class="section-header section-header--l1"><div class="section-header__row"><h1 class="hi-display section-header__title">装备</h1></div></header><p class="hi-body-sm uses-updated">更新于 <time datetime="2026-10-03">2026-10-03</time></p></div><section class="entry-group"><h2 class="hi-headline-lg entry-group__title">桌上</h2><ul class="fact-list uses-list" role="list"><li data-id="uses-pc" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">主机</span><div class="fact__body"><p class="hi-body">主力台式机：AMD Ryzen 7 9800X3D，ASUS TUF GAMING B850M-PLUS WIFI 主板，48GB DDR5 内存（2 × 24GB），NVIDIA GeForce RTX 4070 Ti SUPER 16GB 显卡，WD Blue SN5000 2TB 固态硬盘。</p></div></li><li data-id="uses-keyboard" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">键盘</span><div class="fact__body"><p class="hi-body">Razer BlackWidow V4 Pro 机械键盘。</p></div></li><li data-id="uses-mic" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">麦克风</span><div class="fact__body"><p class="hi-body">Razer Seiren X USB 麦克风。</p></div></li><li data-id="uses-headset" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">耳机</span><div class="fact__body"><p class="hi-body">SteelSeries Arctis Nova 7P 无线耳机。</p></div></li><li data-id="uses-os" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">系统</span><div class="fact__body"><p class="hi-body">Windows 11 专业版，跟 Insider Preview 通道。</p></div></li></ul></section><section class="entry-group"><h2 class="hi-headline-lg entry-group__title">随身</h2><ul class="fact-list uses-list" role="list"><li data-id="uses-phone" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">手机</span><div class="fact__body"><p class="hi-body">一加 15（主力）、iPhone 15 Pro<span class="uses-asof">（截至 2026-07）</span>。</p></div></li><li data-id="uses-laptop" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">笔记本</span><div class="fact__body"><p class="hi-body">MacBook Air 13 英寸，M1<span class="uses-asof">（截至 2026-07）</span>。</p></div></li><li data-id="uses-watch" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">手表</span><div class="fact__body"><p class="hi-body">Apple Watch Series 10<span class="uses-asof">（截至 2026-07）</span>。</p></div></li><li data-id="uses-earbuds" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">耳机</span><div class="fact__body"><p class="hi-body">AirPods Pro 2<span class="uses-asof">（截至 2026-07）</span>。</p></div></li></ul></section><section class="entry-group"><h2 class="hi-headline-lg entry-group__title">玩</h2><ul class="fact-list uses-list" role="list"><li data-id="uses-consoles" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">游戏机</span><div class="fact__body"><p class="hi-body">PS5、Switch 2<span class="uses-asof">（截至 2026-07）</span>。</p></div></li><li data-id="uses-vr" data-by="fact" class="entry fact uses-item fact--titled"><span class="fact__title uses-item__name">VR 头显</span><div class="fact__body"><p class="hi-body">Meta Quest 3，经 Meta Horizon Link 连电脑玩 PC VR<span class="uses-asof">（截至 2026-07）</span>。</p></div></li></ul></section></div></main><footer class="site-footer" data-pagefind-ignore="all"><div class="site-wrap site-footer__inner"><div class="site-footer__meta hi-body-sm"><span>© 2026 朱鹭户焰 / HOMURA TOKIDO</span><a class="hi-link hit" href="/rss.xml" data-astro-reload>RSS</a><a class="hi-link hit" href="#top">回到顶部<span aria-hidden="true"> ↑</span></a><span class="site-footer__note" data-by="her" data-id="footer-maintenance">由朱鹭户焰本人维护</span><span class="site-footer__colophon" data-by="fact" data-id="footer-colophon">本站用 Astro 生成，托管在 GitHub Pages。</span></div></div></footer><nav class="site-more" id="site-more" aria-label="更多" data-pagefind-ignore="all" style="--deck-cols: 3"><div class="site-wrap site-more__inner"><ul class="site-deck__grid" role="list"><li class="site-deck__item"><a class="site-deck__link" href="/character/" data-dock-key="character"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-character.BRSavR79_Z1OhPlD.avif 160w, /_astro/window-character.BRSavR79_ZpeSs0.avif 240w, /_astro/window-character.BRSavR79_YN3qD.avif 320w, /_astro/window-character.BRSavR79_1MGiS0.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-character.BRSavR79_2si00N.webp" srcset="/_astro/window-character.BRSavR79_ZFGmGG.webp 160w, /_astro/window-character.BRSavR79_IlzbW.webp 240w, /_astro/window-character.BRSavR79_28ow5A.webp 320w, /_astro/window-character.BRSavR79_Z28TmgY.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">角色</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/favorites/" data-dock-key="favorites"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-favorites.Bk7qEdI6_ZGPUbc.avif 160w, /_astro/window-favorites.Bk7qEdI6_Hc1Hr.avif 240w, /_astro/window-favorites.Bk7qEdI6_27eXB5.avif 320w, /_astro/window-favorites.Bk7qEdI6_Z2a3TKu.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-favorites.Bk7qEdI6_1DzwzY.webp" srcset="/_astro/window-favorites.Bk7qEdI6_qJxsK.webp 160w, /_astro/window-favorites.Bk7qEdI6_1PMumo.webp 240w, /_astro/window-favorites.Bk7qEdI6_Z1OlGxT.webp 320w, /_astro/window-favorites.Bk7qEdI6_Z11sr6x.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">喜好</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/timeline/" data-dock-key="timeline"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-timeline.CdcoTEHB_1A2gr9.avif 160w, /_astro/window-timeline.CdcoTEHB_Z2fSCs.avif 240w, /_astro/window-timeline.CdcoTEHB_Z1Ey3H4.avif 320w, /_astro/window-timeline.CdcoTEHB_ZLGAlD.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-timeline.CdcoTEHB_T3umj.webp" srcset="/_astro/window-timeline.CdcoTEHB_Z1DPBvk.webp 160w, /_astro/window-timeline.CdcoTEHB_1N3me0.webp 240w, /_astro/window-timeline.CdcoTEHB_aKc9o.webp 320w, /_astro/window-timeline.CdcoTEHB_13BEuO.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">时间线</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/now/" data-dock-key="now"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-now.DASJUbnq_ZXLkiK.avif 160w, /_astro/window-now.DASJUbnq_QN5ac.avif 240w, /_astro/window-now.DASJUbnq_Z2mNDaM.avif 320w, /_astro/window-now.DASJUbnq_Z2mnMXG.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-now.DASJUbnq_1s3j45.webp" srcset="/_astro/window-now.DASJUbnq_ZAYTV4.webp 160w, /_astro/window-now.DASJUbnq_1ezuwS.webp 240w, /_astro/window-now.DASJUbnq_Z202dN6.webp 320w, /_astro/window-now.DASJUbnq_Z1YBnB0.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">近况</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/projects/" data-dock-key="projects"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-projects.D_WAFdx4_Z2pTHnn.avif 160w, /_astro/window-projects.D_WAFdx4_11YglW.avif 240w, /_astro/window-projects.D_WAFdx4_ZAiSHE.avif 320w, /_astro/window-projects.D_WAFdx4_hxyCL.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-projects.D_WAFdx4_Z1wCqEw.webp" srcset="/_astro/window-projects.D_WAFdx4_ZzArvU.webp 160w, /_astro/window-projects.D_WAFdx4_Z2cSBAw.webp 240w, /_astro/window-projects.D_WAFdx4_1f0m8N.webp 320w, /_astro/window-projects.D_WAFdx4_27QOue.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">项目</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/writing/" data-dock-key="writing"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-writing.DO-wUyA5_Z1u5Q72.avif 160w, /_astro/window-writing.DO-wUyA5_ZAgsle.avif 240w, /_astro/window-writing.DO-wUyA5_ixUpz.avif 320w, /_astro/window-writing.DO-wUyA5_2uCiA5.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-writing.DO-wUyA5_5mN7o.webp" srcset="/_astro/window-writing.DO-wUyA5_cA4mz.webp 160w, /_astro/window-writing.DO-wUyA5_16ps8n.webp 240w, /_astro/window-writing.DO-wUyA5_20ePTb.webp 320w, /_astro/window-writing.DO-wUyA5_ZRRTJf.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">文章</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/interface/" data-dock-key="design"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-design.B6ldoKCf_Z2qxpXG.avif 160w, /_astro/window-design.B6ldoKCf_Z8GCc7.avif 240w, /_astro/window-design.B6ldoKCf_299azs.avif 320w, /_astro/window-design.B6ldoKCf_Z1lpjEh.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-design.B6ldoKCf_Z1V9WLR.webp" srcset="/_astro/window-design.B6ldoKCf_4Stiy.webp 160w, /_astro/window-design.B6ldoKCf_2mJh58.webp 240w, /_astro/window-design.B6ldoKCf_ZpB3We.webp 320w, /_astro/window-design.B6ldoKCf_1a1zBX.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">设计语言</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/uses/" data-dock-key="uses" aria-current="page"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-uses.CCp6AO2U_ZHd8LW.avif 160w, /_astro/window-uses.CCp6AO2U_1zROXl.avif 240w, /_astro/window-uses.CCp6AO2U_Z1cdk5i.avif 320w, /_astro/window-uses.CCp6AO2U_Z27QJhq.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-uses.CCp6AO2U_2vhbu2.webp" srcset="/_astro/window-uses.CCp6AO2U_Gts6w.webp 160w, /_astro/window-uses.CCp6AO2U_Z25BGW7.webp 240w, /_astro/window-uses.CCp6AO2U_ctgNb.webp 320w, /_astro/window-uses.CCp6AO2U_ZIa8nW.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">装备</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/contact/" data-dock-key="contact"><span class="site-deck__win site-deck__win--open" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-contact.BuY4pugC_2sJYbH.avif 160w, /_astro/window-contact.BuY4pugC_Z1HBKQq.avif 240w, /_astro/window-contact.BuY4pugC_ZNMn5C.avif 320w, /_astro/window-contact.BuY4pugC_1nh04S.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-contact.BuY4pugC_VVoYP.webp" srcset="/_astro/window-contact.BuY4pugC_ZTKe8C.webp 160w, /_astro/window-contact.BuY4pugC_ZUPmO.webp 240w, /_astro/window-contact.BuY4pugC_RSxnY.webp 320w, /_astro/window-contact.BuY4pugC_Z20edfr.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">联系</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/search/" data-dock-key="search"><span class="site-deck__win site-deck__win--dim" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-search.wgMrYNGG_Z198hjq.avif 160w, /_astro/window-search.wgMrYNGG_18Hvs9.avif 240w, /_astro/window-search.wgMrYNGG_Z1DCOzd.avif 320w, /_astro/window-search.wgMrYNGG_Z40b01.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-search.wgMrYNGG_2jdpVI.webp" srcset="/_astro/window-search.wgMrYNGG_1miBWO.webp 160w, /_astro/window-search.wgMrYNGG_Z1q2I4x.webp 240w, /_astro/window-search.wgMrYNGG_QN4H2.webp 320w, /_astro/window-search.wgMrYNGG_2rqIhe.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">搜索</span></a></li></ul></div></nav></body></html>

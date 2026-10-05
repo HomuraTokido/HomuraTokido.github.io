@@ -1,0 +1,478 @@
+<!DOCTYPE html><html lang="en" data-theme="red-black"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#090909"><title>Why Self-Evolution Belongs to Subagents — 朱鹭户焰</title><meta name="description" content="Why persistent subagent roles, rather than the main agent, are the right place for agents to accumulate skill and self-evolve."><link rel="canonical" href="https://homura-tokido.com/subagent-evolution.html"><meta property="og:site_name" content="朱鹭户焰 / HOMURA TOKIDO"><meta property="og:title" content="Why Self-Evolution Belongs to Subagents — 朱鹭户焰"><meta property="og:description" content="Why persistent subagent roles, rather than the main agent, are the right place for agents to accumulate skill and self-evolve."><meta property="og:type" content="article"><meta property="og:url" content="https://homura-tokido.com/subagent-evolution.html"><meta property="og:image" content="https://homura-tokido.com/img/og-share.jpg"><meta property="og:image:width" content="941"><meta property="og:image:height" content="494"><meta property="og:image:alt" content="朱鹭户焰的角色形象"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/x-icon" href="/img/favicon.ico"><link rel="icon" type="image/svg+xml" href="/img/favicon.svg"><link rel="alternate" type="application/rss+xml" title="朱鹭户焰 / HOMURA TOKIDO" href="/rss.xml"><link rel="sitemap" href="/sitemap-index.xml"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://homura-tokido.com/#person","name":"朱鹭户焰","alternateName":["HOMURA TOKIDO","朱鹭户焰png","朱鷺戸ほむら","HomuraTokido"],"url":"https://homura-tokido.com/","sameAs":["https://space.bilibili.com/794282","https://github.com/HomuraTokido"],"mainEntityOfPage":{"@id":"https://homura-tokido.com/#webpage"}},{"@type":"WebSite","@id":"https://homura-tokido.com/#website","url":"https://homura-tokido.com/","name":"朱鹭户焰 / HOMURA TOKIDO","publisher":{"@id":"https://homura-tokido.com/#person"}},{"@type":"WebPage","@id":"https://homura-tokido.com/subagent-evolution.html#webpage","url":"https://homura-tokido.com/subagent-evolution.html","name":"Why Self-Evolution Belongs to Subagents — 朱鹭户焰","description":"Why persistent subagent roles, rather than the main agent, are the right place for agents to accumulate skill and self-evolve.","inLanguage":"en","isPartOf":{"@id":"https://homura-tokido.com/#website"},"publisher":{"@id":"https://homura-tokido.com/#person"},"mainEntity":{"@id":"https://homura-tokido.com/subagent-evolution.html#article"}},{"@type":"Article","@id":"https://homura-tokido.com/subagent-evolution.html#article","url":"https://homura-tokido.com/subagent-evolution.html","headline":"Why Self-Evolution Belongs to Subagents, Not the Main Agent","description":"Why persistent subagent roles, rather than the main agent, are the right place for agents to accumulate skill and self-evolve.","inLanguage":"en","mainEntityOfPage":{"@id":"https://homura-tokido.com/subagent-evolution.html#webpage"},"publisher":{"@id":"https://homura-tokido.com/#person"},"author":{"@id":"https://homura-tokido.com/#person"},"datePublished":"2026-05-07"}]}</script><meta name="author" content="朱鹭户焰"><link rel="stylesheet" href="/assets/hi/TOKENS.css"><link rel="stylesheet" href="/assets/hi/COMPONENTS.css"><link rel="stylesheet" href="/_astro/site.27P_tDud.css"><script>document.documentElement.classList.add('js');
+addEventListener('pagehide', function () {
+  try { history.scrollRestoration = 'auto'; } catch (e) {}
+});
+addEventListener('pageshow', function (e) {
+  if (e.persisted) { try { history.scrollRestoration = 'manual'; } catch (err) {} }
+});
+(function () {
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    var st = history.state;
+    if (!nav || (nav.type !== 'reload' && nav.type !== 'back_forward') || !st || !(st.scrollY > 0 || st.scrollX > 0)) return;
+    var root = document.documentElement;
+    root.classList.add('restoring-scroll');
+    var done = function () { root.classList.remove('restoring-scroll'); };
+    document.addEventListener('DOMContentLoaded', function () { requestAnimationFrame(done); });
+    setTimeout(done, 1500);
+  } catch (e) {}
+})();
+(function () {
+  var FULL_LOAD = {"pages":[],"prefixes":["/interface/","/pagefind/"]};
+  function fullLoad(url) {
+    var p = url.pathname;
+    if (FULL_LOAD.prefixes.some(function (pre) { return p === pre.slice(0, -1) || p.indexOf(pre) === 0; })) return true;
+    var ext = /\.([a-z0-9]+)$/i.exec(p);
+    if (!ext) return false;
+    if (/^html?$/i.test(ext[1])) return FULL_LOAD.pages.indexOf(p) >= 0;
+    return true;
+  }
+  function relativeImages(doc, base) {
+    var rel = function (u) { return !!u && !/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(u); };
+    var abs = function (u) {
+      var x = new URL(u, base);
+      return x.origin === location.origin ? x.pathname + x.search + x.hash : x.href;
+    };
+    doc.querySelectorAll('img[src], img[srcset], source[srcset]').forEach(function (el) {
+      var src = el.getAttribute('src');
+      if (rel(src)) el.setAttribute('src', abs(src));
+      var set = el.getAttribute('srcset');
+      if (!set || set.indexOf('data:') >= 0) return;
+      var changed = false;
+      var out = set.split(',').map(function (c) {
+        var t = c.trim().split(/\s+/);
+        if (rel(t[0])) { t[0] = abs(t[0]); changed = true; }
+        return t.join(' ');
+      });
+      if (changed) el.setAttribute('srcset', out.join(', '));
+    });
+  }
+  window.__htFullLoad = fullLoad; // 里站的 ?ai=1 / ?src=1 脚本用它判断哪些地址不改写
+  // 取消这次页面切换，路由改为整页跳到同一地址（不先抓取）。
+  document.addEventListener('astro:before-preparation', function (e) {
+    if (fullLoad(e.to)) e.preventDefault();
+  });
+  document.addEventListener('astro:before-swap', function (e) {
+    var hi = window.HomuraInterface;
+    if (hi) document.querySelectorAll('[data-hi-popover-trigger][aria-expanded="true"]').forEach(function (t) { hi.closePopover(t); });
+    var carry = [];
+    for (var i = 0; i < document.body.children.length; i++) {
+      var el = document.body.children[i];
+      var defs = el.localName === 'svg' && el.querySelector('defs');
+      var probe = el.localName === 'span' && !el.className && !el.childNodes.length && el.style.display === 'none';
+      if (defs || probe) carry.push(el);
+    }
+    carry.forEach(function (el) { e.newDocument.body.appendChild(el); });
+    e.newDocument.documentElement.classList.add('js');
+    relativeImages(e.newDocument, e.to.href);
+  });
+  document.addEventListener('astro:after-swap', function () {
+    if (window.HomuraInterface) window.HomuraInterface.init(document);
+  });
+})();</script><script src="/assets/hi/COMPONENTS.js" defer></script><script src="/assets/hi/OPTICS.js" defer></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="swap"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CYDbzu1r.js"></script><link rel="stylesheet" href="/_astro/Base.E65VzyY6.css"></head><body class="hi-page hi-page--full page--longread"><a class="hi-button skip-link" href="#main" data-pagefind-ignore="all" lang="zh-CN">跳到正文</a><header class="site-header hi-body-sm" id="top" data-pagefind-ignore="all" lang="zh-CN"><div class="site-wrap site-header__inner"><a class="site-brand" href="/" data-id="site-name" data-by="her">朱鹭户焰 / HOMURA TOKIDO</a><div class="site-header__links"><a class="site-header__link hit" href="/writing/">文章</a><a class="site-header__link hit" href="/interface/" data-astro-reload="true">设计语言</a><span class="site-header__out site-header__out--first" data-id="contact-bilibili" data-by="her"><a class="site-header__link hit is-external" href="https://space.bilibili.com/794282" target="_blank" rel="noopener noreferrer" data-external>B 站<span class="link-external" aria-hidden="true">↗</span><span class="visually-hidden">（外部链接，在新标签页打开）</span></a></span><span class="site-header__out" data-id="contact-github" data-by="her"><a class="site-header__link hit is-external" href="https://github.com/HomuraTokido" target="_blank" rel="noopener noreferrer" data-external>GitHub<span class="link-external" aria-hidden="true">↗</span><span class="visually-hidden">（外部链接，在新标签页打开）</span></a></span></div></div></header><div data-astro-transition-persist="site-dock" class="site-dock" data-pagefind-ignore="all" lang="zh-CN"><nav class="hi-toolbar site-dock__bar" data-hi-current="lens" aria-label="站点导航"><a class="hi-button site-dock__link" href="/" data-dock-key="home">朱鹭户焰</a><button class="hi-button site-dock__more" type="button" data-dock-key="more" aria-expanded="false" aria-controls="site-deck">更多</button><a class="hi-button site-dock__more-link" href="#site-more" data-dock-key="more-link">更多</a></nav><div class="hi-popover site-deck" id="site-deck" data-state="closed" data-hi-optics="off" role="region" aria-label="更多" inert style="--deck-cols: 3"><span class="site-deck__skin" aria-hidden="true"></span><div class="site-deck__scroll"><ul class="site-deck__grid" role="list"><li class="site-deck__item"><a class="site-deck__link" href="/character/" data-dock-key="character"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-character.BRSavR79_Z1OhPlD.avif 160w, /_astro/window-character.BRSavR79_ZpeSs0.avif 240w, /_astro/window-character.BRSavR79_YN3qD.avif 320w, /_astro/window-character.BRSavR79_1MGiS0.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-character.BRSavR79_2si00N.webp" srcset="/_astro/window-character.BRSavR79_ZFGmGG.webp 160w, /_astro/window-character.BRSavR79_IlzbW.webp 240w, /_astro/window-character.BRSavR79_28ow5A.webp 320w, /_astro/window-character.BRSavR79_Z28TmgY.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">角色</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/favorites/" data-dock-key="favorites"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-favorites.Bk7qEdI6_ZGPUbc.avif 160w, /_astro/window-favorites.Bk7qEdI6_Hc1Hr.avif 240w, /_astro/window-favorites.Bk7qEdI6_27eXB5.avif 320w, /_astro/window-favorites.Bk7qEdI6_Z2a3TKu.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-favorites.Bk7qEdI6_1DzwzY.webp" srcset="/_astro/window-favorites.Bk7qEdI6_qJxsK.webp 160w, /_astro/window-favorites.Bk7qEdI6_1PMumo.webp 240w, /_astro/window-favorites.Bk7qEdI6_Z1OlGxT.webp 320w, /_astro/window-favorites.Bk7qEdI6_Z11sr6x.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">喜好</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/timeline/" data-dock-key="timeline"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-timeline.CdcoTEHB_1A2gr9.avif 160w, /_astro/window-timeline.CdcoTEHB_Z2fSCs.avif 240w, /_astro/window-timeline.CdcoTEHB_Z1Ey3H4.avif 320w, /_astro/window-timeline.CdcoTEHB_ZLGAlD.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-timeline.CdcoTEHB_T3umj.webp" srcset="/_astro/window-timeline.CdcoTEHB_Z1DPBvk.webp 160w, /_astro/window-timeline.CdcoTEHB_1N3me0.webp 240w, /_astro/window-timeline.CdcoTEHB_aKc9o.webp 320w, /_astro/window-timeline.CdcoTEHB_13BEuO.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">时间线</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/now/" data-dock-key="now"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-now.DASJUbnq_ZXLkiK.avif 160w, /_astro/window-now.DASJUbnq_QN5ac.avif 240w, /_astro/window-now.DASJUbnq_Z2mNDaM.avif 320w, /_astro/window-now.DASJUbnq_Z2mnMXG.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-now.DASJUbnq_1s3j45.webp" srcset="/_astro/window-now.DASJUbnq_ZAYTV4.webp 160w, /_astro/window-now.DASJUbnq_1ezuwS.webp 240w, /_astro/window-now.DASJUbnq_Z202dN6.webp 320w, /_astro/window-now.DASJUbnq_Z1YBnB0.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">近况</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/projects/" data-dock-key="projects"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-projects.D_WAFdx4_Z2pTHnn.avif 160w, /_astro/window-projects.D_WAFdx4_11YglW.avif 240w, /_astro/window-projects.D_WAFdx4_ZAiSHE.avif 320w, /_astro/window-projects.D_WAFdx4_hxyCL.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-projects.D_WAFdx4_Z1wCqEw.webp" srcset="/_astro/window-projects.D_WAFdx4_ZzArvU.webp 160w, /_astro/window-projects.D_WAFdx4_Z2cSBAw.webp 240w, /_astro/window-projects.D_WAFdx4_1f0m8N.webp 320w, /_astro/window-projects.D_WAFdx4_27QOue.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">项目</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/writing/" data-dock-key="writing"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-writing.DO-wUyA5_Z1u5Q72.avif 160w, /_astro/window-writing.DO-wUyA5_ZAgsle.avif 240w, /_astro/window-writing.DO-wUyA5_ixUpz.avif 320w, /_astro/window-writing.DO-wUyA5_2uCiA5.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-writing.DO-wUyA5_5mN7o.webp" srcset="/_astro/window-writing.DO-wUyA5_cA4mz.webp 160w, /_astro/window-writing.DO-wUyA5_16ps8n.webp 240w, /_astro/window-writing.DO-wUyA5_20ePTb.webp 320w, /_astro/window-writing.DO-wUyA5_ZRRTJf.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">文章</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/interface/" data-dock-key="design"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-design.B6ldoKCf_Z2qxpXG.avif 160w, /_astro/window-design.B6ldoKCf_Z8GCc7.avif 240w, /_astro/window-design.B6ldoKCf_299azs.avif 320w, /_astro/window-design.B6ldoKCf_Z1lpjEh.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-design.B6ldoKCf_Z1V9WLR.webp" srcset="/_astro/window-design.B6ldoKCf_4Stiy.webp 160w, /_astro/window-design.B6ldoKCf_2mJh58.webp 240w, /_astro/window-design.B6ldoKCf_ZpB3We.webp 320w, /_astro/window-design.B6ldoKCf_1a1zBX.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">设计语言</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/uses/" data-dock-key="uses"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-uses.CCp6AO2U_ZHd8LW.avif 160w, /_astro/window-uses.CCp6AO2U_1zROXl.avif 240w, /_astro/window-uses.CCp6AO2U_Z1cdk5i.avif 320w, /_astro/window-uses.CCp6AO2U_Z27QJhq.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-uses.CCp6AO2U_2vhbu2.webp" srcset="/_astro/window-uses.CCp6AO2U_Gts6w.webp 160w, /_astro/window-uses.CCp6AO2U_Z25BGW7.webp 240w, /_astro/window-uses.CCp6AO2U_ctgNb.webp 320w, /_astro/window-uses.CCp6AO2U_ZIa8nW.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">装备</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/contact/" data-dock-key="contact"><span class="site-deck__win site-deck__win--open" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-contact.BuY4pugC_2sJYbH.avif 160w, /_astro/window-contact.BuY4pugC_Z1HBKQq.avif 240w, /_astro/window-contact.BuY4pugC_ZNMn5C.avif 320w, /_astro/window-contact.BuY4pugC_1nh04S.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-contact.BuY4pugC_VVoYP.webp" srcset="/_astro/window-contact.BuY4pugC_ZTKe8C.webp 160w, /_astro/window-contact.BuY4pugC_ZUPmO.webp 240w, /_astro/window-contact.BuY4pugC_RSxnY.webp 320w, /_astro/window-contact.BuY4pugC_Z20edfr.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">联系</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/search/" data-dock-key="search"><span class="site-deck__win site-deck__win--dim" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-search.wgMrYNGG_Z198hjq.avif 160w, /_astro/window-search.wgMrYNGG_18Hvs9.avif 240w, /_astro/window-search.wgMrYNGG_Z1DCOzd.avif 320w, /_astro/window-search.wgMrYNGG_Z40b01.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-search.wgMrYNGG_2jdpVI.webp" srcset="/_astro/window-search.wgMrYNGG_1miBWO.webp 160w, /_astro/window-search.wgMrYNGG_Z1q2I4x.webp 240w, /_astro/window-search.wgMrYNGG_QN4H2.webp 320w, /_astro/window-search.wgMrYNGG_2rqIhe.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">搜索</span></a></li></ul></div><div class="site-deck__foot"><button class="hi-button hi-button--glass site-deck__close" type="button">关闭</button></div></div></div><script>(function () {
+  if (window.HTDock) return;
+  var ITEM = ':scope > [data-dock-key]';
+  function parts() {
+    var dock = document.querySelector('.site-dock');
+    var bar = dock && dock.querySelector('.site-dock__bar');
+    var more = dock && dock.querySelector('.site-dock__more');
+    var deck = dock && dock.querySelector('.site-deck');
+    return bar && more && deck ? { dock: dock, bar: bar, more: more, deck: deck } : null;
+  }
+  function isOpen(p) {
+    return !!p && p.more.getAttribute('aria-expanded') === 'true';
+  }
+  // 整根栏变形成面板、原路变回（dock.css 第 2 节）：量栏相对面板内边距盒的位置，写成 --from-*，皮的四边从这里插值到盖满面板；
+  // 量「更多」相对底栏的位置和大小，写成 --close-*，「关闭」放在同一个地方。开合前都量一次（窗口变过宽窄，栏和面板都会挪）
+  function aim(p) {
+    var d = p.deck, b = p.bar.getBoundingClientRect(), r = d.getBoundingClientRect();
+    var x0 = r.left + d.clientLeft, y0 = r.top + d.clientTop;
+    var s = d.style;
+    s.setProperty('--from-t', (b.top - y0) + 'px');
+    s.setProperty('--from-l', (b.left - x0) + 'px');
+    s.setProperty('--from-r', (x0 + d.clientWidth - b.right) + 'px');
+    s.setProperty('--from-b', (y0 + d.clientHeight - b.bottom) + 'px');
+    s.setProperty('--from-rad', (b.height / 2) + 'px');
+    var foot = d.querySelector('.site-deck__foot');
+    if (!foot) return;
+    var m = p.more.getBoundingClientRect(), f = foot.getBoundingClientRect();
+    s.setProperty('--close-t', (m.top - f.top) + 'px');
+    s.setProperty('--close-l', (m.left - f.left) + 'px');
+    s.setProperty('--close-w', m.width + 'px');
+    s.setProperty('--close-h', m.height + 'px');
+  }
+  // 开着时栏看不见，也不让点、不让聚焦（inert）；面板里的「关闭」把它变回来
+  function open(p) {
+    // 先让内容排出来（data-warm），面板有了真实高度再量
+    p.deck.setAttribute('data-warm', '');
+    aim(p);
+    p.dock.setAttribute('data-deck', 'open');
+    p.bar.inert = true;
+    p.deck.inert = false;
+    p.deck.setAttribute('data-state', 'open');
+    p.more.setAttribute('aria-expanded', 'true');
+    var first = p.deck.querySelector('a[href]');
+    if (first) first.focus({ preventScroll: true });
+  }
+  function close(p, toMore) {
+    if (!isOpen(p)) return;
+    var inside = p.deck.contains(document.activeElement);
+    aim(p);
+    p.dock.removeAttribute('data-deck');
+    p.deck.setAttribute('data-state', 'closed');
+    p.deck.inert = true;
+    p.bar.inert = false;
+    p.more.setAttribute('aria-expanded', 'false');
+    if (toMore || inside) p.more.focus({ preventScroll: true });
+  }
+  function copyAttrs(el, from, names) {
+    names.forEach(function (name) {
+      var v = from.getAttribute(name);
+      if (v === null) el.removeAttribute(name);
+      else if (el.getAttribute(name) !== v) el.setAttribute(name, v);
+    });
+  }
+  function refreshChip(bar) {
+    if (window.HomuraInterface && window.HomuraInterface.refreshCurrent) window.HomuraInterface.refreshCurrent(bar);
+  }
+  // 栏上的项照新页面增删：按 data-dock-key 对，留得下的元素原地不动
+  function syncBar(bar, nextBar) {
+    var key = function (el) { return el.getAttribute('data-dock-key'); };
+    var want = Array.prototype.slice.call(nextBar.querySelectorAll(ITEM));
+    var wanted = want.map(key);
+    var have = {};
+    var changed = false;
+    bar.querySelectorAll(ITEM).forEach(function (el) {
+      if (wanted.indexOf(key(el)) < 0) { el.remove(); changed = true; }
+      else have[key(el)] = el;
+    });
+    want.forEach(function (w, i) {
+      var at = bar.querySelectorAll(ITEM)[i] || null;
+      var el = have[key(w)];
+      if (el) {
+        copyAttrs(el, w, ['href', 'aria-current']);
+        if (el.localName === 'a' && el.textContent !== w.textContent) el.textContent = w.textContent;
+        if (el !== at) { bar.insertBefore(el, at); changed = true; }
+      } else {
+        bar.insertBefore(document.importNode(w, true), at);
+        changed = true;
+      }
+    });
+    if (changed) refreshChip(bar);
+  }
+  // 当前项直接取页面内容（她 2026-10-04 定的「特事特办」，样式见 dock.css 末节）：栏的玻璃画在栏里的子层 .hi-optics 上，
+  // 当前项是它的兄弟层，背景滤镜本来只取得到栏。这里把当前项「要去的位置」（库写在它行内样式里的 left/top/width/height）
+  // 换算到玻璃层的坐标，写成 --hole-* 四个变量，dock.css 用它们在玻璃层上挖一个胶囊形的洞。
+  // 变量注册成长度、和当前项同一条过渡，浏览器同一帧驱动两者，洞不会追不上当前项。没有当前项时洞收成 0。
+  function syncHole() {
+    var bar = document.querySelector('.site-dock__bar');
+    var layer = bar && bar.querySelector(':scope > .hi-optics');
+    var chip = bar && bar.querySelector(':scope > .hi-toolbar__current');
+    if (!layer || !chip) return;
+    var px = function (v) { return parseFloat(v) || 0; };
+    var w = px(chip.style.width), h = px(chip.style.height);
+    if (!w || !h) {
+      layer.style.setProperty('--hole-w', '0px');
+      layer.style.setProperty('--hole-r', '0px');
+      return;
+    }
+    var br = bar.getBoundingClientRect(), lr = layer.getBoundingClientRect();
+    layer.style.setProperty('--hole-x', (px(chip.style.left) + br.left + bar.clientLeft - lr.left) + 'px');
+    layer.style.setProperty('--hole-y', (px(chip.style.top) + br.top + bar.clientTop - lr.top) + 'px');
+    layer.style.setProperty('--hole-w', w + 'px');
+    layer.style.setProperty('--hole-h', h + 'px');
+    layer.style.setProperty('--hole-r', (h / 2) + 'px');
+  }
+  // 库插入玻璃层、插入当前项、改当前项位置（换项、换页、窗口变宽窄）都会动栏里的节点或行内样式：盯住整根栏，
+  // 只跳过玻璃层自己的样式变化（那是这里写的变量，不跳过就会自己触发自己）。栏是 transition:persist 的同一个元素，盯一次就够。
+  function watchHole() {
+    var bar = document.querySelector('.site-dock__bar');
+    if (!bar || bar.__htHole) return;
+    bar.__htHole = new MutationObserver(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        var t = list[i].target;
+        if (list[i].type === 'attributes' && t.classList && t.classList.contains('hi-optics')) continue;
+        syncHole();
+        return;
+      }
+    });
+    bar.__htHole.observe(bar, { subtree: true, childList: true, attributes: true, attributeFilter: ['style'] });
+    syncHole();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchHole);
+  else watchHole();
+  document.addEventListener('astro:page-load', watchHole);
+  window.HTDock = {
+    setCurrent: function (k) {
+      var bar = document.querySelector('.site-dock__bar');
+      if (!bar) return;
+      bar.querySelectorAll(ITEM).forEach(function (el) {
+        if (el.getAttribute('data-dock-key') === k) el.setAttribute('aria-current', el.hasAttribute('data-dock-anchor') ? 'location' : 'page');
+        else el.removeAttribute('aria-current');
+      });
+    },
+  };
+  // 预热：鼠标移到「更多」上、键盘聚焦到它时，面板里的缩略图先下载、解码（data-warm 让滚动层先排出来但仍看不见，见 dock.css），
+  // 点开那一刻不再临时解码；只做一次
+  function warm(e) {
+    var p = parts();
+    if (!p || !(e.target instanceof Element) || !p.more.contains(e.target) || p.deck.hasAttribute('data-warm')) return;
+    p.deck.setAttribute('data-warm', '');
+  }
+  document.addEventListener('pointerover', warm);
+  document.addEventListener('focusin', warm);
+  var tapOutside = false;
+  window.addEventListener('pointerdown', function (e) {
+    var p = parts();
+    tapOutside = isOpen(p) && !p.dock.contains(e.target);
+  }, true);
+  ['pointercancel', 'keydown'].forEach(function (type) {
+    window.addEventListener(type, function () { tapOutside = false; }, true);
+  });
+  window.addEventListener('click', function (e) {
+    if (!e.isTrusted || !tapOutside) return;
+    tapOutside = false;
+    e.preventDefault();
+  }, true);
+  document.addEventListener('click', function (e) {
+    var p = parts();
+    if (!p) return;
+    var t = e.target instanceof Element ? e.target : null;
+    if (t && p.more.contains(t)) {
+      if (isOpen(p)) close(p, true);
+      else open(p);
+      return;
+    }
+    if (t && t.closest('.site-deck__close')) {
+      close(p, true);
+      return;
+    }
+    if (isOpen(p) && !(t && p.dock.contains(t))) close(p, false);
+  });
+  // 开着时窗口变宽窄：栏和面板都挪了，重量一次，「关闭」跟着「更多」原来的位置走
+  window.addEventListener('resize', function () {
+    var p = parts();
+    if (isOpen(p)) aim(p);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var p = parts();
+    if (!isOpen(p)) return;
+    e.preventDefault();
+    close(p, true);
+  });
+  document.addEventListener('focusout', function (e) {
+    var p = parts();
+    if (!isOpen(p) || !(e.target instanceof Node) || !p.deck.contains(e.target)) return;
+    var to = e.relatedTarget;
+    if (!to || p.deck.contains(to) || to === p.more) return;
+    close(p, false);
+  });
+  document.addEventListener('astro:before-preparation', function (e) {
+    if (e.defaultPrevented) return;
+    var p = parts();
+    if (p) close(p, false);
+  });
+  document.addEventListener('astro:before-swap', function (e) {
+    var dock = document.querySelector('.site-dock');
+    var next = e.newDocument.querySelector('.site-dock');
+    if (!dock || !next) return;
+    var p = parts();
+    if (p) close(p, false);
+    copyAttrs(dock, next, ['lang']);
+    var bar = dock.querySelector('.site-dock__bar');
+    var nextBar = next.querySelector('.site-dock__bar');
+    if (bar && nextBar) syncBar(bar, nextBar);
+    dock.querySelectorAll('.site-deck [data-dock-key]').forEach(function (el) {
+      var twin = next.querySelector('.site-deck [data-dock-key="' + el.getAttribute('data-dock-key') + '"]');
+      if (twin) copyAttrs(el, twin, ['href', 'aria-current', 'data-current']);
+    });
+  });
+})();</script><main id="main" class="site-wrap site-main"><article data-id="subagent-evolution" data-by="her" class="entry longread"><header class="longread__header"><a class="hi-button hi-button--flush longread__back" href="/" data-longread-chrome data-pagefind-ignore="all">← Back to Home</a><h1 class="hi-display longread__title"><span class="title-keep">Why Self-Evolution</span> <span class="title-keep">Belongs to Subagents,</span> <span class="title-keep">Not the Main Agent</span></h1><p class="hi-body-sm longread__meta"><span class="longread__author">朱鹭户焰</span> <time datetime="2026-05-07">May 7, 2026</time></p></header><nav class="longread__toc" aria-label="目录" lang="zh-CN" data-longread-chrome data-pagefind-ignore="all"><details><summary class="hi-button hi-button--flush longread__toc-title">目录</summary><ol class="longread__toc-list hi-body-sm" role="list" lang="en"><li><a class="longread__toc-link" href="#the-problem-is-not-whether-subagents-have-skills">The Problem Is Not Whether Subagents Have Skills</a></li><li><a class="longread__toc-link" href="#current-subagents-still-feel-too-much-like-temporary-workers">Current Subagents Still Feel Too Much Like Temporary Workers</a></li><li><a class="longread__toc-link" href="#ai-is-automating-work-that-has-already-been-sliced-by-bureaucracy">AI Is Automating Work That Has Already Been Sliced by Bureaucracy</a></li><li><a class="longread__toc-link" href="#what-really-allows-experts-to-grow-is-not-division-of-labor-but-the-persistence-of-positions">What Really Allows Experts to Grow Is Not Division of Labor, but the Persistence of Positions</a></li><li><a class="longread__toc-link" href="#an-experts-real-value-is-knowing-where-things-break">An Expert&#39;s Real Value Is Knowing Where Things Break</a></li><li><a class="longread__toc-link" href="#the-main-agent-is-not-well-suited-to-carry-self-evolution">The Main Agent Is Not Well-Suited to Carry Self-Evolution</a></li><li><a class="longread__toc-link" href="#subagents-have-a-natural-advantage-narrower-task-distributions">Subagents Have a Natural Advantage: Narrower Task Distributions</a></li><li><a class="longread__toc-link" href="#skill-is-not-a-knowledge-package--it-is-accumulated-craft">Skill Is Not a Knowledge Package — It Is Accumulated Craft</a></li><li><a class="longread__toc-link" href="#the-pin-factory-worker-vs-the-brilliant-generalist">The Pin Factory Worker vs. the Brilliant Generalist</a></li><li><a class="longread__toc-link" href="#the-real-architecture">The Real Architecture</a></li><li><a class="longread__toc-link" href="#conclusion">Conclusion</a></li></ol></details></nav><div class="longread__body"><div class="article-body">
+
+    <div class="hi-surface hi-body-sm note">
+        Posted to the Hermes Agent community: Hermes has built the closest thing to this vision so far — a self-improving agent with a real learning loop. This post is a proposal for one specific direction: what happens if we move that logic down from the main agent layer into specialized subagents? Is that where it truly belongs?
+    </div>
+
+    <h2 id="the-problem-is-not-whether-subagents-have-skills" class="hi-headline-lg">The Problem Is Not Whether Subagents Have Skills</h2>
+
+    <p class="hi-body">Modern agent frameworks are already beginning to support equipping subagents with their own skills, memory, and tools. Simply claiming that "subagents need their own skill libraries" is no longer a particularly fresh insight.</p>
+
+    <p class="hi-body">The real question is not:</p>
+
+    <blockquote class="hi-quote hi-body"><p>Can a subagent possess skills?</p></blockquote>
+
+    <p class="hi-body">But rather:</p>
+
+    <blockquote class="hi-quote hi-body"><p>Can a subagent, anchored to a stable professional identity, continuously distill its execution experience into progressively better skills?</p></blockquote>
+
+    <p class="hi-body">This is what truly matters.</p>
+
+    <p class="hi-body">A subagent that only loads skill files is nothing more than a temp worker carrying an operations manual. A subagent that keeps refining, compressing, validating, and updating its own skills is what a genuinely maturing professional role looks like.</p>
+
+    <h2 id="current-subagents-still-feel-too-much-like-temporary-workers" class="hi-headline-lg">Current Subagents Still Feel Too Much Like Temporary Workers</h2>
+
+    <p class="hi-body">After using subagents at scale, one obvious pattern emerges: they keep turning on and off.</p>
+
+    <p class="hi-body">A task arrives, the subagent spins up, executes, and shuts down. The next task comes, and it restarts all over again. Even if it can load a skill, it remains fundamentally task-driven and disposable.</p>
+
+    <p class="hi-body">This is not a bug. It is the default organizational pattern of today's mainstream agent architectures: the orchestrator assigns tasks, subagents handle localized work, and tools execute specific actions. The structure closely resembles a bureaucracy.</p>
+
+    <h2 id="ai-is-automating-work-that-has-already-been-sliced-by-bureaucracy" class="hi-headline-lg">AI Is Automating Work That Has Already Been Sliced by Bureaucracy</h2>
+
+    <p class="hi-body">The orchestrator maps to upper management, subagents map to functional departments, and tools map to execution-level roles. Instructions flow downward, results flow upward, and each layer is only responsible for its own interface.</p>
+
+    <p class="hi-body">This is not because designers love bureaucracy. It is because modern work has already been pre-processed by bureaucratic structures. Organizations have spent over a century breaking down ambiguous human intent into defined positions, processes, permissions, tickets, documents, standards, interfaces, and deliverables. When AI takes over, it usually receives tasks that have already been shaped by organizational structure. That is why multi-agent systems naturally grow to resemble bureaucratic hierarchies.</p>
+
+    <p class="hi-body">Yet while AI has replicated the division of labor, it has missed the single most important element that makes bureaucracy effective at developing expertise: <strong>stable positions</strong>.</p>
+
+    <h2 id="what-really-allows-experts-to-grow-is-not-division-of-labor-but-the-persistence-of-positions" class="hi-headline-lg">What Really Allows Experts to Grow Is Not Division of Labor, but the Persistence of Positions</h2>
+
+    <p class="hi-body">Bureaucracy enables experts to get better not merely because it splits tasks apart, but because it grants each expert a <strong>persistent identity</strong>.</p>
+
+    <p class="hi-body">A position does not disappear when a task ends. Tasks come and go, but the position remains. It is this persistence that gives experience a place to accumulate and allows genuine growth to occur.</p>
+
+    <p class="hi-body">Current subagents, however, are purely task-driven: they exist only when a task arrives and vanish the moment it ends. That is not a position — it is a work order.</p>
+
+    <p class="hi-body">Work orders have no craft history. Positions do.</p>
+
+    <p class="hi-body"><strong>Without persistence, self-iteration has no subject.</strong> If a subagent is shut down after every task, where does its accumulated experience live? Who is the entity updating its skills? Is the instance that starts next time even the same one as before?</p>
+
+    <p class="hi-body">This is not an engineering optimization. It is a logical prerequisite. A subagent must first persist before self-evolution can even be discussed.</p>
+
+    <h2 id="an-experts-real-value-is-knowing-where-things-break" class="hi-headline-lg">An Expert's Real Value Is Knowing Where Things Break</h2>
+
+    <p class="hi-body">Someone who has done the same thing for a long time is valuable not because they know the standard procedure. Standard procedures can be written into documents, turned into checklists, or compressed into skill files.</p>
+
+    <p class="hi-body">An expert's true value lies in:</p>
+
+    <ul class="hi-body">
+        <li>Knowing where this kind of work typically goes wrong.</li>
+        <li>Knowing which anomalies can be safely ignored and which faint signals must be acted on immediately.</li>
+        <li>Knowing the pitfalls that are never written in the documentation but always appear in real situations.</li>
+        <li>Sometimes not even being able to articulate exactly why — they simply look at something and know "this feels off."</li>
+    </ul>
+
+    <p class="hi-body">This is not knowledge. It is craft intuition forged through long-term, repeated practice.</p>
+
+    <p class="hi-body">This is exactly where today's subagents fall short. They can read skills, but they do not behave like a craftsperson who gets better the longer they stay in the role. They can perform the work, but they do not grow.</p>
+
+    <h2 id="the-main-agent-is-not-well-suited-to-carry-self-evolution" class="hi-headline-lg">The Main Agent Is Not Well-Suited to Carry Self-Evolution</h2>
+
+    <p class="hi-body">Many self-evolution designs today center on the main agent: after completing a complex task, the main agent summarizes lessons, updates skills, and reuses them next time.</p>
+
+    <p class="hi-body">This direction is not wrong, but it has a structural flaw: the main agent's task distribution is far too broad.</p>
+
+    <p class="hi-body">Today it writes code, tomorrow it researches information, the day after it analyzes logs, and the day after that it writes articles. Every experience may be genuine, yet none of them accumulate in the same direction.</p>
+
+    <p class="hi-body">The main agent's experience drifts laterally. Because it does everything, it touches every kind of experience only lightly. This makes the self-evolution signal extremely noisy: Is this skill a general capability or just a one-off patch? Should this process be hardened into a permanent rule, or was it merely a temporary workaround?</p>
+
+    <p class="hi-body">The main agent's problem is not lack of intelligence. It is that its task distribution is too wide. When tasks are too diverse, self-iteration struggles to converge.</p>
+
+    <h2 id="subagents-have-a-natural-advantage-narrower-task-distributions" class="hi-headline-lg">Subagents Have a Natural Advantage: Narrower Task Distributions</h2>
+
+    <p class="hi-body">A subagent responsible only for reading PDF tables repeatedly encounters PDFs, scanned documents, broken tables, headers and footers, cross-page structures, OCR errors, and formatting pollution.</p>
+
+    <p class="hi-body">A subagent responsible only for log analysis repeatedly encounters timestamps, stack traces, distributed tracing, anomaly patterns, noise filtering, and root-cause localization.</p>
+
+    <p class="hi-body">Their task distributions are narrow, so experience accumulates in the same direction. This is why specialized subagents have a greater need — and greater potential — for self-evolution than the main agent. Not because they are "smarter," but because they are narrower, making compounding improvement far more likely.</p>
+
+    <h2 id="skill-is-not-a-knowledge-package--it-is-accumulated-craft" class="hi-headline-lg">Skill Is Not a Knowledge Package — It Is Accumulated Craft</h2>
+
+    <p class="hi-body">We must distinguish between memory and skill.</p>
+
+    <p class="hi-body">Memory records "what happened in the past." Skill records "what I should do differently next time." Memory is like a log. Skill is like a craft procedure.</p>
+
+    <p class="hi-body">A subagent should not merely remember "the PDF table parsing failed last time." It should convert that failure into more precise skills:</p>
+
+    <ul class="hi-body">
+        <li>When encountering a cross-page table, first check whether the header is duplicated.</li>
+        <li>When encountering a scanned PDF, first determine whether OCR is required.</li>
+        <li>After extracting amount fields, always perform a total verification.</li>
+        <li>When table column counts are unstable, do not blindly trust markdown conversion results.</li>
+    </ul>
+
+    <p class="hi-body">Only then does experience become capability. What truly matters is not "whether the subagent has its own skills," but:</p>
+
+    <blockquote class="hi-quote hi-body"><p>Can the subagent continuously transform its own failures, corrections, and validation results into its own skills?</p></blockquote>
+
+    <h2 id="the-pin-factory-worker-vs-the-brilliant-generalist" class="hi-headline-lg">The Pin Factory Worker vs. the Brilliant Generalist</h2>
+
+    <p class="hi-body">Adam Smith described the pin factory. A single person making an entire pin from start to finish is inefficient. But when each person specializes in one step for a long time, overall productivity explodes.</p>
+
+    <p class="hi-body">The key is not just division of labor, but the local optimization that comes from sustained specialization.</p>
+
+    <p class="hi-body">A person who has spent years making pins is fundamentally different from a very smart person who has temporarily read a document titled "How to Make Pins."</p>
+
+    <p class="hi-body">The latter knows the process. The former knows the feel. The latter follows steps. The former knows which step is most likely to go wrong, and which small error that looks harmless now will definitely cause problems later.</p>
+
+    <p class="hi-body">A subagent that has loaded skills is merely a smart person who has read the manual. A subagent that continuously iterates on its own skills is like someone who has been doing this craft for years. But there is a prerequisite: the worker must actually stay in the role.</p>
+
+    <h2 id="the-real-architecture" class="hi-headline-lg">The Real Architecture</h2>
+
+    <p class="hi-body">A more accurate statement of what I am really arguing is:</p>
+
+    <blockquote class="hi-quote hi-body"><p>Persistent, specialized subagents need self-iterating private skill libraries.</p></blockquote>
+
+    <p class="hi-body">Each subagent should have its own task boundaries, its own memory, its own skills, its own validation methods, its own failure samples, and its own update mechanisms.</p>
+
+    <p class="hi-body">The main agent should not manage all the experiential knowledge for them. The main agent is better suited for orchestration, coordination, decomposition, and final sign-off. The actual craft expertise should live inside the subagents.</p>
+
+    <ul class="hi-body">
+        <li>The PDF-reading subagent evolves its own PDF-reading skills.</li>
+        <li>The log-analysis subagent evolves its own log-analysis skills.</li>
+        <li>The test-writing subagent evolves its own test-writing skills.</li>
+        <li>The code-review subagent evolves its own code-review skills.</li>
+    </ul>
+
+    <p class="hi-body">Because only their experience is converging.</p>
+
+    <h2 id="conclusion" class="hi-headline-lg">Conclusion</h2>
+
+    <p class="hi-body">A subagent possessing skills does not mean the subagent is growing. Two conditions are essential and non-negotiable:</p>
+
+    <p class="hi-body">First, the subagent must persist. Without persistence, self-iteration has no subject. Second, the subagent must be sufficiently specialized. Without narrow task distribution, experience cannot converge.</p>
+
+    <p class="hi-body">The main agent's experience drifts laterally. The subagent's experience accumulates vertically.</p>
+
+    <p class="hi-body">What self-evolution truly needs is not a larger, more powerful agent, but more stable, narrower, and more repetitive task distributions — combined with an identity that will not be arbitrarily shut down.</p>
+
+    <p class="hi-body">Therefore, persistent specialized subagents are the most natural hosts for skill self-evolution. This is not simply handing a temporary worker a manual. This is allowing a professional position to begin developing its own craft history.</p>
+
+    <div class="hi-surface hi-body-sm note">
+        <strong>Note:</strong> This is a hypothesis, not a validated solution. The reasoning comes from real usage experience and logical deduction, not from implemented code. I have not tested this architecture, and it may encounter unforeseen issues during implementation. If anyone builds this, I would love to hear the results.
+    </div>
+
+</div>
+</div><footer class="longread__end" data-longread-chrome data-pagefind-ignore="all"><a class="hi-button hi-button--flush" href="/">← Back to Home</a></footer></article><script>(function () {
+  var toc = document.querySelector('.longread__toc');
+  if (!toc) return;
+  var box = toc.querySelector('details');
+  var wide = window.matchMedia('(min-width: 1100px)');
+  var sync = function () { if (wide.matches) box.open = true; };
+  sync();
+  wide.addEventListener('change', sync);
+  toc.addEventListener('click', function (e) {
+    if (!wide.matches && e.target.closest && e.target.closest('a')) box.open = false;
+  });
+  var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+  var heads = links.map(function (a) { return document.getElementById(decodeURIComponent(a.hash.slice(1))); });
+  var current = -1;
+  var queued = false;
+  var update = function () {
+    queued = false;
+    var line = window.innerHeight * 0.3;
+    var at = -1;
+    heads.forEach(function (h, i) { if (h && h.getBoundingClientRect().top <= line) at = i; });
+    if (at === current) return;
+    current = at;
+    links.forEach(function (a, i) {
+      if (i === at) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  };
+  var schedule = function () { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  update();
+})();</script></main><footer class="site-footer" data-pagefind-ignore="all" lang="zh-CN"><div class="site-wrap site-footer__inner"><div class="site-footer__meta hi-body-sm"><span>© 2026 朱鹭户焰 / HOMURA TOKIDO</span><a class="hi-link hit" href="/rss.xml" data-astro-reload>RSS</a><a class="hi-link hit" href="#top">回到顶部<span aria-hidden="true"> ↑</span></a><span class="site-footer__note" data-by="her" data-id="footer-maintenance">由朱鹭户焰本人维护</span><span class="site-footer__colophon" data-by="fact" data-id="footer-colophon">本站用 Astro 生成，托管在 GitHub Pages。</span></div></div></footer><nav class="site-more" id="site-more" aria-label="更多" data-pagefind-ignore="all" lang="zh-CN" style="--deck-cols: 3"><div class="site-wrap site-more__inner"><ul class="site-deck__grid" role="list"><li class="site-deck__item"><a class="site-deck__link" href="/character/" data-dock-key="character"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-character.BRSavR79_Z1OhPlD.avif 160w, /_astro/window-character.BRSavR79_ZpeSs0.avif 240w, /_astro/window-character.BRSavR79_YN3qD.avif 320w, /_astro/window-character.BRSavR79_1MGiS0.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-character.BRSavR79_2si00N.webp" srcset="/_astro/window-character.BRSavR79_ZFGmGG.webp 160w, /_astro/window-character.BRSavR79_IlzbW.webp 240w, /_astro/window-character.BRSavR79_28ow5A.webp 320w, /_astro/window-character.BRSavR79_Z28TmgY.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">角色</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/favorites/" data-dock-key="favorites"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-favorites.Bk7qEdI6_ZGPUbc.avif 160w, /_astro/window-favorites.Bk7qEdI6_Hc1Hr.avif 240w, /_astro/window-favorites.Bk7qEdI6_27eXB5.avif 320w, /_astro/window-favorites.Bk7qEdI6_Z2a3TKu.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-favorites.Bk7qEdI6_1DzwzY.webp" srcset="/_astro/window-favorites.Bk7qEdI6_qJxsK.webp 160w, /_astro/window-favorites.Bk7qEdI6_1PMumo.webp 240w, /_astro/window-favorites.Bk7qEdI6_Z1OlGxT.webp 320w, /_astro/window-favorites.Bk7qEdI6_Z11sr6x.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">喜好</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/timeline/" data-dock-key="timeline"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-timeline.CdcoTEHB_1A2gr9.avif 160w, /_astro/window-timeline.CdcoTEHB_Z2fSCs.avif 240w, /_astro/window-timeline.CdcoTEHB_Z1Ey3H4.avif 320w, /_astro/window-timeline.CdcoTEHB_ZLGAlD.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-timeline.CdcoTEHB_T3umj.webp" srcset="/_astro/window-timeline.CdcoTEHB_Z1DPBvk.webp 160w, /_astro/window-timeline.CdcoTEHB_1N3me0.webp 240w, /_astro/window-timeline.CdcoTEHB_aKc9o.webp 320w, /_astro/window-timeline.CdcoTEHB_13BEuO.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">时间线</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/now/" data-dock-key="now"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-now.DASJUbnq_ZXLkiK.avif 160w, /_astro/window-now.DASJUbnq_QN5ac.avif 240w, /_astro/window-now.DASJUbnq_Z2mNDaM.avif 320w, /_astro/window-now.DASJUbnq_Z2mnMXG.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-now.DASJUbnq_1s3j45.webp" srcset="/_astro/window-now.DASJUbnq_ZAYTV4.webp 160w, /_astro/window-now.DASJUbnq_1ezuwS.webp 240w, /_astro/window-now.DASJUbnq_Z202dN6.webp 320w, /_astro/window-now.DASJUbnq_Z1YBnB0.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">近况</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/projects/" data-dock-key="projects"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-projects.D_WAFdx4_Z2pTHnn.avif 160w, /_astro/window-projects.D_WAFdx4_11YglW.avif 240w, /_astro/window-projects.D_WAFdx4_ZAiSHE.avif 320w, /_astro/window-projects.D_WAFdx4_hxyCL.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-projects.D_WAFdx4_Z1wCqEw.webp" srcset="/_astro/window-projects.D_WAFdx4_ZzArvU.webp 160w, /_astro/window-projects.D_WAFdx4_Z2cSBAw.webp 240w, /_astro/window-projects.D_WAFdx4_1f0m8N.webp 320w, /_astro/window-projects.D_WAFdx4_27QOue.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">项目</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/writing/" data-dock-key="writing"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-writing.DO-wUyA5_Z1u5Q72.avif 160w, /_astro/window-writing.DO-wUyA5_ZAgsle.avif 240w, /_astro/window-writing.DO-wUyA5_ixUpz.avif 320w, /_astro/window-writing.DO-wUyA5_2uCiA5.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-writing.DO-wUyA5_5mN7o.webp" srcset="/_astro/window-writing.DO-wUyA5_cA4mz.webp 160w, /_astro/window-writing.DO-wUyA5_16ps8n.webp 240w, /_astro/window-writing.DO-wUyA5_20ePTb.webp 320w, /_astro/window-writing.DO-wUyA5_ZRRTJf.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">文章</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/interface/" data-dock-key="design"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-design.B6ldoKCf_Z2qxpXG.avif 160w, /_astro/window-design.B6ldoKCf_Z8GCc7.avif 240w, /_astro/window-design.B6ldoKCf_299azs.avif 320w, /_astro/window-design.B6ldoKCf_Z1lpjEh.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-design.B6ldoKCf_Z1V9WLR.webp" srcset="/_astro/window-design.B6ldoKCf_4Stiy.webp 160w, /_astro/window-design.B6ldoKCf_2mJh58.webp 240w, /_astro/window-design.B6ldoKCf_ZpB3We.webp 320w, /_astro/window-design.B6ldoKCf_1a1zBX.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">设计语言</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/uses/" data-dock-key="uses"><span class="site-deck__win" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-uses.CCp6AO2U_ZHd8LW.avif 160w, /_astro/window-uses.CCp6AO2U_1zROXl.avif 240w, /_astro/window-uses.CCp6AO2U_Z1cdk5i.avif 320w, /_astro/window-uses.CCp6AO2U_Z27QJhq.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-uses.CCp6AO2U_2vhbu2.webp" srcset="/_astro/window-uses.CCp6AO2U_Gts6w.webp 160w, /_astro/window-uses.CCp6AO2U_Z25BGW7.webp 240w, /_astro/window-uses.CCp6AO2U_ctgNb.webp 320w, /_astro/window-uses.CCp6AO2U_ZIa8nW.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">装备</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/contact/" data-dock-key="contact"><span class="site-deck__win site-deck__win--open" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-contact.BuY4pugC_2sJYbH.avif 160w, /_astro/window-contact.BuY4pugC_Z1HBKQq.avif 240w, /_astro/window-contact.BuY4pugC_ZNMn5C.avif 320w, /_astro/window-contact.BuY4pugC_1nh04S.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-contact.BuY4pugC_VVoYP.webp" srcset="/_astro/window-contact.BuY4pugC_ZTKe8C.webp 160w, /_astro/window-contact.BuY4pugC_ZUPmO.webp 240w, /_astro/window-contact.BuY4pugC_RSxnY.webp 320w, /_astro/window-contact.BuY4pugC_Z20edfr.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">联系</span></a></li><li class="site-deck__item"><a class="site-deck__link" href="/search/" data-dock-key="search"><span class="site-deck__win site-deck__win--dim" aria-hidden="true"><span class="site-deck__view"><picture><source srcset="/_astro/window-search.wgMrYNGG_Z198hjq.avif 160w, /_astro/window-search.wgMrYNGG_18Hvs9.avif 240w, /_astro/window-search.wgMrYNGG_Z1DCOzd.avif 320w, /_astro/window-search.wgMrYNGG_Z40b01.avif 424w" type="image/avif" sizes="(max-width: 720px) calc(33vw - 27px), 114px"><img src="/_astro/window-search.wgMrYNGG_2jdpVI.webp" srcset="/_astro/window-search.wgMrYNGG_1miBWO.webp 160w, /_astro/window-search.wgMrYNGG_Z1q2I4x.webp 240w, /_astro/window-search.wgMrYNGG_QN4H2.webp 320w, /_astro/window-search.wgMrYNGG_2rqIhe.webp 424w" alt sizes="(max-width: 720px) calc(33vw - 27px), 114px" loading="lazy" decoding="async" width="1254" height="1254" class="site-deck__img"></picture></span></span><span class="site-deck__label">搜索</span></a></li></ul></div></nav></body></html>
